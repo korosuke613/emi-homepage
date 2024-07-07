@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import { locales } from "@/config";
+import { Analytics } from "@vercel/analytics/react";
 import { NextIntlClientProvider } from "next-intl";
 import {
   getMessages,
@@ -48,6 +49,7 @@ export default async function LocaleLayout({
           <Navigation />
           {children}
         </NextIntlClientProvider>
+        <Analytics />
       </body>
     </html>
   );
