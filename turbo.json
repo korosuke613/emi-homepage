@@ -2,10 +2,14 @@
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
     "build": {
+      "cache": true,
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
-    "lint": {},
+    "check": {
+      "cache": true
+    },
+    "check:fix": {},
     "dev": {
       "cache": false,
       "persistent": true
