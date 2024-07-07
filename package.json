@@ -2,25 +2,17 @@
   "name": "non-monorepo",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "next dev --turbo",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "next": "14.2.4",
-    "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "check": "turbo check",
+    "check:fix": "turbo check:fix"
   },
   "devDependencies": {
-    "@types/node": "20.14.10",
-    "@types/react": "18.3.3",
-    "@types/react-dom": "18.3.0",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "14.2.4",
-    "turbo": "^2.0.6",
-    "typescript": "5.5.3"
+    "turbo": "2.0.6"
   },
   "packageManager": "npm@10.5.0",
   "engines": {
