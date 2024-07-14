@@ -40,7 +40,11 @@ export const Header = ({ lang, path = "/" }: Props) => {
     <header>
       <Box component="nav" aria-label="My site">
         <List role="menubar" orientation="horizontal" sx={{ padding: "0px" }}>
-          <ListItem>
+          <ListItem
+            sx={{
+              padding: "2px",
+            }}
+          >
             <Link
               aria-label="to Home"
               underline="none"
@@ -95,7 +99,7 @@ export const Header = ({ lang, path = "/" }: Props) => {
                   sx={{
                     padding: "unset",
                     width: "48px",
-                    minHeight: "-webkit-fill-available",
+                    height: "48px",
                     borderRadius: "0%",
                   }}
                 >
@@ -130,7 +134,6 @@ export const Header = ({ lang, path = "/" }: Props) => {
           <ListItem
             sx={{
               padding: "5px",
-              minHeight: "-webkit-fill-available",
               borderRadius: "0%",
             }}
           >
