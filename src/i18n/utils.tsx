@@ -13,6 +13,12 @@ export function useSharedTranslations(lang: keyof typeof ui) {
 }
 
 export function useLocalTranslations(lang: Languages) {
+  return function t(dict: Record<Languages, string>): string {
+    return dict[lang];
+  };
+}
+
+export function useLocalTranslationsWithElement(lang: Languages) {
   return function t(props: {
     dict: Record<Languages, string>;
   }): React.ReactNode {
