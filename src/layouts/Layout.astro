@@ -1,6 +1,6 @@
 ---
-import  SpeedInsights  from "@vercel/speed-insights/astro"
 import { Box } from "@mui/joy";
+import SpeedInsights from "@vercel/speed-insights/astro";
 import { Header } from "../components/Header";
 import { type Languages, defaultLang } from "../i18n/ui";
 
@@ -42,5 +42,9 @@ console.log({ asPath, asPathWithoutLocale });
 	</body>
 </html>
 
-<!-- <style is:global>
-</style> -->
+<style is:global>
+body {
+	word-break: auto-phrase;
+	text-wrap: balance;
+}
+</style>

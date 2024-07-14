@@ -45,10 +45,14 @@ export const LangSelector = ({ path, currentLang, open }: Props) => (
       <MenuButton
         slots={{ root: IconButton }}
         slotProps={{ root: { variant: "outlined", color: "neutral" } }}
+        sx={{
+          height: "50px",
+          width: "50px",
+        }}
       >
         {languageEmojis[currentLang]}
       </MenuButton>
-      <Menu>
+      <Menu placement="bottom-end">
         {languageKeys.map((lang) => {
           let className = "";
           if (lang === defaultLang) className = `${idPrefix}-default`;
