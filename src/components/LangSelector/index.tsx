@@ -1,4 +1,4 @@
-import { defaultLang, languageNames } from "../i18n/ui";
+import { defaultLang, languageNames } from "../../i18n/ui";
 
 export const LangSelector = (props: { path: string }) => (
   <ul>
