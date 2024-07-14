@@ -1,26 +1,36 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { useSharedTranslations, useLocalTranslations, useLocalTranslationsWithElement } from '../i18n/utils';
-import type { Languages } from '../i18n/ui';
+import { Box, Typography } from "@mui/joy";
+import type { Languages } from "../i18n/ui";
+import {
+  useLocalTranslations,
+  useLocalTranslationsWithElement,
+  useSharedTranslations,
+} from "../i18n/utils";
+import Layout from "../layouts/Layout.astro";
 
 interface Props {
-	lang: Languages;
+  lang: Languages;
 }
 
 const props = Astro.props;
 
-const lang = props.lang ?? 'ja';
+const lang = props.lang ?? "ja";
 const t = useSharedTranslations(lang);
 const tl = useLocalTranslations(lang);
 const TLE = useLocalTranslationsWithElement(lang);
-
 ---
 
 <Layout title={t('title')} description={tl({ja: "牧浦えみのホームページです⭐️", en: "This is Emi Makiura's homepage."})} lang={lang}>
-	<h1>
-		<TLE dict={{
+	<Box sx={{ height: "10rem",     display: "flex",
+	flexWrap: "wrap",
+	alignContent: "center",
+	justifyContent: "center" }}>
+	<Typography level="h1">
+	<TLE dict={{
 			ja: "<strong>牧浦えみ</strong>のホームページへようこそ！",
 			en: "Welcome to <strong>Emi Makiura's</strong> homepage!",
 		}} />
 	</h1>
+  </Typography>
+</Box>
 </Layout>

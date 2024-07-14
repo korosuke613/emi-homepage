@@ -1,24 +1,22 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getRelativeLocaleUrl } from 'astro:i18n';
-import { useLocalTranslations, useSharedTranslations } from '../i18n/utils';
-import type { Languages } from '../i18n/ui';
-import {LangSelector} from '../components/LangSelector';
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { LangSelector } from "../components/LangSelector";
+import type { Languages } from "../i18n/ui";
+import { useLocalTranslations, useSharedTranslations } from "../i18n/utils";
+import Layout from "../layouts/Layout.astro";
 
 interface Props {
-	lang: Languages;
+  lang: Languages;
 }
 
 const props = Astro.props;
 
-const lang = props.lang ?? 'ja';
+const lang = props.lang ?? "ja";
 const t = useSharedTranslations(lang);
 const tl = useLocalTranslations(lang);
-
 ---
 
 <Layout title={`${tl({ja: "サブページ", en: "Sub page."})}: ${t('title')}`} description={tl({ja: "サブページ", en: "Sub page."})} lang={lang}>
   <h1>{t('nav.about')}</h1>
   <a href={getRelativeLocaleUrl(lang, '/')}>ホームへ</a>
-  <LangSelector path='sub'/>
 </Layout>

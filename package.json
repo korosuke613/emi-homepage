@@ -15,6 +15,11 @@
     "@astrojs/check": "^0.8.1",
     "@astrojs/react": "^3.6.0",
     "@astrojs/vercel": "^7.7.2",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.16.1",
+    "@mui/joy": "^5.0.0-beta.48",
+    "@mui/material": "^5.16.1",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "astro": "^4.11.5",
@@ -23,15 +28,16 @@
     "typescript": "^5.5.3"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.8.3",
     "@chromatic-com/storybook": "^1.6.1",
-    "@storybook/addon-essentials": "^8.2.2",
-    "@storybook/addon-interactions": "^8.2.2",
-    "@storybook/addon-links": "^8.2.2",
-    "@storybook/addon-onboarding": "^8.2.2",
-    "@storybook/blocks": "^8.2.2",
-    "@storybook/react": "^8.2.2",
-    "@storybook/react-vite": "^8.2.2",
-    "@storybook/test": "^8.2.2",
-    "storybook": "^8.2.2"
+    "@storybook/addon-essentials": "8.1.11",
+    "@storybook/addon-interactions": "8.1.11",
+    "@storybook/addon-links": "8.1.11",
+    "@storybook/addon-onboarding": "8.1.11",
+    "@storybook/blocks": "8.1.11",
+    "@storybook/react": "8.1.11",
+    "@storybook/react-vite": "8.1.11",
+    "@storybook/test": "8.1.11",
+    "storybook": "v8.1.11"
   }
 }
