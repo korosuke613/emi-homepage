@@ -29,3 +29,10 @@ export function useLocalTranslationsWithElement(lang: Languages) {
 
 export const isLanguages = (lang?: string): lang is Languages =>
   languageKeys.includes(lang as Languages);
+
+export const isUIKey = (
+  lang: Languages,
+  key: string,
+): key is keyof (typeof ui)[typeof lang] => {
+  return Object.hasOwn(ui[lang], key);
+};
