@@ -1,0 +1,14 @@
+---
+import { languageKeys } from "../../i18n/ui";
+import DefaultSub from "../sub.astro";
+
+export async function getStaticPaths() {
+  return languageKeys.map((lang) => {
+    return { params: { lang } };
+  });
+}
+
+const { lang } = Astro.params;
+---
+
+<DefaultSub lang={lang}></DefaultSub>

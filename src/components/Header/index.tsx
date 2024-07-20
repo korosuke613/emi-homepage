@@ -25,6 +25,7 @@ import {
   useSharedTranslations,
 } from "../../i18n/utils";
 import { LangSelector } from "../LangSelector";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
 type Props = {
   lang: Languages;
@@ -80,6 +81,19 @@ export const Header = ({ lang, path = "/" }: Props) => {
               {t("route.links")}
             </ListItemButton>
           </ListItem>
+          <ListItem
+            sx={{
+              display: { xs: "none", sm: "flex" },
+            }}
+          >
+            <ListItemButton
+              role="menuitem"
+              component="a"
+              href={getRelativeLocaleUrl(lang, "/blog")}
+            >
+              {t("route.blog")}
+            </ListItemButton>
+          </ListItem>
 
           <ListItem
             sx={{
@@ -124,6 +138,16 @@ export const Header = ({ lang, path = "/" }: Props) => {
                       textColor={"common.black"}
                     >
                       {t("route.links")}
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link
+                      underline="none"
+                      color="neutral"
+                      href={getRelativeLocaleUrl(lang, "/blog")}
+                      textColor={"common.black"}
+                    >
+                      {t("route.blog")}
                     </Link>
                   </MenuItem>
                 </Menu>

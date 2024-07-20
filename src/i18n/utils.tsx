@@ -1,4 +1,4 @@
-import { type Languages, defaultLang, ui } from "./ui";
+import { type Languages, defaultLang, languageKeys, ui } from "./ui";
 
 export function getLangFromUrl(url: URL) {
   const [, lang] = url.pathname.split("/");
@@ -26,3 +26,6 @@ export function useLocalTranslationsWithElement(lang: Languages) {
     return <span dangerouslySetInnerHTML={{ __html: props.dict[lang] }} />;
   };
 }
+
+export const isLanguages = (lang?: string): lang is Languages =>
+  languageKeys.includes(lang as Languages);

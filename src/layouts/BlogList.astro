@@ -1,0 +1,32 @@
+---
+import type { Languages } from "../i18n/ui";
+import Layout from "./Layout.astro";
+import type { blogSchema } from "../content/config";
+import type { z } from "astro:content";
+import { useSharedTranslations, useLocalTranslations, useLocalTranslationsWithElement } from "../i18n/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+type Props = {
+  lang: Languages;
+  blogs: {
+    slug: string,
+    data: z.infer<typeof blogSchema>;
+  }[];
+}
+
+const {blogs, lang} = Astro.props;
+
+const t = useSharedTranslations(lang);
+const tl = useLocalTranslations(lang);
+---
+
+<Layout title="Blog" description={tl({ja: '記事一覧です。', "en": "List of articles"})} lang={lang}>
+  <h1>Blog</h1>
+  <ul>
+    {blogs.map((blog) => (
+      <li>
+          <a href={getRelativeLocaleUrl(lang, `/blog/${blog.slug}`)}>{blog.data.date.toLocaleDateString(lang)} {blog.data.title}</a>
+      </li>
+    ))}
+  </ul>
+</Layout>
