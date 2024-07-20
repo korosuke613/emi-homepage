@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import type { Languages } from '../../i18n/ui';
+import Blog from '../../layouts/Blog.astro';
+
+
+export async function getStaticPaths() {
+  const pages = await getCollection('blog');
+
+  return pages.map((page) => {
+    const [_, ...slug] = page.slug.split('/');
+
+    return { params: { slug: slug.join('/') || undefined }, props: page };
+  });
+}
+
+const page = Astro.props;
+
+const lang: Languages = "ja";
+
+const { Content } = await page.render();
+
+---
+
+<Blog lang={lang} blog={page.data}>
+  <Content />
+</Blog>

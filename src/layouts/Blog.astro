@@ -1,0 +1,24 @@
+---
+import type { Languages } from "../i18n/ui";
+import Layout from "./Layout.astro";
+import type { blogSchema } from "../content/config";
+import type { z } from "astro:content";
+import { useSharedTranslations, useLocalTranslations, useLocalTranslationsWithElement } from "../i18n/utils";
+
+type Props = {
+  lang: Languages;
+  blog: z.infer<typeof blogSchema>;
+}
+
+const {blog, lang} = Astro.props;
+
+const formattedDate = blog.date.toLocaleString(lang);
+
+const t = useSharedTranslations(lang);
+---
+
+<Layout title={blog.title} description={blog.description ?? t('description')} lang={lang}>
+  <h1>{blog.title}</h1>
+  <p>by {blog.author} {formattedDate}</p>
+  <slot />  
+</Layout>

@@ -16,8 +16,6 @@ const asPath = Astro.url.pathname; // ex: / or /en/sub
 
 const asPathWithoutLocale =
   lang === defaultLang ? `${asPath}` : asPath.replace(`/${lang}`, ""); // ex: / or /sub
-
-console.log({ asPath, asPathWithoutLocale });
 ---
 
 <!doctype html>
