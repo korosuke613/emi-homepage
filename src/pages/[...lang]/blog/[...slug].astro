@@ -1,26 +1,25 @@
 ---
-import { getCollection } from 'astro:content';
-import { isLanguages } from '../../../i18n/utils';
-import { defaultLang, type Languages } from '../../../i18n/ui';
-import Blog from '../../../layouts/Blog.astro';
-
+import { getCollection } from "astro:content";
+import { type Languages, defaultLang } from "../../../i18n/ui";
+import { isLanguages } from "../../../i18n/utils";
+import Blog from "../../../layouts/Blog.astro";
 
 export async function getStaticPaths() {
-  const pages = await getCollection('blog');
+  const pages = await getCollection("blog");
 
   return pages.map((page) => {
     let lang: Languages = defaultLang;
-    const [rawLang, ...slug] = page.slug.split('/');
-    if(isLanguages(rawLang)){
+    const [rawLang, ...slug] = page.slug.split("/");
+    if (isLanguages(rawLang)) {
       lang = rawLang;
     }
 
-    return { params: { slug: slug.join('/') || undefined, lang }, props: page };
+    return { params: { slug: slug.join("/") || undefined, lang }, props: page };
   });
 }
 const page = Astro.props;
 
-const {lang} = Astro.params;
+const { lang } = Astro.params;
 
 const { Content } = await page.render();
 ---

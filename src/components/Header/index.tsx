@@ -8,31 +8,47 @@ import {
   IconButton,
   Link,
   List,
+  ListDivider,
   ListItem,
   ListItemButton,
   Menu,
   MenuButton,
   MenuItem,
+  MenuList,
   Sheet,
   Stack,
   Typography,
   styled,
 } from "@mui/joy";
+
 import { type Languages, defaultLang } from "../../i18n/ui";
 import {
+  isUIKey,
   useLocalTranslations,
   useLocalTranslationsWithElement,
   useSharedTranslations,
 } from "../../i18n/utils";
+import type { StaticRoutes } from "../../utils/staticRoute";
 import { LangSelector } from "../LangSelector";
-import { getRelativeLocaleUrl } from "astro:i18n";
+import { MobileMenu } from "./MobileMenu";
 
 type Props = {
   lang: Languages;
-  path: string;
+  currentPath: string;
+  routes: StaticRoutes;
+  keepOpen?: boolean;
+  selectedItem?: string;
+  isStorybook?: boolean;
 };
 
-export const Header = ({ lang, path = "/" }: Props) => {
+export const Header = ({
+  lang,
+  currentPath = "/",
+  routes,
+  keepOpen = false,
+  selectedItem,
+  isStorybook = false,
+}: Props) => {
   const t = useSharedTranslations(lang);
   const tl = useLocalTranslations(lang);
   const TLE = useLocalTranslationsWithElement(lang);
@@ -54,47 +70,32 @@ export const Header = ({ lang, path = "/" }: Props) => {
               <Typography level="h1">{t("header")}</Typography>
             </Link>
           </ListItem>
-          <ListItem
-            sx={{
-              marginInlineStart: "auto",
-              display: { xs: "none", sm: "flex" },
-            }}
-          >
-            <ListItemButton
-              role="menuitem"
-              component="a"
-              href="#horizontal-list"
-            >
-              {t("route.career")}
-            </ListItemButton>
-          </ListItem>
-          <ListItem
-            sx={{
-              display: { xs: "none", sm: "flex" },
-            }}
-          >
-            <ListItemButton
-              role="menuitem"
-              component="a"
-              href="#horizontal-list"
-            >
-              {t("route.links")}
-            </ListItemButton>
-          </ListItem>
-          <ListItem
-            sx={{
-              display: { xs: "none", sm: "flex" },
-            }}
-          >
-            <ListItemButton
-              role="menuitem"
-              component="a"
-              href={getRelativeLocaleUrl(lang, "/blog")}
-            >
-              {t("route.blog")}
-            </ListItemButton>
-          </ListItem>
 
+          {/* デスクトップ用メニュー */}
+          {routes.map(({ name, path }, index) => {
+            const uiKey = `route.${name}`;
+            if (!isUIKey(lang, uiKey)) return null;
+            return (
+              <ListItem
+                key={name}
+                sx={{
+                  display: { xs: "none", sm: "flex" },
+                  marginInlineStart: index === 0 ? "auto" : "unset", // 最初の要素を右寄せ
+                }}
+              >
+                <ListItemButton
+                  role="menuitem"
+                  component="a"
+                  href={path}
+                  selected={selectedItem === name}
+                >
+                  {t(uiKey)}
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
+
+          {/* モバイル用メニューボタン */}
           <ListItem
             sx={{
               marginInlineStart: { xs: "auto", sm: "0" },
@@ -107,61 +108,18 @@ export const Header = ({ lang, path = "/" }: Props) => {
                 padding: "unset",
               }}
             >
-              <Dropdown>
-                <MenuButton
-                  variant="plain"
-                  sx={{
-                    padding: "unset",
-                    width: "48px",
-                    height: "48px",
-                    borderRadius: "0%",
-                  }}
-                >
-                  <MoreVert />
-                </MenuButton>
-                <Menu placement="bottom-end">
-                  <MenuItem>
-                    <Link
-                      underline="none"
-                      color="neutral"
-                      href="#horizontal-list"
-                      textColor={"common.black"}
-                    >
-                      {t("route.career")}
-                    </Link>
-                  </MenuItem>
-                  <MenuItem>
-                    <Link
-                      underline="none"
-                      color="neutral"
-                      href="#horizontal-list"
-                      textColor={"common.black"}
-                    >
-                      {t("route.links")}
-                    </Link>
-                  </MenuItem>
-                  <MenuItem>
-                    <Link
-                      underline="none"
-                      color="neutral"
-                      href={getRelativeLocaleUrl(lang, "/blog")}
-                      textColor={"common.black"}
-                    >
-                      {t("route.blog")}
-                    </Link>
-                  </MenuItem>
-                </Menu>
-              </Dropdown>
+              <MobileMenu lang={lang} routes={routes} />
             </ListItemButton>
           </ListItem>
 
+          {/* 言語切り替えボタン */}
           <ListItem
             sx={{
               padding: "5px",
               borderRadius: "0%",
             }}
           >
-            <LangSelector path={path} currentLang={lang} />
+            <LangSelector path={currentPath} currentLang={lang} />
           </ListItem>
         </List>
       </Box>

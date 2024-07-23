@@ -3,6 +3,7 @@ import { Box } from "@mui/joy";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import { Header } from "../components/Header";
 import { type Languages, defaultLang } from "../i18n/ui";
+import { getStaticRoutes } from "../utils/staticRoute";
 
 interface Props {
   title: string;
@@ -16,6 +17,8 @@ const asPath = Astro.url.pathname; // ex: / or /en/sub
 
 const asPathWithoutLocale =
   lang === defaultLang ? `${asPath}` : asPath.replace(`/${lang}`, ""); // ex: / or /sub
+
+const routes = getStaticRoutes(lang);
 ---
 
 <!doctype html>
@@ -31,7 +34,7 @@ const asPathWithoutLocale =
 		<SpeedInsights />
 	</head>
 	<body>
-		<Header lang={lang} path={asPathWithoutLocale} client:visible/>
+		<Header lang={lang} currentPath={asPathWithoutLocale} routes={routes} client:visible/>
 		<Box sx={{margin: "1rem"}}>
 		<main>
 		<slot />

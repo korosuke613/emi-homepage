@@ -1,16 +1,20 @@
 ---
-import type { Languages } from "../i18n/ui";
-import Layout from "./Layout.astro";
-import type { blogSchema } from "../content/config";
 import type { z } from "astro:content";
-import { useSharedTranslations, useLocalTranslations, useLocalTranslationsWithElement } from "../i18n/utils";
+import type { blogSchema } from "../content/config";
+import type { Languages } from "../i18n/ui";
+import {
+  useLocalTranslations,
+  useLocalTranslationsWithElement,
+  useSharedTranslations,
+} from "../i18n/utils";
+import Layout from "./Layout.astro";
 
 type Props = {
   lang: Languages;
   blog: z.infer<typeof blogSchema>;
-}
+};
 
-const {blog, lang} = Astro.props;
+const { blog, lang } = Astro.props;
 
 const formattedDate = blog.date.toLocaleString(lang);
 
