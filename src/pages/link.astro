@@ -20,16 +20,37 @@ const tl = useLocalTranslations(lang);
 const TLE = useLocalTranslationsWithElement(lang);
 ---
 
-<Layout title={t('title')} description={t('description')} lang={lang}>
+<Layout title={t('route.link')} description={t('description')} lang={lang}>
 	<Box sx={{ 
     height: "10rem",
-    display: "flex",
-	  flexWrap: "wrap",
-	  alignContent: "center",
-	  justifyContent: "center" 
+    textAlign: "center",
   }}>
-	<Typography level="h1">
+	<Typography level="h2"
+  >
 	  {t("route.link")}
   </Typography>
-</Box>
+
+  <Typography
+  gutterBottom={true}
+  >
+	  {tl({
+      ja: "各種リンク",
+      en: "Various links"
+    })}
+
+  </Typography>
+
+  <Typography level="h3"
+  gutterBottom={true}
+  >
+	  {t("link.service")}
+  </Typography>
+
+  <Typography level="h3"
+  gutterBottom={true}
+  >
+	  {t("link.sns")}
+  </Typography>
+
+  </Box>
 </Layout>
