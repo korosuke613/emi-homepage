@@ -10,25 +10,25 @@ import {
 
 import { type Languages, defaultLang, type ui } from "../../../i18n/ui";
 import {
+  getRoutePathWithLang,
   isUIKey,
   useLocalTranslations,
   useLocalTranslationsWithElement,
   useSharedTranslations,
 } from "../../../i18n/utils";
-import type { StaticRoutes } from "../../../utils/staticRoute";
+import { STATIC_ROUTES } from "../../../utils/staticRoute";
 
 type Props = {
   lang: Languages;
-  routes: StaticRoutes;
   keepOpen?: boolean;
   selectedItem?: string;
+  currentPathWithoutLang?: string;
 };
 
 export const MobileMenu = ({
   lang,
   keepOpen = false,
-  selectedItem,
-  routes,
+  currentPathWithoutLang = "/",
 }: Props) => {
   const t = useSharedTranslations(lang);
   const tl = useLocalTranslations(lang);
@@ -58,15 +58,19 @@ export const MobileMenu = ({
         {...(keepOpen ? { open: keepOpen } : {})} // open が渡された場合のみ open を設定
       >
         <ListDivider />
-        {routes.map(({ name, path }) => {
-          const uiKey = `route.${name}`;
+        {STATIC_ROUTES.map((route) => {
+          const uiKey = `route.${route}`;
+          const routePath = getRoutePathWithLang(route, lang);
           if (isUIKey(lang, uiKey)) {
             return (
-              <MenuItem key={name} selected={selectedItem === name}>
+              <MenuItem
+                key={route}
+                selected={currentPathWithoutLang === `/${route}`}
+              >
                 <Link
                   underline="none"
                   color="neutral"
-                  href={path}
+                  href={routePath}
                   textColor={"common.black"}
                 >
                   {t(uiKey)}

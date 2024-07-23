@@ -23,31 +23,26 @@ import {
 
 import { type Languages, defaultLang } from "../../i18n/ui";
 import {
+  getRoutePathWithLang,
   isUIKey,
   useLocalTranslations,
   useLocalTranslationsWithElement,
   useSharedTranslations,
 } from "../../i18n/utils";
-import type { StaticRoutes } from "../../utils/staticRoute";
+import { STATIC_ROUTES } from "../../utils/staticRoute";
 import { LangSelector } from "../LangSelector";
 import { MobileMenu } from "./MobileMenu";
 
 type Props = {
   lang: Languages;
-  currentPath: string;
-  routes: StaticRoutes;
+  currentPathWithoutLang: string;
   keepOpen?: boolean;
-  selectedItem?: string;
-  isStorybook?: boolean;
 };
 
 export const Header = ({
   lang,
-  currentPath = "/",
-  routes,
-  keepOpen = false,
-  selectedItem,
-  isStorybook = false,
+  currentPathWithoutLang = "/",
+  keepOpen,
 }: Props) => {
   const t = useSharedTranslations(lang);
   const tl = useLocalTranslations(lang);
@@ -72,12 +67,13 @@ export const Header = ({
           </ListItem>
 
           {/* デスクトップ用メニュー */}
-          {routes.map(({ name, path }, index) => {
-            const uiKey = `route.${name}`;
+          {STATIC_ROUTES.map((route, index) => {
+            const uiKey = `route.${route}`;
             if (!isUIKey(lang, uiKey)) return null;
+            const routePath = getRoutePathWithLang(route, lang);
             return (
               <ListItem
-                key={name}
+                key={route}
                 sx={{
                   display: { xs: "none", sm: "flex" },
                   marginInlineStart: index === 0 ? "auto" : "unset", // 最初の要素を右寄せ
@@ -86,8 +82,8 @@ export const Header = ({
                 <ListItemButton
                   role="menuitem"
                   component="a"
-                  href={path}
-                  selected={selectedItem === name}
+                  href={routePath}
+                  selected={currentPathWithoutLang === `/${route}`}
                 >
                   {t(uiKey)}
                 </ListItemButton>
@@ -108,7 +104,11 @@ export const Header = ({
                 padding: "unset",
               }}
             >
-              <MobileMenu lang={lang} routes={routes} />
+              <MobileMenu
+                lang={lang}
+                keepOpen={keepOpen}
+                currentPathWithoutLang={currentPathWithoutLang}
+              />
             </ListItemButton>
           </ListItem>
 
@@ -119,7 +119,7 @@ export const Header = ({
               borderRadius: "0%",
             }}
           >
-            <LangSelector path={currentPath} currentLang={lang} />
+            <LangSelector path={currentPathWithoutLang} currentLang={lang} />
           </ListItem>
         </List>
       </Box>

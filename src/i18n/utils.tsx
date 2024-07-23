@@ -6,6 +6,13 @@ export function getLangFromUrl(url: URL) {
   return defaultLang;
 }
 
+export function getRoutePathWithLang(route: string, lang: Languages) {
+  const normalizedRoutePath = route.startsWith("/") ? route : `/${route}`;
+  return lang === defaultLang
+    ? normalizedRoutePath
+    : `/${lang}${normalizedRoutePath}`;
+}
+
 export function useSharedTranslations(lang: keyof typeof ui) {
   return function t(key: keyof (typeof ui)[typeof defaultLang]) {
     return ui[lang][key] || ui[defaultLang][key];
