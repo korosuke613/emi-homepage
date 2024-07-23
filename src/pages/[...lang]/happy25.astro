@@ -1,0 +1,19 @@
+---
+import { defaultLang, languageKeys } from "../../i18n/ui";
+import DefaultHappy25 from "../happy25.astro";
+
+export async function getStaticPaths() {
+  return languageKeys
+    .map((lang) => {
+      if (lang === defaultLang) {
+        return undefined;
+      }
+      return { params: { lang } };
+    })
+    .filter((v) => v !== undefined);
+}
+
+const { lang } = Astro.params;
+---
+
+<DefaultHappy25 lang={lang}></DefaultHappy25>
