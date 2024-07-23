@@ -6,6 +6,7 @@ import {
   Menu,
   MenuButton,
   MenuItem,
+  Box,
 } from "@mui/joy";
 
 import { type Languages, defaultLang, type ui } from "../../../i18n/ui";
@@ -63,19 +64,21 @@ export const MobileMenu = ({
           const routePath = getRoutePathWithLang(route, lang);
           if (isUIKey(lang, uiKey)) {
             return (
-              <MenuItem
-                key={route}
-                selected={currentPathWithoutLang === `/${route}`}
+              <Box
+                component="a"
+                href={routePath}
+                sx={{
+                  textDecoration: "none",
+                }}
               >
-                <Link
-                  underline="none"
-                  color="neutral"
+                <MenuItem
+                  key={route}
+                  selected={currentPathWithoutLang === `/${route}`}
                   href={routePath}
-                  textColor={"common.black"}
                 >
                   {t(uiKey)}
-                </Link>
-              </MenuItem>
+                </MenuItem>
+              </Box>
             );
           }
           console.error(`[MobileMenu] route is not found: ${name}`);
