@@ -1,20 +1,24 @@
 ---
-import type { Languages } from "../i18n/ui";
-import Layout from "./Layout.astro";
-import type { blogSchema } from "../content/config";
 import type { z } from "astro:content";
-import { useSharedTranslations, useLocalTranslations, useLocalTranslationsWithElement } from "../i18n/utils";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import type { blogSchema } from "../content/config";
+import type { Languages } from "../i18n/ui";
+import {
+  useLocalTranslations,
+  useLocalTranslationsWithElement,
+  useSharedTranslations,
+} from "../i18n/utils";
+import Layout from "./Layout.astro";
 
 type Props = {
   lang: Languages;
   blogs: {
-    slug: string,
+    slug: string;
     data: z.infer<typeof blogSchema>;
   }[];
-}
+};
 
-const {blogs, lang} = Astro.props;
+const { blogs, lang } = Astro.props;
 
 const t = useSharedTranslations(lang);
 const tl = useLocalTranslations(lang);

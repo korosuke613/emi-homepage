@@ -3,16 +3,17 @@ import { defaultLang, languageKeys } from "../../i18n/ui";
 import DefaultIndex from "../index.astro";
 
 export async function getStaticPaths() {
-  return languageKeys.map((lang) => {
-    if(lang === defaultLang){
-      return undefined;
-    }
-    return { params: { lang } };
-  }).filter((v) => v !== undefined);
+  return languageKeys
+    .map((lang) => {
+      if (lang === defaultLang) {
+        return undefined;
+      }
+      return { params: { lang } };
+    })
+    .filter((v) => v !== undefined);
 }
 
 const { lang } = Astro.params;
-
 ---
 
 <DefaultIndex lang={lang}></DefaultIndex>

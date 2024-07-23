@@ -28,9 +28,9 @@ import {
   useLocalTranslationsWithElement,
   useSharedTranslations,
 } from "../../i18n/utils";
+import type { StaticRoutes } from "../../utils/staticRoute";
 import { LangSelector } from "../LangSelector";
 import { MobileMenu } from "./MobileMenu";
-import type { StaticRoutes } from "../../utils/staticRoute";
 
 type Props = {
   lang: Languages;

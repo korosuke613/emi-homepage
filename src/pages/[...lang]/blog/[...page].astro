@@ -1,22 +1,21 @@
 ---
-import { getCollection } from 'astro:content';
-import { defaultLang, languageKeys, type Languages } from '../../../i18n/ui';
-import type { GetStaticPathsOptions, Page } from 'astro';
-import BlogList from '../../../layouts/BlogList.astro';
-import { isLanguages } from '../../../i18n/utils';
+import { getCollection } from "astro:content";
+import type { GetStaticPathsOptions, Page } from "astro";
+import { type Languages, defaultLang, languageKeys } from "../../../i18n/ui";
+import { isLanguages } from "../../../i18n/utils";
+import BlogList from "../../../layouts/BlogList.astro";
 
-
-export async function getStaticPaths({paginate}: GetStaticPathsOptions) {
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   // ja の記事を抽出
-  const pages = await getCollection('blog')
-  
+  const pages = await getCollection("blog");
+
   type PageByLang = Record<Languages, typeof pages>;
   const pageByLang: PageByLang = {} as PageByLang;
 
   for (const page of pages) {
-    const [rawLang, ..._] = page.slug.split('/');
+    const [rawLang, ..._] = page.slug.split("/");
     let lang: Languages = defaultLang;
-    if(isLanguages(rawLang)){
+    if (isLanguages(rawLang)) {
       lang = rawLang;
     }
 
@@ -31,18 +30,20 @@ export async function getStaticPaths({paginate}: GetStaticPathsOptions) {
     const sortedPages = pages.sort((a, b) => {
       return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
     });
-    return paginate(pages, { pageSize: 9, params: {lang: lang as Languages} });
+    return paginate(pages, {
+      pageSize: 9,
+      params: { lang: lang as Languages },
+    });
   });
 }
 
 const page = Astro.props.page.data.map((page) => {
-  const [_, ...slug] = page.slug.split('/');
+  const [_, ...slug] = page.slug.split("/");
 
-  return { slug: slug.join('/'), data: page.data };
+  return { slug: slug.join("/"), data: page.data };
 });
 
 const lang = Astro.params.lang;
-
 ---
 
 <BlogList lang={lang} blogs={page} />
