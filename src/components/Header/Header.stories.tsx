@@ -11,11 +11,6 @@ export default metaData;
 export const Default: StoryObj<typeof Header> = {
   args: {
     lang: "ja",
-    routes: [
-      { name: "career", path: "/career" },
-      { name: "link", path: "/link" },
-      { name: "blog", path: "/blog" },
-    ],
   },
 };
 
@@ -29,10 +24,5 @@ export const MobileView: StoryObj<typeof Header> = {
 
   args: {
     lang: "ja",
-    routes: [
-      { name: "career", path: "/career" },
-      { name: "link", path: "/link" },
-      { name: "blog", path: "/blog" },
-    ],
   },
 };

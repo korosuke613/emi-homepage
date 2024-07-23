@@ -1,0 +1,35 @@
+---
+import { Box, Typography } from "@mui/joy";
+import type { Languages } from "../i18n/ui";
+import {
+  useLocalTranslations,
+  useLocalTranslationsWithElement,
+  useSharedTranslations,
+} from "../i18n/utils";
+import Layout from "../layouts/Layout.astro";
+
+interface Props {
+  lang: Languages;
+}
+
+const props = Astro.props;
+
+const lang = props.lang ?? "ja";
+const t = useSharedTranslations(lang);
+const tl = useLocalTranslations(lang);
+const TLE = useLocalTranslationsWithElement(lang);
+---
+
+<Layout title={t('route.career')} description={t('description')} lang={lang}>
+	<Box sx={{ 
+    height: "10rem",
+    display: "flex",
+	  flexWrap: "wrap",
+	  alignContent: "center",
+	  justifyContent: "center" 
+  }}>
+	<Typography level="h1">
+	  {t("route.career")}
+  </Typography>
+</Box>
+</Layout>

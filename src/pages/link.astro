@@ -1,0 +1,56 @@
+---
+import { Box, Typography } from "@mui/joy";
+import type { Languages } from "../i18n/ui";
+import {
+  useLocalTranslations,
+  useLocalTranslationsWithElement,
+  useSharedTranslations,
+} from "../i18n/utils";
+import Layout from "../layouts/Layout.astro";
+
+interface Props {
+  lang: Languages;
+}
+
+const props = Astro.props;
+
+const lang = props.lang ?? "ja";
+const t = useSharedTranslations(lang);
+const tl = useLocalTranslations(lang);
+const TLE = useLocalTranslationsWithElement(lang);
+---
+
+<Layout title={t('route.link')} description={t('description')} lang={lang}>
+	<Box sx={{ 
+    height: "10rem",
+    textAlign: "center",
+  }}>
+	<Typography level="h2"
+  >
+	  {t("route.link")}
+  </Typography>
+
+  <Typography
+  gutterBottom={true}
+  >
+	  {tl({
+      ja: "各種リンク",
+      en: "Various links"
+    })}
+
+  </Typography>
+
+  <Typography level="h3"
+  gutterBottom={true}
+  >
+	  {t("link.service")}
+  </Typography>
+
+  <Typography level="h3"
+  gutterBottom={true}
+  >
+	  {t("link.sns")}
+  </Typography>
+
+  </Box>
+</Layout>

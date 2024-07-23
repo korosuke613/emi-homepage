@@ -1,0 +1,74 @@
+---
+import {
+  Box,
+  Card,
+  AspectRatio,
+  CardCover,
+  Typography,
+  CardContent,
+  Grid,
+} from "@mui/joy";
+import type { Languages } from "../i18n/ui";
+import {
+  useLocalTranslations,
+  useLocalTranslationsWithElement,
+  useSharedTranslations,
+} from "../i18n/utils";
+import Layout from "../layouts/Layout.astro";
+
+interface Props {
+  lang: Languages;
+}
+
+const props = Astro.props;
+
+const lang = props.lang ?? "ja";
+const t = useSharedTranslations(lang);
+const tl = useLocalTranslations(lang);
+const TLE = useLocalTranslationsWithElement(lang);
+---
+
+<Layout title={tl({
+	ja: "2024/07/24 誕生日",
+	en: "2024/07/24 Birthday",
+})} description={t('description')} lang={lang}>
+	<Box sx={{ height: "10rem",    
+	textAlign: "center",
+	justifyContent: "center" }}>
+		<Typography level="h1">
+		<TLE dict={{
+				ja: "<strong>牧浦えみ</strong>！祝 25 歳！！",
+				en: "<strong>Emi Makura</strong>! Happy 25th Birthday!!",
+			}} />
+		</h1>
+		</Typography>
+
+		<br />
+		<Grid container spacing={2} sx={{ flexGrow: 1 }}>
+			<Grid xs={12}>
+				<AspectRatio
+					variant="plain"
+					maxHeight={555}
+				>
+					<Box
+						component="img"
+						alt="The house from the offer."
+						src="/happy25.jpg"
+						width="100%"
+						maxWidth={1200}
+						maxHeight={555}
+					/>
+				</AspectRatio>
+			</Grid>
+
+			<Grid xs={12}>
+				<Typography level="h4">
+					{tl({
+						ja: "めでたいねぇ",
+						en: "Congratulations!",
+					})}
+				</Typography>
+			</Grid>
+		</Grid>
+	</Box>
+</Layout>
