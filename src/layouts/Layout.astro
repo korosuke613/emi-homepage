@@ -15,9 +15,14 @@ interface Props {
 const { title, lang, description } = Astro.props;
 
 const asPath = Astro.url.pathname; // ex: / or /en/sub
+const asPathWithoutEndSlash = asPath.endsWith("/")
+  ? asPath.slice(0, -1)
+  : asPath;
 
 const asPathWithoutLocale =
-  lang === defaultLang ? `${asPath}` : asPath.replace(`/${lang}`, ""); // ex: / or /sub
+  lang === defaultLang
+    ? asPathWithoutEndSlash
+    : asPathWithoutEndSlash.replace(`/${lang}`, ""); // ex: / or /sub
 
 const t = useSharedTranslations(lang);
 
