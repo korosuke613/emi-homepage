@@ -1,7 +1,7 @@
 import type React from "react";
 import type { ReactProps } from "../../utils/react";
-import { Header } from "../Header";
-import { PageCover } from "../PageCover";
+import { Header } from "./Header";
+import { PageCover } from "./PageCover";
 
 type Props = {
   headerProp: ReactProps<typeof Header>;

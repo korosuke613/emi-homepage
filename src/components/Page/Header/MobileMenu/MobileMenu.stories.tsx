@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { MobileMenu } from ".";
 
 const metaData: Meta = {
-  title: "Header/MobileMenu",
+  title: "Page/Header/MobileMenu",
   component: MobileMenu,
 };
 

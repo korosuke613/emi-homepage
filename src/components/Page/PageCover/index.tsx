@@ -1,24 +1,5 @@
-import {
-  Box,
-  Divider,
-  Dropdown,
-  Grid,
-  IconButton,
-  Link,
-  Menu,
-  MenuButton,
-  MenuItem,
-  Sheet,
-} from "@mui/joy";
-import type React from "react";
-import {
-  type Languages,
-  defaultLang,
-  languageEmojis,
-  languageKeys,
-  languageNames,
-} from "../../i18n/ui";
-import { Typography } from "../Typography";
+import { Box, Grid } from "@mui/joy";
+import { Typography } from "../../Typography";
 
 type Props = {
   title: string;

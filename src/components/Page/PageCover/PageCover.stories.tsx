@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { PageCover } from ".";
 
 const metaData: Meta = {
-  title: "PageCover",
+  title: "Page/PageCover",
   component: PageCover,
 };
 
