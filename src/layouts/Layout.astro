@@ -1,8 +1,6 @@
 ---
-import { toCodes } from "astro:i18n";
-import { Box } from "@mui/joy";
 import SpeedInsights from "@vercel/speed-insights/astro";
-import { Header } from "../components/Header";
+import { Page } from "../components/Page";
 import { type Languages, defaultLang } from "../i18n/ui";
 import { useSharedTranslations } from "../i18n/utils";
 
@@ -10,9 +8,10 @@ interface Props {
   title: string;
   description: string;
   lang: Languages;
+  secondTitle?: string;
 }
 
-const { title, lang, description } = Astro.props;
+const { title, lang, description, secondTitle } = Astro.props;
 
 const asPath = Astro.url.pathname; // ex: / or /en/sub
 const asPathWithoutEndSlash = asPath.endsWith("/")
@@ -43,12 +42,19 @@ const normalizedTitle =
 		<SpeedInsights />
 	</head>
 	<body>
-		<Header lang={lang} currentPathWithoutLang={asPathWithoutLocale} client:visible/>
-		<Box sx={{margin: "1rem"}}>
-		<main>
-		<slot />
-		</main>
-		</Box>
+		<Page 
+			headerProp={{
+				lang,
+				currentPathWithoutLang: asPathWithoutLocale,
+			}}
+			pageCoverProp={{
+				title: secondTitle ? secondTitle : title,
+			}}
+
+			client:visible
+		>
+			<slot />
+		</Page>
 	</body>
 </html>
 

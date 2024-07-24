@@ -1,36 +1,16 @@
-import { MoreVert } from "@mui/icons-material";
-import {
-  Box,
-  Button,
-  Container,
-  Dropdown,
-  Grid,
-  IconButton,
-  Link,
-  List,
-  ListDivider,
-  ListItem,
-  ListItemButton,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Sheet,
-  Stack,
-  styled,
-} from "@mui/joy";
+import { Box, Link, List, ListItem, ListItemButton } from "@mui/joy";
 
-import { type Languages, defaultLang } from "../../i18n/ui";
+import { type Languages, defaultLang } from "../../../i18n/ui";
 import {
   getRoutePathWithLang,
   isUIKey,
   useLocalTranslations,
   useLocalTranslationsWithElement,
   useSharedTranslations,
-} from "../../i18n/utils";
-import { STATIC_ROUTES } from "../../utils/staticRoute";
-import { LangSelector } from "../LangSelector";
-import { Typography } from "../Typography";
+} from "../../../i18n/utils";
+import { STATIC_ROUTES } from "../../../utils/staticRoute";
+import { Typography } from "../../Typography";
+import { LangSelector } from "./LangSelector";
 import { MobileMenu } from "./MobileMenu";
 
 type Props = {

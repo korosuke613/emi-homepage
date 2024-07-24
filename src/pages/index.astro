@@ -1,6 +1,4 @@
 ---
-import { Box } from "@mui/joy";
-import { Typography } from "../components/Typography";
 import type { Languages } from "../i18n/ui";
 import {
   useLocalTranslations,
@@ -21,16 +19,8 @@ const tl = useLocalTranslations(lang);
 const TLE = useLocalTranslationsWithElement(lang);
 ---
 
-<Layout title={t('title')} description={t('description')} lang={lang}>
-	<Box sx={{ height: "10rem",     display: "flex",
-	flexWrap: "wrap",
-	alignContent: "center",
-	justifyContent: "center" }}>
-	<Typography level="h1">
-	<TLE dict={{
-			ja: "<strong>牧浦えみ</strong>のホームページへようこそ！",
-			en: "Welcome to <strong>Emi Makiura's</strong> homepage!",
-		}} />
-  </Typography>
-</Box>
+<Layout title={t('title')} description={t('description')} lang={lang} secondTitle={tl({
+	ja: "牧浦えみのホームページへようこそ！",
+	en: "Welcome to Emi Makiura's homepage!",
+})}>
 </Layout>

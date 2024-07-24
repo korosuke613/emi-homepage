@@ -13,7 +13,7 @@ import {
   languageEmojis,
   languageKeys,
   languageNames,
-} from "../../i18n/ui";
+} from "../../../../i18n/ui";
 
 const idPrefix = "lang-selector";
 

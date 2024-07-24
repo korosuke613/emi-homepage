@@ -1,6 +1,4 @@
 ---
-import { Box } from "@mui/joy";
-import { Typography } from "../components/Typography";
 import type { Languages } from "../i18n/ui";
 import {
   useLocalTranslations,
@@ -22,15 +20,4 @@ const TLE = useLocalTranslationsWithElement(lang);
 ---
 
 <Layout title={t('route.career')} description={t('description')} lang={lang}>
-	<Box sx={{ 
-    height: "10rem",
-    display: "flex",
-	  flexWrap: "wrap",
-	  alignContent: "center",
-	  justifyContent: "center" 
-  }}>
-	<Typography level="h1">
-	  {t("route.career")}
-  </Typography>
-</Box>
 </Layout>

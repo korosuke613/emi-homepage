@@ -26,7 +26,6 @@ const tl = useLocalTranslations(lang);
 ---
 
 <Layout title="Blog" description={tl({ja: '記事一覧です。', "en": "List of articles"})} lang={lang}>
-  <Typography level="h1">Blog</Typography>
   <ul>
     {blogs.map((blog) => (
       <li>

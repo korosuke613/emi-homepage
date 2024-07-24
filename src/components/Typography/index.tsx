@@ -38,9 +38,9 @@ const theme = extendTheme({});
 
 theme.typography.h1 = {
   ...theme.typography.h1,
-  fontSize: fontSize[11],
+  fontSize: fontSize[12],
   [theme.breakpoints.only("sm")]: {
-    fontSize: fontSize[10],
+    fontSize: fontSize[11],
   },
   [theme.breakpoints.only("xs")]: {
     fontSize: fontSize[9],

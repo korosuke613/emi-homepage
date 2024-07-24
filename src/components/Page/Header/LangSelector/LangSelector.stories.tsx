@@ -3,7 +3,7 @@ import { expect, screen, userEvent, within } from "@storybook/test";
 import { LangSelector } from ".";
 
 const metaData: Meta = {
-  title: "LangSelector",
+  title: "Page/Header/LangSelector",
   component: LangSelector,
 };
 

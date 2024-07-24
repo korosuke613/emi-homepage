@@ -9,15 +9,15 @@ import {
   MenuItem,
 } from "@mui/joy";
 
-import { type Languages, defaultLang, type ui } from "../../../i18n/ui";
+import { type Languages, defaultLang, type ui } from "../../../../i18n/ui";
 import {
   getRoutePathWithLang,
   isUIKey,
   useLocalTranslations,
   useLocalTranslationsWithElement,
   useSharedTranslations,
-} from "../../../i18n/utils";
-import { STATIC_ROUTES } from "../../../utils/staticRoute";
+} from "../../../../i18n/utils";
+import { STATIC_ROUTES } from "../../../../utils/staticRoute";
 
 type Props = {
   lang: Languages;
