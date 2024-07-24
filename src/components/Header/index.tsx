@@ -17,7 +17,6 @@ import {
   MenuList,
   Sheet,
   Stack,
-  Typography,
   styled,
 } from "@mui/joy";
 
@@ -31,6 +30,7 @@ import {
 } from "../../i18n/utils";
 import { STATIC_ROUTES } from "../../utils/staticRoute";
 import { LangSelector } from "../LangSelector";
+import { Typography } from "../Typography";
 import { MobileMenu } from "./MobileMenu";
 
 type Props = {

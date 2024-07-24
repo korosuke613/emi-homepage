@@ -1,5 +1,6 @@
 ---
 import type { z } from "astro:content";
+import { Typography } from "../components/Typography";
 import type { blogSchema } from "../content/config";
 import type { Languages } from "../i18n/ui";
 import {
@@ -22,7 +23,7 @@ const t = useSharedTranslations(lang);
 ---
 
 <Layout title={blog.title} description={blog.description ?? t('description')} lang={lang}>
-  <h1>{blog.title}</h1>
-  <p>by {blog.author} {formattedDate}</p>
-  <slot />  
+  <Typography level="h1">{blog.title}</Typography>
+  <Typography>by {blog.author} {formattedDate}</Typography>
+  <slot />
 </Layout>
