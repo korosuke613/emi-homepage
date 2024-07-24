@@ -1,5 +1,6 @@
 ---
 import { AspectRatio, Box, Card, CardContent, CardCover, Grid } from "@mui/joy";
+import { PageCover } from "../components/PageCover";
 import { Typography } from "../components/Typography";
 import type { Languages } from "../i18n/ui";
 import {
@@ -22,20 +23,16 @@ const TLE = useLocalTranslationsWithElement(lang);
 ---
 
 <Layout title={tl({
-	ja: "2024/07/24 誕生日",
-	en: "2024/07/24 Birthday",
+	ja: "牧浦えみ！祝 25 歳！！",
+	en: "Emi Makura! Happy 25th Birthday!!",
 })} description={t('description')} lang={lang}>
-	<Box sx={{ height: "10rem",    
-	textAlign: "center",
-	justifyContent: "center" }}>
-		<Typography level="h1">
-		{tl({
-				ja: "牧浦えみ！祝 25 歳！！",
-				en: "Emi Makura! Happy 25th Birthday!!",
-			})}
-		</Typography>
-
-		<br />
+	<Box 
+		sx={{ 
+			height: "10rem",    
+			textAlign: "center",
+			justifyContent: "center" 
+		}}
+	>	
 		<Grid container spacing={2} sx={{ flexGrow: 1 }}>
 			<Grid xs={12}>
 				<Box

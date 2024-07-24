@@ -21,25 +21,14 @@ const tl = useLocalTranslations(lang);
 const TLE = useLocalTranslationsWithElement(lang);
 ---
 
-<Layout title={t('route.link')} description={t('description')} lang={lang}>
+<Layout title={t('route.link')} description={t('description')} lang={lang} secondTitle={tl({
+  ja: "リンク集",
+  en: "Link",
+})}>
 	<Box sx={{ 
     height: "10rem",
     textAlign: "center",
   }}>
-	<Typography level="h1"
-  >
-	  {t("route.link")}
-  </Typography>
-
-  <Typography
-  gutterBottom={true}
-  >
-	  {tl({
-      ja: "各種リンク",
-      en: "Various links"
-    })}
-
-  </Typography>
 
   <Typography level="h2"
   gutterBottom={true}
