@@ -1,6 +1,7 @@
 ---
 import { Box } from "@mui/joy";
 import { Typography } from "../components/Typography";
+import { ServiceLinkCards } from "../components/ServiceLinkCards";
 import type { Languages } from "../i18n/ui";
 import {
   useLocalTranslations,
@@ -26,21 +27,64 @@ const TLE = useLocalTranslationsWithElement(lang);
   en: "Link",
 })}>
 	<Box sx={{ 
-    height: "10rem",
     textAlign: "center",
   }}>
-
   <Typography level="h2"
   gutterBottom={true}
+  marginBottom={"1rem"}
   >
 	  {t("link.service")}
   </Typography>
 
+  <ServiceLinkCards serviceLinkCard={[
+      {
+        title: "障害者就労継続支援",
+        cardImg:
+          "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318",
+        tags: ["障害者支援"],
+      },
+      {
+        title: "障害者就労定着支援",
+        cardImg:
+          "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318",
+          tags: ["障害者支援"],
+        },
+      {
+        title: "英語の授業",
+        cardImg:
+          "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318",
+          tags: ["授業"],
+        },
+      {
+        title: "高校理科(化学)の授業",
+        cardImg:
+          "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318",
+        tags: ["授業"],
+      },
+      {
+        title: "デジタル絵作成",
+        description: "SNSアイコン、名刺、オリジナルキャラのご提案、商品パッケージ",
+        cardImg:
+          "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318",
+        tags: ["絵"],
+      },
+      {
+        title: "アナログ絵作成",
+        description: "デッサン全般",
+        cardImg:
+          "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318",
+        tags: ["絵"],
+      }
+  ]}
+  />
+
   <Typography level="h2"
   gutterBottom={true}
+  marginBottom={"1rem"}
   >
 	  {t("link.sns")}
   </Typography>
 
   </Box>
+</Box>
 </Layout>
