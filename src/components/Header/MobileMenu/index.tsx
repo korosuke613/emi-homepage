@@ -1,12 +1,12 @@
 import { MoreVert } from "@mui/icons-material";
 import {
+  Box,
   Dropdown,
   Link,
   ListDivider,
   Menu,
   MenuButton,
   MenuItem,
-  Box,
 } from "@mui/joy";
 
 import { type Languages, defaultLang, type ui } from "../../../i18n/ui";
