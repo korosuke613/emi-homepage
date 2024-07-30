@@ -5,25 +5,47 @@ import {
   CardContent,
   CardOverflow,
   Chip,
+  CssVarsProvider,
   Divider,
+  extendTheme,
   Link,
   Typography,
 } from "@mui/joy";
 
+import type { SvgIconComponent } from "@mui/icons-material";
+import { Facebook } from "@mui/icons-material";
+import type { ReactNode } from "react";
+
 type Props = {
   title: string;
   description?: string;
-  cardImg: string;
+  cardImg?: string;
+  svgIcon?: ReactNode;
+  link?: string;
   tags: string[];
 };
+
+const theme = extendTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 400,
+      md: 600,
+      lg: 900,
+      xl: 1200,
+    },
+  },
+});
 
 export const ServiceLinkCardMobile = ({
   title,
   description,
   cardImg,
+  svgIcon,
+  link = "#",
   tags,
 }: Props) => (
-  <>
+  <CssVarsProvider theme={theme}>
     <Card
       variant="outlined"
       orientation="horizontal"
@@ -35,31 +57,58 @@ export const ServiceLinkCardMobile = ({
         },
       }}
     >
-      <AspectRatio ratio="1" sx={{ width: 90 }}>
-        <img src={cardImg} loading="lazy" alt="" />
-      </AspectRatio>
+      {cardImg && (
+        <AspectRatio
+          ratio="1"
+          sx={{
+            minWidth: {
+              xs: 50,
+              sm: 90,
+            },
+          }}
+        >
+          <img src={cardImg} loading="lazy" alt="" />
+        </AspectRatio>
+      )}
+      {svgIcon && svgIcon}
       <CardContent>
-        <Typography level="title-lg" id="card-description">
+        <Typography level="title-md" id="card-description">
           {title}
         </Typography>
-        <Typography level="body-sm" aria-describedby="card-description" mb={1}>
+        <Typography level="body-sm" aria-describedby="card-description">
           <Link
             overlay
             underline="none"
-            href="#interactive-card"
-            sx={{ color: "text.tertiary" }}
+            href={link}
+            sx={{
+              color: "text.tertiary",
+              overflow: "hidden",
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 2,
+              minHeight: "1.25rem",
+            }}
           >
             {description}
           </Link>
         </Typography>
-        <Box>
+        <Box
+          sx={{
+            display: {
+              xs: "none",
+              sm: "flex",
+            },
+          }}
+        >
           {tags?.map((tag) => {
             return (
               <Chip
                 key={tag}
                 variant="outlined"
                 size="sm"
-                sx={{ pointerEvents: "none" }}
+                sx={{
+                  pointerEvents: "none",
+                }}
               >
                 {tag.startsWith("#") ? tag : `＃${tag}`}
               </Chip>
@@ -68,5 +117,5 @@ export const ServiceLinkCardMobile = ({
         </Box>
       </CardContent>
     </Card>
-  </>
+  </CssVarsProvider>
 );

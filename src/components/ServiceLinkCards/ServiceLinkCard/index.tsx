@@ -16,6 +16,7 @@ type Props = {
   title: string;
   description?: string;
   cardImg: string;
+  link?: string;
   tags: string[];
 };
 
@@ -23,6 +24,7 @@ export const ServiceLinkCard = ({
   title,
   description,
   cardImg,
+  link = "#",
   tags,
 }: Props) => (
   <Card
@@ -52,7 +54,7 @@ export const ServiceLinkCard = ({
         <Link
           overlay
           underline="none"
-          href="#interactive-card"
+          href={link}
           sx={{ color: "text.tertiary" }}
         >
           {description}
