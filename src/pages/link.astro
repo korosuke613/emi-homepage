@@ -9,6 +9,9 @@ import {
   useSharedTranslations,
 } from "../i18n/utils";
 import Layout from "../layouts/Layout.astro";
+import { Facebook, Twitter, Instagram, GitHub } from "@mui/icons-material";
+import type React from "react";
+import { SocialNetworks } from "../components/SocialNetworks";
 
 interface Props {
   lang: Languages;
@@ -85,6 +88,7 @@ const TLE = useLocalTranslationsWithElement(lang);
 	  {t("link.sns")}
   </Typography>
 
+  <SocialNetworks />
   </Box>
 </Box>
 </Layout>
