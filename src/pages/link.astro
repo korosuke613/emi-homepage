@@ -36,6 +36,15 @@ const TLE = useLocalTranslationsWithElement(lang);
   gutterBottom={true}
   marginBottom={"1rem"}
   >
+	  {t("link.sns")}
+  </Typography>
+
+  <SocialNetworks />
+
+  <Typography level="h2"
+  gutterBottom={true}
+  marginBottom={"1rem"}
+  >
 	  {t("link.service")}
   </Typography>
 
@@ -80,15 +89,6 @@ const TLE = useLocalTranslationsWithElement(lang);
       }
   ]}
   />
-
-  <Typography level="h2"
-  gutterBottom={true}
-  marginBottom={"1rem"}
-  >
-	  {t("link.sns")}
-  </Typography>
-
-  <SocialNetworks />
   </Box>
 </Box>
 </Layout>
