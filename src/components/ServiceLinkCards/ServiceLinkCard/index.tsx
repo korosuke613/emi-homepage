@@ -7,10 +7,7 @@ import {
   Divider,
   Link,
   Typography,
-  type CardTypeMap,
 } from "@mui/joy";
-import type { ReactProps } from "../../../utils/react";
-import type { OverridableComponent } from "@mui/material/OverridableComponent";
 
 type Props = {
   title: string;

@@ -1,9 +1,5 @@
-import { Facebook, GitHub, Instagram, Twitter } from "@mui/icons-material";
-
-import type { ReactProps } from "../../utils/react";
-import type { ServiceLinkCardMobile } from "../ServiceLinkCards/ServiceLinkCardMobile";
+import { Facebook, Instagram } from "@mui/icons-material";
 import { SocialNetworksTemplate } from "./SocialNetworksTemplate";
-import { FaSquareThreads } from "react-icons/fa6";
 
 export const SocialNetworks = () => (
   <SocialNetworksTemplate

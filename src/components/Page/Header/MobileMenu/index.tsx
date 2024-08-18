@@ -2,19 +2,16 @@ import { MoreVert } from "@mui/icons-material";
 import {
   Box,
   Dropdown,
-  Link,
   ListDivider,
   Menu,
   MenuButton,
   MenuItem,
 } from "@mui/joy";
 
-import { type Languages, defaultLang, type ui } from "../../../../i18n/ui";
+import type { Languages } from "../../../../i18n/ui";
 import {
   getRoutePathWithLang,
   isUIKey,
-  useLocalTranslations,
-  useLocalTranslationsWithElement,
   useSharedTranslations,
 } from "../../../../i18n/utils";
 import { STATIC_ROUTES } from "../../../../utils/staticRoute";
@@ -32,8 +29,6 @@ export const MobileMenu = ({
   currentPathWithoutLang = "/",
 }: Props) => {
   const t = useSharedTranslations(lang);
-  const tl = useLocalTranslations(lang);
-  const TLE = useLocalTranslationsWithElement(lang);
 
   return (
     <Dropdown>
@@ -81,7 +76,7 @@ export const MobileMenu = ({
               </Box>
             );
           }
-          console.error(`[MobileMenu] route is not found: ${name}`);
+          console.error(`[MobileMenu] route is not found: ${route}`);
           return null;
         })}
         <ListDivider />

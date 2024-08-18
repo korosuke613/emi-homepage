@@ -1,13 +1,4 @@
-import {
-  AspectRatio,
-  Box,
-  Card,
-  CardContent,
-  CardOverflow,
-  Divider,
-  Grid,
-  Typography,
-} from "@mui/joy";
+import { Grid } from "@mui/joy";
 import type { ReactProps } from "../../utils/react";
 import { ServiceLinkCard } from "./ServiceLinkCard";
 import { ServiceLinkCardMobile } from "./ServiceLinkCardMobile";

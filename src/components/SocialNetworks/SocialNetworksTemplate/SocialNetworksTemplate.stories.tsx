@@ -1,7 +1,7 @@
+import { Facebook, GitHub, Instagram, Twitter } from "@mui/icons-material";
 import type { Meta, StoryObj } from "@storybook/react";
 import { SocialNetworksTemplate } from ".";
 import type { ReactProps } from "../../../utils/react";
-import { Facebook, Instagram, Twitter, GitHub } from "@mui/icons-material";
 
 const metaData: Meta = {
   title: "SocialNetworksTemplate",

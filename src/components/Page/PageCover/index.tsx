@@ -6,7 +6,7 @@ type Props = {
   description?: string;
 };
 
-export const PageCover = ({ title, description }: Props) => (
+export const PageCover = ({ title }: Props) => (
   <Box
     sx={{
       textAlign: "center",

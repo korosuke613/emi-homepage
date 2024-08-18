@@ -1,23 +1,9 @@
 import {
-  Box,
   CssVarsProvider,
-  Dropdown,
-  IconButton,
-  Link,
-  Menu,
-  MenuButton,
-  MenuItem,
   Typography as TypoGraphyBase,
   type TypographyTypeMap,
   extendTheme,
 } from "@mui/joy";
-import {
-  type Languages,
-  defaultLang,
-  languageEmojis,
-  languageKeys,
-  languageNames,
-} from "../../i18n/ui";
 
 const fontSize = {
   "1": "0.625rem",

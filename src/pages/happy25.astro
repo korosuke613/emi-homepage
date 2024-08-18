@@ -1,12 +1,8 @@
 ---
-import { AspectRatio, Box, Card, CardContent, CardCover, Grid } from "@mui/joy";
+import { Box, Grid } from "@mui/joy";
 import { Typography } from "../components/Typography";
 import type { Languages } from "../i18n/ui";
-import {
-  useLocalTranslations,
-  useLocalTranslationsWithElement,
-  useSharedTranslations,
-} from "../i18n/utils";
+import { useLocalTranslations, useSharedTranslations } from "../i18n/utils";
 import Layout from "../layouts/Layout.astro";
 
 interface Props {
@@ -18,7 +14,6 @@ const props = Astro.props;
 const lang = props.lang ?? "ja";
 const t = useSharedTranslations(lang);
 const tl = useLocalTranslations(lang);
-const TLE = useLocalTranslationsWithElement(lang);
 ---
 
 <Layout title={tl({
