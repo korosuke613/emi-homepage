@@ -9,44 +9,25 @@ export const SocialNetworks = () => (
   <SocialNetworksTemplate
     socialLinks={[
       {
-        title: "Futa Hirakoba",
-        description: "滅多に使ってない",
-        link: "https://www.facebook.com/futa.hirakoba.5",
-        svgIcon: <Facebook />,
-        tags: ["Facebook"],
-      },
-      {
-        title: "@Shitimi_613",
-        link: "https://twitter.com/Shitimi_613",
-        description: "エンジニアアカウント",
-        svgIcon: <Twitter />,
-        tags: ["Twitter"],
-      },
-      {
-        title: "@AiraKagoshima",
-        link: "https://twitter.com/AiraKagoshima",
-        description: "裏アカウント",
-        svgIcon: <Twitter />,
-        tags: ["Twitter"],
-      },
-      {
-        title: "@tibi_auwa_auwa",
-        link: "https://www.instagram.com/tibi_auwa_auwa/",
-        description: "ストーリーメイン",
+        title: "@amy_from_japan",
+        link: "https://www.instagram.com/amy_from_japan",
+        description: "顔",
         svgIcon: <Instagram />,
         tags: ["Instagram"],
       },
       {
-        title: "@tibi_auwa_auwa",
-        link: "https://www.threads.net/@tibi_auwa_auwa",
-        svgIcon: <FaSquareThreads size={24} color="636B74" />,
-        tags: ["Threads"],
+        title: "@yesmypanda",
+        link: "https://www.instagram.com/yesmypanda",
+        description: "連絡つきやすい",
+        svgIcon: <Instagram />,
+        tags: ["Instagram"],
       },
       {
-        title: "@korosuke613",
-        link: "https://github.com/korosuke613",
-        svgIcon: <GitHub />,
-        tags: ["GitHub"],
+        title: "牧浦えみ  (Amy)",
+        link: "https://www.facebook.com/yesmypanda",
+        description: "社内広報メイン",
+        svgIcon: <Facebook />,
+        tags: ["Facebook"],
       },
     ]}
   />
