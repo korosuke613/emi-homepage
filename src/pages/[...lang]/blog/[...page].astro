@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
-import type { GetStaticPathsOptions, Page } from "astro";
-import { type Languages, defaultLang, languageKeys } from "../../../i18n/ui";
+import type { GetStaticPathsOptions } from "astro";
+import { type Languages, defaultLang } from "../../../i18n/ui";
 import { isLanguages } from "../../../i18n/utils";
 import BlogList from "../../../layouts/BlogList.astro";
 
@@ -27,9 +27,6 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   }
 
   return Object.entries(pageByLang).flatMap(([lang, pages]) => {
-    const sortedPages = pages.sort((a, b) => {
-      return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
-    });
     return paginate(pages, {
       pageSize: 9,
       params: { lang: lang as Languages },

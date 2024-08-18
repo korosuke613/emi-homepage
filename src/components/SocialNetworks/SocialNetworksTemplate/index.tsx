@@ -1,16 +1,6 @@
-import {
-  AspectRatio,
-  Box,
-  Card,
-  CardContent,
-  CardOverflow,
-  Divider,
-  Grid,
-  Typography,
-} from "@mui/joy";
+import { Grid } from "@mui/joy";
 import type { ReactProps } from "../../../utils/react";
 import { ServiceLinkCardMobile } from "../../ServiceLinkCards/ServiceLinkCardMobile";
-import { Twitter } from "@mui/icons-material";
 
 type Props = {
   socialLinks: ReactProps<typeof ServiceLinkCardMobile>[];

@@ -5,11 +5,15 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
+    "check": "astro check",
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "biome": "biome check",
+    "biome:apply": "biome check --write",
+    "biome:ci": "biome ci"
   },
   "dependencies": {
     "@astrojs/check": "^0.8.1",

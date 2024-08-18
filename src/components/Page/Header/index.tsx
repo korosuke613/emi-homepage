@@ -4,8 +4,6 @@ import { type Languages, defaultLang } from "../../../i18n/ui";
 import {
   getRoutePathWithLang,
   isUIKey,
-  useLocalTranslations,
-  useLocalTranslationsWithElement,
   useSharedTranslations,
 } from "../../../i18n/utils";
 import { STATIC_ROUTES } from "../../../utils/staticRoute";
@@ -25,8 +23,6 @@ export const Header = ({
   keepOpen,
 }: Props) => {
   const t = useSharedTranslations(lang);
-  const tl = useLocalTranslations(lang);
-  const TLE = useLocalTranslationsWithElement(lang);
 
   return (
     <header>

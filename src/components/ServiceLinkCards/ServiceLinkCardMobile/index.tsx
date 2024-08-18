@@ -3,17 +3,13 @@ import {
   Box,
   Card,
   CardContent,
-  CardOverflow,
   Chip,
   CssVarsProvider,
-  Divider,
-  extendTheme,
   Link,
   Typography,
+  extendTheme,
 } from "@mui/joy";
 
-import type { SvgIconComponent } from "@mui/icons-material";
-import { Facebook } from "@mui/icons-material";
 import type { ReactNode } from "react";
 
 type Props = {
