@@ -6,12 +6,21 @@ const generatedDir = "./generated";
 const blogsPath = "./generated/blogs.json";
 
 const setup = async () => {
-  const blogs = await getBlogs();
-
   if (!fs.existsSync(generatedDir)) {
     await fs.promises.mkdir(generatedDir);
   }
 
+  if (process.env.CI) {
+    console.log("CI detected. Copying sample data.");
+
+    await fs.promises.copyFile(
+      "./.github/workflows/sample-data/blogs.json",
+      blogsPath,
+    );
+    return;
+  }
+
+  const blogs = await getBlogs();
   await fs.promises.writeFile(blogsPath, JSON.stringify(blogs, null, 2));
 };
 
