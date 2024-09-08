@@ -1,6 +1,6 @@
 import fs from "node:fs";
-import { getBlogs } from "./microcms";
 import type { AstroIntegration } from "astro";
+import { getBlogs } from "./microcms";
 
 const generatedDir = "./generated";
 const blogsPath = "./generated/blogs.json";
