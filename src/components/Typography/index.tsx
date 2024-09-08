@@ -66,6 +66,17 @@ theme.typography.h4 = {
   },
 };
 
+theme.typography["body-md"] = {
+  ...theme.typography["body-md"],
+  fontSize: fontSize[5],
+  [theme.breakpoints.only("sm")]: {
+    fontSize: fontSize[4],
+  },
+  [theme.breakpoints.only("xs")]: {
+    fontSize: fontSize[3],
+  },
+};
+
 type Props = {
   level?: TypographyTypeMap["props"]["level"];
   children: React.ReactNode;

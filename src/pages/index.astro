@@ -1,4 +1,5 @@
 ---
+import { About } from "../components/Page/About";
 import type { Languages } from "../i18n/ui";
 import { useLocalTranslations, useSharedTranslations } from "../i18n/utils";
 import Layout from "../layouts/Layout.astro";
@@ -18,4 +19,7 @@ const tl = useLocalTranslations(lang);
 	ja: "牧浦えみのホームページへようこそ！",
 	en: "Welcome to Emi Makiura's homepage!",
 })}>
+
+<About lang={lang}/>
+
 </Layout>
