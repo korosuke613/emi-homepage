@@ -1,25 +1,29 @@
 ---
-import type { z } from "astro:content";
+import { Box, Grid } from "@mui/joy";
 import { Typography } from "../components/Typography";
-import type { blogSchema } from "../content/config";
-import type { Languages } from "../i18n/ui";
-import { useSharedTranslations } from "../i18n/utils";
+import type { BlogSchema } from "../utils/microcms";
 import Layout from "./Layout.astro";
 
 type Props = {
-  lang: Languages;
-  blog: z.infer<typeof blogSchema>;
+  blog: BlogSchema;
 };
 
-const { blog, lang } = Astro.props;
-
-const formattedDate = blog.date.toLocaleString(lang);
-
-const t = useSharedTranslations(lang);
+const { blog } = Astro.props;
 ---
 
-<Layout title={blog.title} description={blog.description ?? t('description')} lang={lang}>
-  <Typography level="h1">{blog.title}</Typography>
-  <Typography>by {blog.author} {formattedDate}</Typography>
-  <slot />
+<Layout title={blog.title} description={""} lang={blog.language[0]}>
+  <Grid container sx={{
+    padding: "2rem",
+    figure: {
+      margin: "0",
+      textAlign: "center",
+    },
+    img: {
+      width: "80%",
+      height: "auto",
+    },
+  }}>
+  <Typography>{blog.createdAt}</Typography>
+  <Box set:html={blog.content}/>      
+  </Grid>
 </Layout>

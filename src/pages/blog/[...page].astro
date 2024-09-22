@@ -1,30 +1,20 @@
 ---
-import { getCollection } from "astro:content";
 import type { GetStaticPathsOptions } from "astro";
+import blogJson from "../../../generated/blogs.json";
 import type { Languages } from "../../i18n/ui";
 import BlogList from "../../layouts/BlogList.astro";
+import type { BlogSchema } from "../../utils/microcms";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  // ja の記事を抽出
-  const pages = (await getCollection("blog"))
-    .filter((page) => {
-      const [rawLang, ..._] = page.slug.split("/");
-      return rawLang === "ja";
-    })
+  const lang: Languages = "ja"; // 必須
+  const blogs = blogJson.contents
+    .filter((blog) => blog.language[0] === lang) // 必ず blog.language は 1 つになる
     .sort((a, b) => {
-      return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
-    });
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    }) as BlogSchema[];
 
-  return paginate(pages, { pageSize: 9 });
+  return paginate(blogs, { pageSize: 9, props: { lang } });
 }
-
-const lang: Languages = "ja";
-
-const page = Astro.props.page.data.map((page) => {
-  const [_, ...slug] = page.slug.split("/");
-
-  return { slug: slug.join("/"), data: page.data };
-});
 ---
 
-<BlogList lang={lang} blogs={page} />
+<BlogList lang={Astro.props.lang} blogs={Astro.props.page.data} />
