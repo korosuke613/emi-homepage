@@ -122,7 +122,7 @@ From 2025, he is currently serving as an English teacher in Laos with JICA Overs
                           sm: "20%",
                           md: "15%",
                         },
-                        alignContent: "flex-start",
+                        alignContent: "center",
                       }}
                     >
                       <Typography level="body-md" fontWeight={"lg"}>
@@ -138,7 +138,7 @@ From 2025, he is currently serving as an English teacher in Laos with JICA Overs
                           md: "80%",
                         },
                         height: "auto",
-                        alignContent: "flex-start",
+                        alignContent: "center",
                       }}
                     >
                       <Typography level="body-md">{row.value}</Typography>
