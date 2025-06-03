@@ -14,12 +14,14 @@ const { blog } = Astro.props;
 <Layout title={blog.title} description={""} lang={blog.language[0]}>
   <Grid container sx={{
     padding: "2rem",
+    maxWidth: "800px",
+    margin: "0 auto",
     figure: {
       margin: "0",
       textAlign: "center",
     },
     img: {
-      width: "80%",
+      width: "60%",
       height: "auto",
     },
   }}>
