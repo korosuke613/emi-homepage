@@ -1,46 +1,35 @@
 ---
-import { getCollection } from "astro:content";
 import type { GetStaticPathsOptions } from "astro";
-import { type Languages, defaultLang } from "../../../i18n/ui";
-import { isLanguages } from "../../../i18n/utils";
+import blogJson from "../../../../generated/blogs.json";
+import type { Languages } from "../../../i18n/ui";
 import BlogList from "../../../layouts/BlogList.astro";
+import type { BlogSchema } from "../../../utils/microcms";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  // ja の記事を抽出
-  const pages = await getCollection("blog");
+  const blogs = blogJson.contents.sort((a, b) => {
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+  }) as BlogSchema[];
 
-  type PageByLang = Record<Languages, typeof pages>;
-  const pageByLang: PageByLang = {} as PageByLang;
+  type BlogByLang = Record<Languages, BlogSchema[]>;
+  const blogByLang: BlogByLang = {} as BlogByLang;
 
-  for (const page of pages) {
-    const [rawLang, ..._] = page.slug.split("/");
-    let lang: Languages = defaultLang;
-    if (isLanguages(rawLang)) {
-      lang = rawLang;
-    }
+  for (const blog of blogs) {
+    const lang: Languages = blog.language[0];
 
-    if (rawLang in pageByLang) {
-      pageByLang[lang].push(page);
+    if (lang in blogByLang) {
+      blogByLang[lang].push(blog);
     } else {
-      pageByLang[lang] = [page];
+      blogByLang[lang] = [blog];
     }
   }
 
-  return Object.entries(pageByLang).flatMap(([lang, pages]) => {
+  return Object.entries(blogByLang).flatMap(([lang, pages]) => {
     return paginate(pages, {
       pageSize: 9,
       params: { lang: lang as Languages },
     });
   });
 }
-
-const page = Astro.props.page.data.map((page) => {
-  const [_, ...slug] = page.slug.split("/");
-
-  return { slug: slug.join("/"), data: page.data };
-});
-
-const lang = Astro.params.lang;
 ---
 
-<BlogList lang={lang} blogs={page} />
+<BlogList lang={Astro.params.lang} blogs={Astro.props.page.data} />
