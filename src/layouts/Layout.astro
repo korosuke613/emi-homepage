@@ -9,9 +9,10 @@ interface Props {
   description: string;
   lang: Languages;
   secondTitle?: string;
+  noindex?: boolean;
 }
 
-const { title, lang, description, secondTitle } = Astro.props;
+const { title, lang, description, secondTitle, noindex } = Astro.props;
 
 const asPath = Astro.url.pathname; // ex: / or /en/sub
 const asPathWithoutEndSlash = asPath.endsWith("/")
@@ -35,6 +36,7 @@ const normalizedTitle =
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
+		{noindex ? <meta name="robots" content="noindex" /> : null}
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{normalizedTitle}</title>

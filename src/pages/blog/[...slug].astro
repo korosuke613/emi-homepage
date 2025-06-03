@@ -1,25 +1,21 @@
 ---
-import { getCollection } from "astro:content";
+import blogJson from "../../../generated/blogs.json";
 import type { Languages } from "../../i18n/ui";
 import Blog from "../../layouts/Blog.astro";
+import type { BlogSchema } from "../../utils/microcms";
 
 export async function getStaticPaths() {
-  const pages = await getCollection("blog");
+  const lang: Languages = "ja"; // 必須
+  const blogs = blogJson.contents.filter(
+    (blog) => blog.language[0] === lang,
+  ) as BlogSchema[];
 
-  return pages.map((page) => {
-    const [_, ...slug] = page.slug.split("/");
-
-    return { params: { slug: slug.join("/") || undefined }, props: page };
+  return blogs.map((blog) => {
+    return { params: { slug: blog.slug, lang: blog.language[0] }, props: blog };
   });
 }
 
-const page = Astro.props;
-
-const lang: Languages = "ja";
-
-const { Content } = await page.render();
+const blog = Astro.props;
 ---
 
-<Blog lang={lang} blog={page.data}>
-  <Content />
-</Blog>
+<Blog blog={blog} />
