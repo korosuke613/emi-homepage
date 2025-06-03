@@ -13,14 +13,24 @@ type Props = {
 const { blogs, lang } = Astro.props;
 
 const tl = useLocalTranslations(lang);
+
+const sanitizeSlug = (slug: string) => {
+  // Remove leading and trailing slashes from the slug
+  return slug.replace(/^\//, "").replace(/\/$/, "");
+};
 ---
 
 <Layout title="Blog" description={tl({ja: '記事一覧です。', "en": "List of articles"})} lang={lang}>
   <ul>
-    {blogs.map((blog) => (
-      <li>
-          <a href={getRelativeLocaleUrl(lang, `/blog/${blog.slug}`)}>{new Date(blog.createdAt).toLocaleDateString(lang)}: {blog.title}</a>
-      </li>
-    ))}
+    {blogs.map(
+      (blog) => {
+        const sanitizedSlug = sanitizeSlug(blog.slug);
+        return (
+          <li>
+            <a href={getRelativeLocaleUrl(lang, `/blog/${sanitizedSlug}`)}>{new Date(blog.createdAt).toLocaleDateString(lang)}: {blog.title}</a>
+          </li>
+        );
+      }
+    )}
   </ul>
 </Layout>
