@@ -13,7 +13,7 @@ const { blog } = Astro.props;
 
 <Layout title={blog.title} description={""} lang={blog.language[0]}>
   <Grid container sx={{
-    padding: "2rem",
+    padding: { xs: "1rem", sm: "2rem" },
     maxWidth: "800px",
     margin: "0 auto",
     figure: {
@@ -26,6 +26,11 @@ const { blog } = Astro.props;
     },
   }}>
   <Typography>{blog.createdAt}</Typography>
-  <Box set:html={blog.content}/>      
+  <Box set:html={blog.content} sx={{
+    "& p": {
+      wordBreak: "break-all",
+      textWrap: "auto",
+    },
+  }}/>      
   </Grid>
 </Layout>

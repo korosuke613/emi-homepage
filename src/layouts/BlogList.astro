@@ -19,7 +19,7 @@ const tl = useLocalTranslations(lang);
   <ul>
     {blogs.map((blog) => (
       <li>
-          <a href={getRelativeLocaleUrl(lang, `/blog/${blog.slug}`)}>{new Date(blog.createdAt).toLocaleDateString(lang)}: {blog.title}</a>
+          <a href={getRelativeLocaleUrl(lang, `/blog/${blog.slug}`.replaceAll("//", "/"))}>{new Date(blog.createdAt).toLocaleDateString(lang)}: {blog.title}</a>
       </li>
     ))}
   </ul>
