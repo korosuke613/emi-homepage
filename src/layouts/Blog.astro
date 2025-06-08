@@ -1,5 +1,6 @@
 ---
-import { Box, Grid } from "@mui/joy";
+import { Box } from "@mui/joy";
+import { LanguageFallbackNotice } from "../components/Blog/LanguageFallbackNotice";
 import { Typography } from "../components/Typography";
 import type { Languages } from "../i18n/ui";
 import type { BlogSchema } from "../utils/microcms";
@@ -14,7 +15,7 @@ const { blog, lang } = Astro.props;
 ---
 
 <Layout title={blog.title} description={""} lang={lang}>
-  <Grid container sx={{
+  <Box sx={{
     padding: { xs: "1rem", sm: "2rem" },
     maxWidth: "800px",
     margin: "0 auto",
@@ -27,6 +28,7 @@ const { blog, lang } = Astro.props;
       height: "auto",
     },
   }}>
+  <LanguageFallbackNotice blog={blog} currentLang={lang} client:visible />
   <Typography>{blog.createdAt}</Typography>
   <Box set:html={blog.content} sx={{
     "& p": {
@@ -34,5 +36,5 @@ const { blog, lang } = Astro.props;
       textWrap: "auto",
     },
   }}/>      
-  </Grid>
+  </Box>
 </Layout>
