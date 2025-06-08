@@ -1,6 +1,6 @@
 ---
 import blogJson from "../../../generated/blogs.json";
-import type { Languages } from "../../i18n/ui";
+import { type Languages, defaultLang } from "../../i18n/ui";
 import Blog from "../../layouts/Blog.astro";
 import type { BlogSchema } from "../../utils/microcms";
 
@@ -19,4 +19,4 @@ export async function getStaticPaths() {
 const blog = Astro.props;
 ---
 
-<Blog blog={blog} />
+<Blog blog={blog} lang={defaultLang} />

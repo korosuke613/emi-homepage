@@ -1,17 +1,19 @@
 ---
 import { Box, Grid } from "@mui/joy";
 import { Typography } from "../components/Typography";
+import type { Languages } from "../i18n/ui";
 import type { BlogSchema } from "../utils/microcms";
 import Layout from "./Layout.astro";
 
 type Props = {
   blog: BlogSchema;
+  lang: Languages;
 };
 
-const { blog } = Astro.props;
+const { blog, lang } = Astro.props;
 ---
 
-<Layout title={blog.title} description={""} lang={blog.language[0]}>
+<Layout title={blog.title} description={""} lang={lang}>
   <Grid container sx={{
     padding: { xs: "1rem", sm: "2rem" },
     maxWidth: "800px",
