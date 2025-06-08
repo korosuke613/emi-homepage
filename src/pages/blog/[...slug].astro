@@ -5,13 +5,14 @@ import Blog from "../../layouts/Blog.astro";
 import type { BlogSchema } from "../../utils/microcms";
 
 export async function getStaticPaths() {
-  const lang: Languages = "ja"; // 必須
-  const blogs = blogJson.contents.filter(
-    (blog) => blog.language[0] === lang,
-  ) as BlogSchema[];
+  const blogs = blogJson.contents as BlogSchema[];
 
   return blogs.map((blog) => {
-    return { params: { slug: blog.slug, lang: blog.language[0] }, props: blog };
+    // スラッシュを除去してslugを正規化
+    const normalizedSlug = blog.slug.startsWith("/")
+      ? blog.slug.slice(1)
+      : blog.slug;
+    return { params: { slug: normalizedSlug }, props: blog };
   });
 }
 
