@@ -4,7 +4,7 @@ on:
   pull_request:
 
 jobs:
-  build:
+  basic-checks:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,3 +22,9 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Setup Playwright
+        run: npx playwright install --with-deps
+
+      - name: e2e-test
+        run: npm run test:e2e

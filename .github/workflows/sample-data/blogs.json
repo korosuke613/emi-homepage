@@ -1,6 +1,48 @@
 {
   "contents": [
     {
+      "id": "english-only-blog",
+      "createdAt": "2024-09-08T14:05:10.034Z",
+      "updatedAt": "2024-09-08T14:55:57.758Z",
+      "publishedAt": "2024-09-08T14:05:10.034Z",
+      "revisedAt": "2024-09-08T14:55:57.758Z",
+      "title": "English Only Blog",
+      "language": [
+        "en"
+      ],
+      "slug": "english-only",
+      "category": {
+        "id": "eiysfz-kix6g",
+        "createdAt": "2024-09-08T07:16:14.425Z",
+        "updatedAt": "2024-09-08T07:16:14.425Z",
+        "publishedAt": "2024-09-08T07:16:14.425Z",
+        "revisedAt": "2024-09-08T07:16:14.425Z",
+        "name": "Test Category"
+      },
+      "content": "<h2 id=\"h51c3418236\">This is English Only Content 🇬🇧</h2><p>This blog post only exists in English and should be accessible from both /blog/english-only/ and /en/blog/english-only/ URLs.</p>"
+    },
+    {
+      "id": "japanese-only-blog",
+      "createdAt": "2024-09-08T07:16:16.044Z",
+      "updatedAt": "2024-09-08T12:45:01.538Z",
+      "publishedAt": "2024-09-08T07:16:16.044Z",
+      "revisedAt": "2024-09-08T12:45:01.538Z",
+      "title": "日本語のみのブログ",
+      "language": [
+        "ja"
+      ],
+      "slug": "japanese-only",
+      "category": {
+        "id": "eiysfz-kix6g",
+        "createdAt": "2024-09-08T07:16:14.425Z",
+        "updatedAt": "2024-09-08T07:16:14.425Z",
+        "publishedAt": "2024-09-08T07:16:14.425Z",
+        "revisedAt": "2024-09-08T07:16:14.425Z",
+        "name": "テストカテゴリ"
+      },
+      "content": "<h2 id=\"hdb41525ba7\">これは日本語のみのコンテンツです 🇯🇵</h2><p>このブログ投稿は日本語でのみ存在し、/blog/japanese-only/ と /en/blog/japanese-only/ の両方のURLからアクセス可能である必要があります。</p>"
+    },
+    {
       "id": "jber5f4jt",
       "createdAt": "2024-09-08T14:05:10.034Z",
       "updatedAt": "2024-09-08T14:55:57.758Z",
@@ -19,7 +61,7 @@
         "revisedAt": "2024-09-08T07:16:14.425Z",
         "name": "更新情報"
       },
-      "content": "<h2 id=\"h51c3418236\">Created from blog template 🎉</h2><p>API was created from blog template.<br>Good night 🎉</p><h2 id=\"hf45076424a\">APIプレビューを試そう🚀</h2><p>最初に「APIプレビュー」をしてみましょう。</p><p>入稿したコンテンツはAPI経由で取得し、Viewに繋ぎ込みます。<br>APIプレビューでは実際のAPIレスポンスを確認でき、あなたの開発を加速させます。</p><p>👇まずはここをクリックします。</p><figure><img src=\"https://images.microcms-assets.io/assets/654afd3e3bbc4a45ab761a9fdf4972b8/033f46023b424cb68cd1b2d8ffb0ab67/blog-template-description1.png\" alt=\"\" width=\"2490\" height=\"1652\"></figure><p>APIプレビュー画面が開いたら、<strong>「取得」</strong>ボタンでリクエストを試してみましょう。</p><figure><img src=\"https://images.microcms-assets.io/assets/654afd3e3bbc4a45ab761a9fdf4972b8/31dee94219e24b9386d76d20875cc197/blog-template-description2.png\" alt=\"\" width=\"2492\" height=\"1648\"></figure><p>この記事の内容がAPIで取得できていることがわかります。</p><figure><img src=\"https://images.microcms-assets.io/assets/654afd3e3bbc4a45ab761a9fdf4972b8/8a9e0518ae3a4516a35bf4390d61370d/blog-template-description3.png\" alt=\"\" width=\"1592\" height=\"1246\"></figure><h2 id=\"h88398f2fb7\">次にやること🏃</h2><p>APIプレビューで確認したレスポンスを参考に、あなた自身のWebサイトを構築しましょう。<br>microCMSはAPIでコンテンツを取得するため、お好きな言語・フレームワークで画面を構築できます。</p><ul><li><a href=\"https://document.microcms.io/tutorial/javascript/javascript-top\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"><u>JavaScript SDK</u></a></li><li><a href=\"https://document.microcms.io/tutorial/nuxt/nuxt-top\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"><u>Nuxt SDK</u></a></li><li><a href=\"https://document.microcms.io/tutorial/gatsby/gatsby-top\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"><u>Gatsby SDK</u></a></li></ul><p>その他に<a href=\"https://microcms.io/features/sdk\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"><u>サーバーサイドSDK（PHP / Go / Ruby）やモバイルSDK（iOS / Android）</u></a>もございます。</p><p>お困りなことや疑問点などございましたらお気軽にご連絡ください。<br>サポート窓口：<a href=\"mailto:support@microcms.io\">support@microcms.io</a><br>よくある質問：<a href=\"https://help.microcms.io/ja/knowledge\"><u>https://help.microcms.io/ja/knowledge</u></a></p>"
+      "content": "<h2 id=\"h51c3418236\">Created from blog template 🎉</h2><p>API was created from blog template.<br>Good night 🎉</p>"
     },
     {
       "id": "xdp4y8o3i3",
@@ -40,15 +82,10 @@
         "revisedAt": "2024-09-08T07:16:14.425Z",
         "name": "更新情報"
       },
-      "content": "<h2 id=\"hdb41525ba7\">ブログテンプレートから作成されました🎉</h2><p>ブログテンプレートからAPIを作成しました。<br>おつかれさまでした🎉</p><h2 id=\"hf45076424a\">APIプレビューを試そう🚀</h2><p>最初に「APIプレビュー」をしてみましょう。</p><p>入稿したコンテンツはAPI経由で取得し、Viewに繋ぎ込みます。<br>APIプレビューでは実際のAPIレスポンスを確認でき、あなたの開発を加速させます。</p><p>👇まずはここをクリックします。</p><figure><img src=\"https://images.microcms-assets.io/assets/654afd3e3bbc4a45ab761a9fdf4972b8/033f46023b424cb68cd1b2d8ffb0ab67/blog-template-description1.png\" alt=\"\" width=\"2490\" height=\"1652\"></figure><p>APIプレビュー画面が開いたら、<strong>「取得」</strong>ボタンでリクエストを試してみましょう。</p><figure><img src=\"https://images.microcms-assets.io/assets/654afd3e3bbc4a45ab761a9fdf4972b8/31dee94219e24b9386d76d20875cc197/blog-template-description2.png\" alt=\"\" width=\"2492\" height=\"1648\"></figure><p>この記事の内容がAPIで取得できていることがわかります。</p><figure><img src=\"https://images.microcms-assets.io/assets/654afd3e3bbc4a45ab761a9fdf4972b8/8a9e0518ae3a4516a35bf4390d61370d/blog-template-description3.png\" alt=\"\" width=\"1592\" height=\"1246\"></figure><h2 id=\"h88398f2fb7\">次にやること🏃</h2><p>APIプレビューで確認したレスポンスを参考に、あなた自身のWebサイトを構築しましょう。<br>microCMSはAPIでコンテンツを取得するため、お好きな言語・フレームワークで画面を構築できます。</p><ul><li><a href=\"https://document.microcms.io/tutorial/javascript/javascript-top\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"><u>JavaScript SDK</u></a></li><li><a href=\"https://document.microcms.io/tutorial/nuxt/nuxt-top\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"><u>Nuxt SDK</u></a></li><li><a href=\"https://document.microcms.io/tutorial/gatsby/gatsby-top\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"><u>Gatsby SDK</u></a></li></ul><p>その他に<a href=\"https://microcms.io/features/sdk\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"><u>サーバーサイドSDK（PHP / Go / Ruby）やモバイルSDK（iOS / Android）</u></a>もございます。</p><p>お困りなことや疑問点などございましたらお気軽にご連絡ください。<br>サポート窓口：<a href=\"mailto:support@microcms.io\">support@microcms.io</a><br>よくある質問：<a href=\"https://help.microcms.io/ja/knowledge\"><u>https://help.microcms.io/ja/knowledge</u></a></p>",
-      "eyecatch": {
-        "url": "https://images.microcms-assets.io/assets/654afd3e3bbc4a45ab761a9fdf4972b8/2b92a0a02fa84b39a4f3d6fb554ca3d2/blog-template.png",
-        "height": 630,
-        "width": 1200
-      }
+      "content": "<h2 id=\"hdb41525ba7\">ブログテンプレートから作成されました🎉</h2><p>ブログテンプレートからAPIを作成しました。<br>おつかれさまでした🎉</p>"
     }
   ],
-  "totalCount": 2,
+  "totalCount": 4,
   "offset": 0,
   "limit": 10
 }

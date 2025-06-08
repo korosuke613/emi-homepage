@@ -28,3 +28,6 @@ pnpm-debug.log*
 *storybook.log
 
 generated/
+
+test-results/
+playwright-report/
