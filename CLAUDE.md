@@ -78,27 +78,26 @@ npm run test:e2e:ui  # Playwrightテスト（UI付き）実行
 - **`src/utils/staticRoute.ts`**: ページルート定義
 - **`vercel.json`**: デプロイ設定
 
-### 多言語ブログシステムの仕様
+### ソフトウェア仕様
 
-#### ブログページのフォールバック機能
-- **どの言語URLでもアクセス可能**: 日本語のみのブログでも`/en/blog/slug/`でアクセス可能
-- **404エラーなし**: 存在しない言語でも同じコンテンツを表示
-- **言語切り替え対応**: 言語選択時は対応するURL形式に遷移（例：`/blog/slug/` ↔ `/en/blog/slug/`）
-- **スラッシュ正規化**: ブログslugの先頭スラッシュ有無に関わらず正常動作
+詳細な外部仕様については @SPEC.md を参照してください。
+
+#### 実装関連
+- **実装ファイル**: 
+  - `/src/pages/[...lang]/blog/[...slug].astro`: 多言語ブログページ
+  - `/src/pages/blog/[...slug].astro`: デフォルト言語ブログページ  
+  - `/src/components/Page/Header/LangSelector/index.tsx`: 言語切り替え機能
+  - `/src/layouts/Blog.astro`: ブログレイアウト（langパラメータ受け取り）
+  - `/src/components/Blog/LanguageFallbackNotice/`: 言語フォールバック通知
 
 #### パス生成ルール
 - **全ブログ×全言語**: getStaticPaths()で全ブログに対して全言語のパスを生成
 - **URLパラメータ優先**: `Blog.astro`では`blog.language[0]`ではなく`Astro.params.lang`を使用
 - **言語アイコン表示**: LangSelectorはURLの言語パラメータに基づいてアイコン表示
 
-#### 実装ファイル
-- `/src/pages/[...lang]/blog/[...slug].astro`: 多言語ブログページ
-- `/src/pages/blog/[...slug].astro`: デフォルト言語ブログページ  
-- `/src/components/Page/Header/LangSelector/index.tsx`: 言語切り替え機能
-- `/src/layouts/Blog.astro`: ブログレイアウト（langパラメータ受け取り）
-
 #### テスト
 - **E2Eテスト**: `/e2e/multilingual-blog.spec.ts` でブログフォールバック機能をテスト
+- **ブログ一覧テスト**: `/e2e/blog-list.spec.ts` でブログ一覧の言語絵文字機能をテスト
 - **テストデータ**: `.github/workflows/sample-data/blogs.json` を使用（MicroCMS非依存）
 - **実行**: `npm run test:e2e` で多言語切り替えとURL正規化をテスト
 
@@ -115,3 +114,4 @@ npm run test:e2e:ui  # Playwrightテスト（UI付き）実行
 - チャットを通じてCLAUDE.mdに書くべきがあれば随時更新
 - コミット、プルリクエスト作成時は日本語を使用
 - issueを元にプルリクエストを作成する際は、プルリクエストのdescriptionに `closed #<issue番号>`を含める
+- テストケースのタイトルは日本語で記述し、「〜するべき」という形式で書く
