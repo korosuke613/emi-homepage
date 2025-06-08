@@ -32,6 +32,12 @@ npm run biome:fix    # リンティング問題の自動修正
 npm run storybook    # コンポーネント開発用Storybook起動
 ```
 
+**E2Eテスト:**
+```bash
+npm run test:e2e     # Playwrightテスト実行
+npm run test:e2e:ui  # Playwrightテスト（UI付き）実行
+```
+
 ## アーキテクチャ概要
 
 これはReactコンポーネントを使った**Astroベースの静的サイト**で、国際化対応の個人ホームページです。
@@ -72,6 +78,30 @@ npm run storybook    # コンポーネント開発用Storybook起動
 - **`src/utils/staticRoute.ts`**: ページルート定義
 - **`vercel.json`**: デプロイ設定
 
+### 多言語ブログシステムの仕様
+
+#### ブログページのフォールバック機能
+- **どの言語URLでもアクセス可能**: 日本語のみのブログでも`/en/blog/slug/`でアクセス可能
+- **404エラーなし**: 存在しない言語でも同じコンテンツを表示
+- **言語切り替え対応**: 言語選択時は対応するURL形式に遷移（例：`/blog/slug/` ↔ `/en/blog/slug/`）
+- **スラッシュ正規化**: ブログslugの先頭スラッシュ有無に関わらず正常動作
+
+#### パス生成ルール
+- **全ブログ×全言語**: getStaticPaths()で全ブログに対して全言語のパスを生成
+- **URLパラメータ優先**: `Blog.astro`では`blog.language[0]`ではなく`Astro.params.lang`を使用
+- **言語アイコン表示**: LangSelectorはURLの言語パラメータに基づいてアイコン表示
+
+#### 実装ファイル
+- `/src/pages/[...lang]/blog/[...slug].astro`: 多言語ブログページ
+- `/src/pages/blog/[...slug].astro`: デフォルト言語ブログページ  
+- `/src/components/Page/Header/LangSelector/index.tsx`: 言語切り替え機能
+- `/src/layouts/Blog.astro`: ブログレイアウト（langパラメータ受け取り）
+
+#### テスト
+- **E2Eテスト**: `/e2e/multilingual-blog.spec.ts` でブログフォールバック機能をテスト
+- **テストデータ**: `.github/workflows/sample-data/blogs.json` を使用（MicroCMS非依存）
+- **実行**: `npm run test:e2e` で多言語切り替えとURL正規化をテスト
+
 ### 開発時の注意点
 - 日本語で回答する
 - コミットはタスクごとにこまめに行う
@@ -80,4 +110,7 @@ npm run storybook    # コンポーネント開発用Storybook起動
 - 全コンポーネントには対応する**Storybookストーリー**が必要
 - ブログ投稿は**多言語コンテンツ**対応 - content configのスキーマを確認
 - MicroCMS統合は**環境別データ取得**を処理
+- サイトに変更を加えた場合、playwright mcp を利用して動作確認
 - ルートは**ビルド時に静的生成**されパフォーマンス最適化
+- チャットを通じてCLAUDE.mdに書くべきがあれば随時更新
+- コミット、プルリクエスト作成時は日本語を使用

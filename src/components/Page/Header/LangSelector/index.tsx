@@ -26,14 +26,35 @@ type Props = {
 const generateHref = (lang: Languages, path: string): string => {
   const normalizedPath = path.replace(/^\//, "").replace(/\/$/, "");
 
-  // デフォルト言語の場合
+  // ブログページかどうかをチェック
+  const isBlogPage =
+    normalizedPath.startsWith("blog/") || normalizedPath.startsWith("en/blog/");
+
+  if (isBlogPage) {
+    // ブログページの場合、スラッグを抽出
+    const blogSlugMatch = normalizedPath.match(/blog\/(.+)$/);
+    if (blogSlugMatch) {
+      let slug = blogSlugMatch[1];
+      // 末尾のスラッシュを確保
+      if (!slug.endsWith("/")) {
+        slug += "/";
+      }
+
+      // どの言語でアクセスしても同じ内容が表示されるため、
+      // リクエストされた言語のURLを生成
+      if (lang === defaultLang) {
+        return `/blog/${slug}`;
+      }
+      return `/${lang}/blog/${slug}`;
+    }
+  }
+
+  // 通常のページの場合（従来の処理）
   if (lang === defaultLang) {
     return `/${normalizedPath}`;
   }
 
-  // それ以外の言語の場合
   if (normalizedPath === "") {
-    // パスが空の場合
     return `/${lang}`;
   }
   return `/${lang}/${normalizedPath}`;

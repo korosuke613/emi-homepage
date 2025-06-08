@@ -1,5 +1,6 @@
 ---
 import blogJson from "../../../../generated/blogs.json";
+import { type Languages, defaultLang, languageKeys } from "../../../i18n/ui";
 import Blog from "../../../layouts/Blog.astro";
 import type { BlogSchema } from "../../../utils/microcms";
 
@@ -8,12 +9,44 @@ export async function getStaticPaths() {
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
   }) as BlogSchema[];
 
-  return blogs.map((blog) => {
-    return { params: { slug: blog.slug, lang: blog.language[0] }, props: blog };
-  });
+  const paths: Array<{
+    params: { slug: string; lang: Languages };
+    props: BlogSchema;
+  }> = [];
+
+  // 各ブログに対して、全ての言語でパスを生成（フォールバック処理のため）
+  for (const blog of blogs) {
+    for (const lang of languageKeys) {
+      // スラッシュを除去してslugを正規化
+      const normalizedSlug = blog.slug.startsWith("/")
+        ? blog.slug.slice(1)
+        : blog.slug;
+      paths.push({
+        params: { slug: normalizedSlug, lang },
+        props: blog,
+      });
+    }
+  }
+
+  return paths;
 }
-const page = Astro.props;
+
+const { slug, lang } = Astro.params;
+const blogs = blogJson.contents as BlogSchema[];
+
+// 現在のブログを検索（スラッシュ付き・なし両方のパターンに対応）
+const currentBlog = blogs.find(
+  (blog) => blog.slug === slug || blog.slug === `/${slug}`,
+);
+
+if (!currentBlog) {
+  throw new Error(`Blog not found: ${slug}`);
+}
+
+// どの言語でアクセスされても、同じブログ内容を表示
+// （実際のコンテンツの言語はブログデータ内で管理）
+const page = currentBlog;
 ---
 
-<Blog blog={page} />
+<Blog blog={page} lang={lang} />
 

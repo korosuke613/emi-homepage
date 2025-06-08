@@ -13,7 +13,9 @@
     "build-storybook": "storybook build",
     "biome": "biome check",
     "biome:apply": "biome check --write",
-    "biome:ci": "biome ci"
+    "biome:ci": "biome ci",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "@astrojs/check": "0.9.3",
@@ -25,6 +27,7 @@
     "@mui/icons-material": "6.0.2",
     "@mui/joy": "5.0.0-beta.48",
     "@mui/material": "6.0.2",
+    "@playwright/test": "1.52.0",
     "@types/react": "18.3.8",
     "@types/react-dom": "18.3.0",
     "@vercel/speed-insights": "1.0.12",
