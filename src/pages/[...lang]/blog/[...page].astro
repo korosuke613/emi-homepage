@@ -6,27 +6,54 @@ import BlogList from "../../../layouts/BlogList.astro";
 import type { BlogSchema } from "../../../utils/microcms";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  const blogs = blogJson.contents.sort((a, b) => {
-    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-  }) as BlogSchema[];
+  const allBlogs = blogJson.contents as BlogSchema[];
 
-  type BlogByLang = Record<Languages, BlogSchema[]>;
-  const blogByLang: BlogByLang = {} as BlogByLang;
+  // 同じslugのブログを統合
+  const blogMap = new Map<string, BlogSchema>();
 
-  for (const blog of blogs) {
-    const lang: Languages = blog.language[0];
+  // 各言語のページ用統合処理
+  const languages: Languages[] = ["ja", "en"];
 
-    if (lang in blogByLang) {
-      blogByLang[lang].push(blog);
-    } else {
-      blogByLang[lang] = [blog];
+  const consolidatedBlogs = languages.map((currentLang) => {
+    const langBlogMap = new Map<string, BlogSchema>();
+
+    for (const blog of allBlogs) {
+      const existing = langBlogMap.get(blog.slug);
+      if (existing) {
+        // 言語配列をマージし、重複を削除
+        const mergedLanguages = Array.from(
+          new Set([...existing.language, ...blog.language]),
+        ) as Languages[];
+
+        // 現在の言語のタイトルを優先
+        const shouldUseCurrentBlogTitle =
+          blog.language.includes(currentLang) &&
+          !existing.language.includes(currentLang);
+
+        langBlogMap.set(blog.slug, {
+          ...(shouldUseCurrentBlogTitle ? blog : existing),
+          language: mergedLanguages,
+          // 表示されているタイトルの createdAt を表示
+          createdAt: shouldUseCurrentBlogTitle
+            ? blog.createdAt
+            : existing.createdAt,
+        });
+      } else {
+        langBlogMap.set(blog.slug, blog);
+      }
     }
-  }
 
-  return Object.entries(blogByLang).flatMap(([lang, pages]) => {
-    return paginate(pages, {
+    const blogs = Array.from(langBlogMap.values()).sort((a, b) => {
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    });
+
+    return { lang: currentLang, blogs };
+  });
+
+  return consolidatedBlogs.flatMap(({ lang, blogs }) => {
+    return paginate(blogs, {
       pageSize: 9,
-      params: { lang: lang as Languages },
+      params: { lang },
     });
   });
 }

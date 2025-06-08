@@ -7,13 +7,33 @@ import type { BlogSchema } from "../../utils/microcms";
 export async function getStaticPaths() {
   const blogs = blogJson.contents as BlogSchema[];
 
-  return blogs.map((blog) => {
-    // スラッシュを除去してslugを正規化
+  // 同じslugのブログをグループ化
+  const blogGroups = new Map<string, BlogSchema[]>();
+  for (const blog of blogs) {
     const normalizedSlug = blog.slug.startsWith("/")
       ? blog.slug.slice(1)
       : blog.slug;
-    return { params: { slug: normalizedSlug }, props: blog };
-  });
+    if (!blogGroups.has(normalizedSlug)) {
+      blogGroups.set(normalizedSlug, []);
+    }
+    blogGroups.get(normalizedSlug)?.push(blog);
+  }
+
+  // 各slugに対してデフォルト言語のブログを選択
+  const paths = [];
+  for (const [slug, blogGroup] of blogGroups) {
+    // デフォルト言語（日本語）に対応するブログを優先選択
+    const preferredBlog =
+      blogGroup.find((blog) => blog.language.includes(defaultLang)) ||
+      blogGroup[0];
+
+    paths.push({
+      params: { slug },
+      props: preferredBlog,
+    });
+  }
+
+  return paths;
 }
 
 const blog = Astro.props;
