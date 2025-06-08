@@ -4,6 +4,9 @@ import {
   type TypographyTypeMap,
   extendTheme,
 } from "@mui/joy";
+import "@fontsource/noto-serif-jp/400.css";
+import "@fontsource/noto-serif-jp/500.css";
+import "@fontsource/noto-serif-jp/700.css";
 
 const fontSize = {
   "1": "0.625rem",
@@ -20,7 +23,12 @@ const fontSize = {
   "12": "3rem",
 };
 
-const theme = extendTheme({});
+const theme = extendTheme({
+  fontFamily: {
+    body: '"Noto Serif JP", "Times New Roman", serif',
+    display: '"Noto Serif JP", "Times New Roman", serif',
+  },
+});
 
 theme.typography.h1 = {
   ...theme.typography.h1,
