@@ -73,6 +73,8 @@ npm run storybook    # コンポーネント開発用Storybook起動
 - **`vercel.json`**: デプロイ設定
 
 ### 開発時の注意点
+- 日本語で回答する
+- コミットはタスクごとにこまめに行う
 - npm install時は -E を付けてバージョン固定する
 - コードフォーマットには**ESLint/Prettierではなく、Biome**を使用
 - 全コンポーネントには対応する**Storybookストーリー**が必要
