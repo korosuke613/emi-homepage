@@ -7,11 +7,40 @@ import type { BlogSchema } from "../../utils/microcms";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const lang: Languages = "ja"; // 必須
-  const blogs = blogJson.contents
-    .filter((blog) => blog.language[0] === lang) // 必ず blog.language は 1 つになる
-    .sort((a, b) => {
-      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-    }) as BlogSchema[];
+  const allBlogs = blogJson.contents as BlogSchema[];
+
+  // 同じslugのブログを統合
+  const blogMap = new Map<string, BlogSchema>();
+
+  for (const blog of allBlogs) {
+    const existing = blogMap.get(blog.slug);
+    if (existing) {
+      // 言語配列をマージし、重複を削除
+      const mergedLanguages = Array.from(
+        new Set([...existing.language, ...blog.language]),
+      ) as Languages[];
+
+      // 現在の言語のタイトルを優先
+      const shouldUseCurrentBlogTitle =
+        blog.language.includes(lang) && !existing.language.includes(lang);
+
+      blogMap.set(blog.slug, {
+        ...(shouldUseCurrentBlogTitle ? blog : existing),
+        language: mergedLanguages,
+        // より新しい作成日を使用
+        createdAt:
+          new Date(blog.createdAt) > new Date(existing.createdAt)
+            ? blog.createdAt
+            : existing.createdAt,
+      });
+    } else {
+      blogMap.set(blog.slug, blog);
+    }
+  }
+
+  const blogs = Array.from(blogMap.values()).sort((a, b) => {
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+  });
 
   return paginate(blogs, { pageSize: 9, props: { lang } });
 }

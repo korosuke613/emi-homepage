@@ -1,6 +1,7 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
 import type { Languages } from "../i18n/ui";
+import { languageEmojis } from "../i18n/ui";
 import { useLocalTranslations } from "../i18n/utils";
 import type { BlogSchema } from "../utils/microcms";
 import Layout from "./Layout.astro";
@@ -28,9 +29,28 @@ const sanitizeSlug = (slug: string) => {
         return (
           <li>
             <a href={getRelativeLocaleUrl(lang, `/blog/${sanitizedSlug}`)}>{new Date(blog.createdAt).toLocaleDateString(lang)}: {blog.title}</a>
+            - {blog.language
+              .sort((a, b) => {
+                // 現在の言語を最前に配置
+                if (a === lang && b !== lang) return -1;
+                if (b === lang && a !== lang) return 1;
+                return 0;
+              })
+              .map(l => (
+                <a href={getRelativeLocaleUrl(l, `/blog/${sanitizedSlug}`)} class="language-emoji-link">
+                  {languageEmojis[l]}
+                </a>
+              ))}
           </li>
         );
       }
     )}
   </ul>
 </Layout>
+
+<style>
+.language-emoji-link {
+  text-decoration: none;
+  margin-left: 2px;
+}
+</style>

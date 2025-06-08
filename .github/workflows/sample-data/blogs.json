@@ -44,10 +44,10 @@
     },
     {
       "id": "jber5f4jt",
-      "createdAt": "2024-09-08T14:05:10.034Z",
-      "updatedAt": "2024-09-08T14:55:57.758Z",
-      "publishedAt": "2024-09-08T14:05:10.034Z",
-      "revisedAt": "2024-09-08T14:55:57.758Z",
+      "createdAt": "2024-09-06T14:05:10.034Z",
+      "updatedAt": "2024-09-06T14:55:57.758Z",
+      "publishedAt": "2024-09-06T14:05:10.034Z",
+      "revisedAt": "2024-09-06T14:55:57.758Z",
       "title": "(Sample) First, open this article",
       "language": [
         "en"
@@ -55,20 +55,20 @@
       "slug": "sample",
       "category": {
         "id": "eiysfz-kix6g",
-        "createdAt": "2024-09-08T07:16:14.425Z",
-        "updatedAt": "2024-09-08T07:16:14.425Z",
-        "publishedAt": "2024-09-08T07:16:14.425Z",
-        "revisedAt": "2024-09-08T07:16:14.425Z",
+        "createdAt": "2024-09-06T07:16:14.425Z",
+        "updatedAt": "2024-09-06T07:16:14.425Z",
+        "publishedAt": "2024-09-06T07:16:14.425Z",
+        "revisedAt": "2024-09-06T07:16:14.425Z",
         "name": "更新情報"
       },
       "content": "<h2 id=\"h51c3418236\">Created from blog template 🎉</h2><p>API was created from blog template.<br>Good night 🎉</p>"
     },
     {
       "id": "xdp4y8o3i3",
-      "createdAt": "2024-09-08T07:16:16.044Z",
-      "updatedAt": "2024-09-08T12:45:01.538Z",
-      "publishedAt": "2024-09-08T07:16:16.044Z",
-      "revisedAt": "2024-09-08T12:45:01.538Z",
+      "createdAt": "2024-09-07T07:16:16.044Z",
+      "updatedAt": "2024-09-07T12:45:01.538Z",
+      "publishedAt": "2024-09-07T07:16:16.044Z",
+      "revisedAt": "2024-09-07T12:45:01.538Z",
       "title": "（サンプル）まずはこの記事を開きましょう",
       "language": [
         "ja"
@@ -76,10 +76,10 @@
       "slug": "sample",
       "category": {
         "id": "eiysfz-kix6g",
-        "createdAt": "2024-09-08T07:16:14.425Z",
-        "updatedAt": "2024-09-08T07:16:14.425Z",
-        "publishedAt": "2024-09-08T07:16:14.425Z",
-        "revisedAt": "2024-09-08T07:16:14.425Z",
+        "createdAt": "2024-09-07T07:16:14.425Z",
+        "updatedAt": "2024-09-07T07:16:14.425Z",
+        "publishedAt": "2024-09-07T07:16:14.425Z",
+        "revisedAt": "2024-09-07T07:16:14.425Z",
         "name": "更新情報"
       },
       "content": "<h2 id=\"hdb41525ba7\">ブログテンプレートから作成されました🎉</h2><p>ブログテンプレートからAPIを作成しました。<br>おつかれさまでした🎉</p>"

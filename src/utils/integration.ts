@@ -11,7 +11,7 @@ const setup = async () => {
   }
 
   // Vercelデプロイ環境でも実際のデータを取得するように修正
-  if (process.env.CI && !process.env.VERCEL) {
+  if ((process.env.CI || process.env.E2E_TEST) && !process.env.VERCEL) {
     console.log("CI detected (not Vercel). Copying sample data.");
 
     await fs.promises.copyFile(
