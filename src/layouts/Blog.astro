@@ -12,9 +12,12 @@ type Props = {
 };
 
 const { blog, lang } = Astro.props;
+
+const availableLanguages = blog.language;
+const isCurrentLanguageSupported = availableLanguages.includes(lang);
 ---
 
-<Layout title={blog.title} description={""} lang={lang}>
+<Layout title={blog.title} description={""} lang={lang} noindex={!isCurrentLanguageSupported}>
   <Box sx={{
     padding: { xs: "1rem", sm: "2rem" },
     maxWidth: "800px",
