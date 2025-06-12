@@ -100,12 +100,19 @@ test.describe("ブログ一覧機能", () => {
     // 統合されたsampleブログで英語タイトルが表示される  
     await expect(page.locator("text=(Sample) First, open this article")).toBeVisible();
     
-    // 両ページで同じ数のブログが表示される  
+    // ラオス語ページでの確認（フォールバック機能により日本語タイトルが表示される）
+    await page.goto("/lo/blog");
+    await expect(page.locator("text=（サンプル）まずはこの記事を開きましょう")).toBeVisible();
+    
+    // 全ページで同じ数のブログが表示される  
     const enPageItems = await page.locator("main ul li").count();
     await page.goto("/blog");
-    const jaPageItems = await page.locator("main ul li").count(); 
+    const jaPageItems = await page.locator("main ul li").count();
+    await page.goto("/lo/blog");
+    const loPageItems = await page.locator("main ul li").count();
     expect(jaPageItems).toBe(3);
     expect(enPageItems).toBe(3);
+    expect(loPageItems).toBe(3);
   });
 
   test("現在の言語の絵文字を最前に表示する", async ({ page }) => {
@@ -125,5 +132,13 @@ test.describe("ブログ一覧機能", () => {
     
     const enFirstEmoji = await enEmojiLinks.first().textContent();
     expect(enFirstEmoji?.trim()).toBe("🇬🇧");
+    
+    // ラオス語ページでの確認（ラオス語は対応していないため、日本語絵文字が最前に表示される）
+    await page.goto("/lo/blog");
+    const loSampleBlog = page.locator("li").filter({ hasText: "（サンプル）まずはこの記事を開きましょう" });
+    const loEmojiLinks = loSampleBlog.locator("a.language-emoji-link");
+    
+    const loFirstEmoji = await loEmojiLinks.first().textContent();
+    expect(loFirstEmoji?.trim()).toBe("🇯🇵");
   });
 });

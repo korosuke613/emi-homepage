@@ -60,6 +60,7 @@ export const MobileMenu = ({
           if (isUIKey(lang, uiKey)) {
             return (
               <Box
+                key={route}
                 component="a"
                 href={routePath}
                 sx={{
@@ -67,7 +68,6 @@ export const MobileMenu = ({
                 }}
               >
                 <MenuItem
-                  key={route}
                   selected={currentPathWithoutLang === `/${route}`}
                   href={routePath}
                 >

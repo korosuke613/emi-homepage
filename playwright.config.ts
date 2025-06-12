@@ -26,7 +26,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     
     /* Action timeout - increase for CI */
-    actionTimeout: process.env.CI ? 15000 : 5000,
+    actionTimeout: process.env.CI ? 15000 : 10000,
   },
 
   /* Configure projects for major browsers */

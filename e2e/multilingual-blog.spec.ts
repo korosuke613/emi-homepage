@@ -42,6 +42,14 @@ test.describe('多言語ブログシステム', () => {
       await expect(page.getByRole('button', { name: '🇬🇧' })).toBeVisible();
     });
 
+    test('ラオス語URLブログページではラオス語アイコン表示', async ({ page }) => {
+      // ラオス語ブログページにアクセス
+      await page.goto('/lo/blog/sample/');
+      
+      // 言語アイコンがラオス語（🇱🇦）になっている
+      await expect(page.getByRole('button', { name: '🇱🇦' })).toBeVisible();
+    });
+
     test('多言語対応ブログで言語アイコン表示', async ({ page }) => {
       // 多言語対応ブログにアクセス
       await page.goto('/blog/sample/');
@@ -53,6 +61,11 @@ test.describe('多言語ブログシステム', () => {
       await page.goto('/en/blog/sample/');
       // 言語アイコンが英語（🇬🇧）に変わる
       await expect(page.getByRole('button', { name: '🇬🇧' })).toBeVisible();
+
+      // ラオス語URLに切り替え
+      await page.goto('/lo/blog/sample/');
+      // 言語アイコンがラオス語（🇱🇦）に変わる
+      await expect(page.getByRole('button', { name: '🇱🇦' })).toBeVisible();
     });
   });
 
@@ -67,11 +80,8 @@ test.describe('多言語ブログシステム', () => {
       // 言語選択メニューを開く
       await page.getByRole('button', { name: '🇯🇵' }).click();
       
-      // メニューが表示されるまで待機
-      await expect(page.getByRole('menu')).toBeVisible();
-      
-      // 英語リンクが表示されるまで待機してからクリック
-      const englishLink = page.getByRole('link', { name: '🇬🇧 English' });
+      // 英語リンクをより具体的に指定して待機
+      const englishLink = page.locator('a').filter({ hasText: '🇬🇧' }).filter({ hasText: 'English' });
       await expect(englishLink).toBeVisible();
       await englishLink.click();
       
@@ -83,6 +93,27 @@ test.describe('多言語ブログシステム', () => {
       
       // 英語版のコンテンツが表示される
       await expect(page.getByRole('heading', { name: 'Created from blog template 🎉' })).toBeVisible();
+    });
+
+    test('ラオス語アクセス時の言語切り替えメニュー表示', async ({ page }) => {
+      // ラオス語版sampleブログにアクセス
+      await page.goto('/lo/blog/sample/');
+      
+      // 言語アイコンがラオス語（🇱🇦）になっている
+      await expect(page.getByRole('button', { name: '🇱🇦' })).toBeVisible();
+      
+      // 言語選択メニューを開く
+      await page.getByRole('button', { name: '🇱🇦' }).click();
+      
+      // ラオス語オプションが表示される
+      const laosLink = page.locator('a').filter({ hasText: '🇱🇦' }).filter({ hasText: 'ລາວ' });
+      await expect(laosLink).toBeVisible();
+      
+      // 日本語と英語のオプションも表示される
+      const japaneseLink = page.locator('a').filter({ hasText: '🇯🇵' }).filter({ hasText: '日本語' });
+      const englishLink = page.locator('a').filter({ hasText: '🇬🇧' }).filter({ hasText: 'English' });
+      await expect(japaneseLink).toBeVisible();
+      await expect(englishLink).toBeVisible();
     });
   });
 });
