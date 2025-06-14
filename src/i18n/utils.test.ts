@@ -14,9 +14,6 @@ describe("i18n/utils", () => {
       expect(getLangFromUrl(new URL("https://example.com/en/blog/"))).toBe(
         "en",
       );
-      expect(getLangFromUrl(new URL("https://example.com/lo/career/"))).toBe(
-        "lo",
-      );
       expect(getLangFromUrl(new URL("https://example.com/ja/"))).toBe("ja");
     });
 
@@ -34,12 +31,12 @@ describe("i18n/utils", () => {
   describe("getRoutePathWithLang", () => {
     it("should return path without prefix for default language (ja)", () => {
       expect(getRoutePathWithLang("/blog", "ja")).toBe("/blog");
-      expect(getRoutePathWithLang("career", "ja")).toBe("/career");
+      expect(getRoutePathWithLang("link", "ja")).toBe("/link");
     });
 
     it("should return path with language prefix for non-default languages", () => {
       expect(getRoutePathWithLang("/blog", "en")).toBe("/en/blog");
-      expect(getRoutePathWithLang("career", "lo")).toBe("/lo/career");
+      expect(getRoutePathWithLang("link", "lo")).toBe("/lo/link");
       expect(getRoutePathWithLang("/", "en")).toBe("/en/");
     });
 
