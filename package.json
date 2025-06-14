@@ -26,9 +26,9 @@
     "test": "npm run test:unit && npm run test:storybook && npm run test:e2e"
   },
   "dependencies": {
-    "@astrojs/check": "0.9.3",
-    "@astrojs/react": "3.6.2",
-    "@astrojs/vercel": "7.8.1",
+    "@astrojs/check": "0.9.4",
+    "@astrojs/react": "4.3.0",
+    "@astrojs/vercel": "8.1.5",
     "@emotion/react": "11.13.3",
     "@emotion/styled": "11.13.0",
     "@fontsource/noto-serif-jp": "5.2.5",
@@ -38,7 +38,7 @@
     "@types/react": "18.3.8",
     "@types/react-dom": "18.3.0",
     "@vercel/speed-insights": "1.0.12",
-    "astro": "4.16.3",
+    "astro": "5.9.3",
     "microcms-js-sdk": "3.2.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
@@ -48,6 +48,7 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.2",
     "@chromatic-com/storybook": "4.0.0",
+    "@playwright/test": "1.53.0",
     "@storybook/addon-docs": "^9.0.9",
     "@storybook/addon-links": "9.0.9",
     "@storybook/addon-onboarding": "9.0.9",
@@ -58,7 +59,6 @@
     "@vitest/ui": "^3.2.3",
     "jsdom": "^26.1.0",
     "playwright": "1.53.0",
-    "@playwright/test": "1.53.0",
     "storybook": "9.0.9",
     "vitest": "^3.2.3"
   },

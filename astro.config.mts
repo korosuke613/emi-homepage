@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import react from "@astrojs/react";
-import vercel from "@astrojs/vercel/static";
+import vercel from "@astrojs/vercel";
 import { setupMicroCMS } from "./src/utils/integration";
 
 // https://astro.build/config
