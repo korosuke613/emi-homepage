@@ -11,14 +11,21 @@ npm run dev
 npm start
 ```
 
-**本番ビルド:**
+**ビルド:**
 ```bash
-npm run build
+npm run build              # テストデータでビルド
+npm run production-build   # microCMSの実データでビルド
 ```
 
-**本番ビルドプレビュー:**
+**プレビュー:**
 ```bash
-npm run preview
+npm run preview            # テストデータでプレビュー
+npm run production-preview # microCMSの実データでプレビュー
+```
+
+**開発サーバー（microCMSデータ使用）:**
+```bash
+npm run production-dev     # microCMSの実データで開発サーバー起動
 ```
 
 **コード品質とフォーマット:**
@@ -68,7 +75,10 @@ npm run test:e2e:ui    # Playwrightテスト（UI付き）実行
 - **ブログコンテンツ**: デュアルシステム
   - `/src/content/blog/` のローカルMarkdownファイル（Astro Content Collections）
   - MicroCMS統合によるリモートコンテンツ（`/src/utils/microcms.ts`）
-- **環境対応**: MicroCMSデータ取得は環境別（CI/Vercel/ローカル）
+- **環境対応**: データ取得方法の環境別分岐
+  - 通常のビルド: テストデータ（`.github/workflows/sample-data/blogs.json`）を使用
+  - Vercel本番環境: 自動的にMicroCMSから実データを取得
+  - 開発時にMicroCMSデータが必要な場合: `PRODUCTION=true`環境変数を使用
 - **型安全**: コンテンツ検証用Zodスキーマ
 
 ### コンポーネントアーキテクチャ

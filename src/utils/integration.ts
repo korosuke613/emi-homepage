@@ -10,9 +10,9 @@ const setup = async () => {
     await fs.promises.mkdir(generatedDir);
   }
 
-  // Vercelデプロイ環境でも実際のデータを取得するように修正
-  if ((process.env.CI || process.env.E2E_TEST) && !process.env.VERCEL) {
-    console.log("CI detected (not Vercel). Copying sample data.");
+  // 通常のbuildではテストデータを使用、Vercelまたは開発時のPRODUCTIONフラグでは実際のデータを取得
+  if (!process.env.VERCEL && !process.env.PRODUCTION) {
+    console.log("Development/CI environment detected. Copying sample data.");
 
     await fs.promises.copyFile(
       "./.github/workflows/sample-data/blogs.json",
