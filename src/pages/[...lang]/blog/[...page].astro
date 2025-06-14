@@ -34,7 +34,7 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
           }
           return 999;
         };
-        
+
         const blogPriority = getLanguagePriority(blog.language);
         const existingPriority = getLanguagePriority(existing.language);
         const shouldUseCurrentBlogTitle = blogPriority < existingPriority;

@@ -7,13 +7,16 @@ import {
   useLocalTranslations,
   useSharedTranslations,
 } from "./utils";
-import { ui } from "./ui";
 
 describe("i18n/utils", () => {
   describe("getLangFromUrl", () => {
     it("should return correct language from URL path", () => {
-      expect(getLangFromUrl(new URL("https://example.com/en/blog/"))).toBe("en");
-      expect(getLangFromUrl(new URL("https://example.com/lo/career/"))).toBe("lo");
+      expect(getLangFromUrl(new URL("https://example.com/en/blog/"))).toBe(
+        "en",
+      );
+      expect(getLangFromUrl(new URL("https://example.com/lo/career/"))).toBe(
+        "lo",
+      );
       expect(getLangFromUrl(new URL("https://example.com/ja/"))).toBe("ja");
     });
 
@@ -22,7 +25,9 @@ describe("i18n/utils", () => {
     });
 
     it("should return default language for invalid language", () => {
-      expect(getLangFromUrl(new URL("https://example.com/invalid/"))).toBe("ja");
+      expect(getLangFromUrl(new URL("https://example.com/invalid/"))).toBe(
+        "ja",
+      );
     });
   });
 
@@ -78,16 +83,16 @@ describe("i18n/utils", () => {
       const tLo = useSharedTranslations("lo");
 
       expect(tJa("nav.about")).toBe("概要");
-      expect(tEn("nav.about")).toBe("About");  
+      expect(tEn("nav.about")).toBe("About");
       expect(tLo("nav.about")).toBe("ກ່ຽວກັບ");
     });
 
     it("should fallback to default language when translation is missing", () => {
       const t = useSharedTranslations("lo");
-      
+
       // Test with a key that should exist in all languages
       expect(t("route.blog")).toBe("Blog");
-      
+
       // If a key doesn't exist in Laotian, it should fallback to Japanese
       const result = t("nav.about");
       expect(typeof result).toBe("string");

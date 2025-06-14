@@ -41,24 +41,24 @@ export const LaotianWithJapaneseBlog: StoryObj<typeof LanguageFallbackNotice> =
     },
   };
 
-export const LaotianWithEnglishBlog: StoryObj<typeof LanguageFallbackNotice> =
-  {
-    args: {
-      blog: {
-        slug: "sample-blog",
-        language: ["en"],
-      },
-      currentLang: "lo",
+export const LaotianWithEnglishBlog: StoryObj<typeof LanguageFallbackNotice> = {
+  args: {
+    blog: {
+      slug: "sample-blog",
+      language: ["en"],
     },
-  };
+    currentLang: "lo",
+  },
+};
 
-export const LaotianWithMultiLanguageBlog: StoryObj<typeof LanguageFallbackNotice> =
-  {
-    args: {
-      blog: {
-        slug: "sample-blog",
-        language: ["ja", "en"],
-      },
-      currentLang: "lo",
+export const LaotianWithMultiLanguageBlog: StoryObj<
+  typeof LanguageFallbackNotice
+> = {
+  args: {
+    blog: {
+      slug: "sample-blog",
+      language: ["ja", "en"],
     },
-  };
+    currentLang: "lo",
+  },
+};
