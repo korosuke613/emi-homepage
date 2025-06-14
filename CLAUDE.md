@@ -134,13 +134,9 @@ npm run test:e2e:ui    # Playwrightテスト（UI付き）実行
 - **プルリクエスト**: issueを元に作成する際は、descriptionに `closed #<issue番号>`を含める
 
 #### Gitワークフロー
-- **コミット整理**: 複数のwipコミットがある場合は`git reset --soft HEAD~N`で整理してから論理的な単位で再コミット
-- **コミット例**:
-  ```bash
-  git reset --soft HEAD~3  # 直近3つのコミットを取り消し
-  git add [関連ファイル群]   # 論理的まとまりでステージング
-  git commit -m "適切なメッセージ"
-  ```
+- **mainブランチ保護**: mainブランチへの直接コミットは禁止 - 必ず機能ブランチを作成してから作業
+- **ブランチ命名**: `<type>/<brief-description>` 形式（例：`feat/add-new-component`, `fix/resolve-routing-issue`）
+- **コミット**: 目的が複数個あると判断した場合、目的ごとにコミットする
 
 #### テスト関連
 - **テストケースタイトル**: 日本語で記述し、「〜するべき」という形式で書く

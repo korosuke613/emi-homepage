@@ -35,54 +35,58 @@ const tl = useLocalTranslations(lang);
 
   <SocialNetworks />
 
-  <Typography level="h2"
-  gutterBottom={true}
-  marginBottom={"1rem"}
-  >
-	  {t("link.service")}
-  </Typography>
+  { /* 工事中なので完成するまで非表示 */ }
+  { false && (
+    <>
+      <Typography level="h2"
+      gutterBottom={true}
+      marginBottom={"1rem"}
+      >
+        {t("link.service")}
+      </Typography>
 
-  <ServiceLinkCards serviceLinkCard={[
-      {
-        title: "障害者就労継続支援",
-        cardImg:
-          "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318",
-        tags: ["障害者支援"],
-      },
-      {
-        title: "障害者就労定着支援",
-        cardImg:
-          "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318",
+    <ServiceLinkCards serviceLinkCard={[
+        {
+          title: "障害者就労継続支援",
+          cardImg:
+            "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318",
           tags: ["障害者支援"],
         },
-      {
-        title: "英語の授業",
-        cardImg:
-          "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318",
+        {
+          title: "障害者就労定着支援",
+          cardImg:
+            "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318",
+            tags: ["障害者支援"],
+          },
+        {
+          title: "英語の授業",
+          cardImg:
+            "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318",
+            tags: ["授業"],
+          },
+        {
+          title: "高校理科(化学)の授業",
+          cardImg:
+            "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318",
           tags: ["授業"],
         },
-      {
-        title: "高校理科(化学)の授業",
-        cardImg:
-          "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318",
-        tags: ["授業"],
-      },
-      {
-        title: "デジタル絵作成",
-        description: "SNSアイコン、名刺、オリジナルキャラのご提案、商品パッケージ",
-        cardImg:
-          "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318",
-        tags: ["絵"],
-      },
-      {
-        title: "アナログ絵作成",
-        description: "デッサン全般",
-        cardImg:
-          "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318",
-        tags: ["絵"],
-      }
-  ]}
-  />
+        {
+          title: "デジタル絵作成",
+          description: "SNSアイコン、名刺、オリジナルキャラのご提案、商品パッケージ",
+          cardImg:
+            "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318",
+          tags: ["絵"],
+        },
+        {
+          title: "アナログ絵作成",
+          description: "デッサン全般",
+          cardImg:
+            "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318",
+          tags: ["絵"],
+        }
+    ]}
+    />
+  </>)}
   </Box>
 </Box>
 </Layout>
