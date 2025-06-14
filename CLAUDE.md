@@ -87,11 +87,19 @@ npm run test:e2e:ui    # Playwrightテスト（UI付き）実行
 - **ハイドレーション**: `client:visible`による選択的クライアントサイドハイドレーション
 - **レスポンシブ**: MUI Joyブレークポイントでモバイルファースト設計
 
+### フォント最適化
+- **フォントpreload**: Layout.astroでNoto Serif JPの重要なウェイトをpreload
+- **環境別フォント**: 開発時はシステムセリフフォント、本番時はNoto Serif JP
+- **FOUC防止**: フォントプリロードによりFlash of Unstyled Contentを軽減
+- **パフォーマンス最適化**: 開発時はフォント読み込みを無効化して高速化
+
 ### 重要ファイル
-- **`astro.config.mjs`**: メインAstro設定（i18nと統合）
+- **`astro.config.mts`**: メインAstro設定（i18nと統合）
 - **`biome.json`**: コード品質設定
 - **`src/content/config.ts`**: コンテンツコレクションスキーマ
 - **`src/utils/staticRoute.ts`**: ページルート定義
+- **`src/layouts/Layout.astro`**: フォントpreload設定
+- **`src/components/ThemeProvider/index.tsx`**: 環境別フォント設定
 - **`vercel.json`**: デプロイ設定
 
 ### ソフトウェア仕様
@@ -130,6 +138,12 @@ npm run test:e2e:ui    # Playwrightテスト（UI付き）実行
 - ルートは**ビルド時に静的生成**されパフォーマンス最適化
 - チャットを通じてCLAUDE.mdに書くべきがあれば随時更新
 - コミット前に必ず `npm run preCommit` を実行してコード品質チェック＆フォーマット
+
+#### 開発パフォーマンス
+- **開発サーバー高速化**: フォント読み込みは本番環境でのみ実行
+- **Vite最適化**: MUIコンポーネントとアイコンを事前バンドル
+- **設定ファイル**: `astro.config.mts`でESモジュール対応とTypeScript統合
+- **フォントフォールバック**: 開発時はシステムセリフフォントで代替表示
 
 #### コミット・プルリクエストルール
 - **言語**: コミット、プルリクエスト作成時は英語を使用

@@ -1,5 +1,6 @@
 import type React from "react";
 import type { ReactProps } from "../../utils/react";
+import { ThemeProvider } from "../ThemeProvider";
 import { Header } from "./Header";
 import { PageCover } from "./PageCover";
 
@@ -10,12 +11,12 @@ type Props = {
 };
 
 export const Page = ({ headerProp, pageCoverProp, children }: Props) => (
-  <>
+  <ThemeProvider>
     <Header {...headerProp} />
     <main>
       <PageCover {...pageCoverProp} />
       {children}
     </main>
     {/* TODO: footer */}
-  </>
+  </ThemeProvider>
 );
