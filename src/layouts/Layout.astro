@@ -4,6 +4,23 @@ import { Page } from "../components/Page";
 import { type Languages, defaultLang } from "../i18n/ui";
 import { useSharedTranslations } from "../i18n/utils";
 
+// フォントファイルのインポート（本番環境のみ）
+let notoSerifJapanese400Woff2: string | undefined;
+let notoSerifLatin400Woff2: string | undefined;
+
+if (import.meta.env.PROD || import.meta.env.PUBLIC_PRODUCTION) {
+  notoSerifJapanese400Woff2 = (
+    await import(
+      "@fontsource/noto-serif-jp/files/noto-serif-jp-japanese-400-normal.woff2?url"
+    )
+  ).default;
+  notoSerifLatin400Woff2 = (
+    await import(
+      "@fontsource/noto-serif-jp/files/noto-serif-jp-latin-400-normal.woff2?url"
+    )
+  ).default;
+}
+
 interface Props {
   title: string;
   description: string;
@@ -40,6 +57,26 @@ const normalizedTitle =
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{normalizedTitle}</title>
+
+		<!-- Noto Serif JP フォントプリロード（本番環境のみ） -->
+		{notoSerifJapanese400Woff2 && (
+			<link
+				rel="preload"
+				href={notoSerifJapanese400Woff2}
+				as="font"
+				type="font/woff2"
+				crossorigin="anonymous"
+			/>
+		)}
+		{notoSerifLatin400Woff2 && (
+			<link
+				rel="preload"
+				href={notoSerifLatin400Woff2}
+				as="font"
+				type="font/woff2"
+				crossorigin="anonymous"
+			/>
+		)}
 
 		<SpeedInsights />
 	</head>

@@ -1,7 +1,7 @@
 import { CssVarsProvider, extendTheme } from "@mui/joy";
 
+// フォントはLayout.astroでpreloadされ、ここでCSSを読み込み
 // 本番環境のみフォント読み込み（開発時高速化のため）
-// 動的インポートは非同期だがモジュール初期化時に実行される
 if (import.meta.env.PROD || import.meta.env.PUBLIC_PRODUCTION) {
   import("@fontsource/noto-serif-jp/japanese-400.css");
   import("@fontsource/noto-serif-jp/japanese-500.css");
@@ -26,11 +26,11 @@ const fontSize = {
   "12": "3rem",
 };
 
-// 開発環境ではシステムフォントを優先してFOUCを防止
+// 開発環境ではシステムセリフフォントを優先してFOUCを防止
 const isDevelopment =
   !import.meta.env.PROD && !import.meta.env.PUBLIC_PRODUCTION;
 const fontFamily = isDevelopment
-  ? 'system-ui, -apple-system, "Segoe UI", "Roboto", sans-serif'
+  ? '"Times New Roman", "Times", "Georgia", serif'
   : '"Noto Serif JP", "Times New Roman", serif';
 
 const theme = extendTheme({
