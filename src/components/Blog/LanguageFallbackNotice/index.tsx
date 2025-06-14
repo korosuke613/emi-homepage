@@ -8,6 +8,7 @@ type Props = {
     language: Languages[];
   };
   currentLang: Languages;
+  availableLanguagesForSlug: Languages[];
 };
 
 const generateBlogUrl = (slug: string, lang: Languages): string => {
@@ -20,8 +21,12 @@ const generateBlogUrl = (slug: string, lang: Languages): string => {
   return `/${lang}/blog/${normalizedSlug}/`;
 };
 
-export const LanguageFallbackNotice = ({ blog, currentLang }: Props) => {
-  const availableLanguages = blog.language;
+export const LanguageFallbackNotice = ({
+  blog,
+  currentLang,
+  availableLanguagesForSlug,
+}: Props) => {
+  const availableLanguages = availableLanguagesForSlug;
   const isCurrentLanguageSupported = availableLanguages.includes(currentLang);
   const t = useLocalTranslations(currentLang);
 
@@ -56,9 +61,14 @@ export const LanguageFallbackNotice = ({ blog, currentLang }: Props) => {
             <Typography level="body-md">{warningMessage}</Typography>
             <Typography level="body-md">
               {availableLanguagesLabel}{" "}
-              <Link href={generateBlogUrl(blog.slug, availableLanguages[0])}>
-                {languageEmojis[availableLanguages[0]]}
-              </Link>
+              {availableLanguages.map((lang, index) => (
+                <span key={lang}>
+                  <Link href={generateBlogUrl(blog.slug, lang)}>
+                    {languageEmojis[lang]}
+                  </Link>
+                  {index < availableLanguages.length - 1 && " "}
+                </span>
+              ))}
             </Typography>
           </Box>
         </Box>
