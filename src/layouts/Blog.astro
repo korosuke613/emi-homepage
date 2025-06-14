@@ -1,8 +1,10 @@
 ---
 import { Box } from "@mui/joy";
+import blogJson from "../../generated/blogs.json";
 import { LanguageFallbackNotice } from "../components/Blog/LanguageFallbackNotice";
 import { Typography } from "../components/Typography";
 import type { Languages } from "../i18n/ui";
+import { getAvailableLanguagesForSlug } from "../utils/blogUtils";
 import type { BlogSchema } from "../utils/microcms";
 import Layout from "./Layout.astro";
 
@@ -13,8 +15,14 @@ type Props = {
 
 const { blog, lang } = Astro.props;
 
-const availableLanguages = blog.language;
-const isCurrentLanguageSupported = availableLanguages.includes(lang);
+// 同じslugを持つ全ブログの言語を取得
+const blogs = blogJson.contents as BlogSchema[];
+const availableLanguagesForSlug = getAvailableLanguagesForSlug(
+  blogs,
+  blog.slug,
+);
+
+const isCurrentLanguageSupported = availableLanguagesForSlug.includes(lang);
 ---
 
 <Layout title={blog.title} description={""} lang={lang} noindex={!isCurrentLanguageSupported}>
@@ -31,7 +39,7 @@ const isCurrentLanguageSupported = availableLanguages.includes(lang);
       height: "auto",
     },
   }}>
-  <LanguageFallbackNotice blog={blog} currentLang={lang} client:visible />
+  <LanguageFallbackNotice blog={blog} currentLang={lang} availableLanguagesForSlug={availableLanguagesForSlug} client:visible />
   <Typography>{blog.createdAt}</Typography>
   <Box set:html={blog.content} sx={{
     "& p": {

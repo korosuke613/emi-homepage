@@ -14,6 +14,12 @@ export default defineConfig({
     projects: [
       {
         test: {
+          name: "unit",
+          include: ["src/**/*.test.ts", "src/**/*.test.tsx"],
+        },
+      },
+      {
+        test: {
           name: "storybook",
           browser: {
             enabled: true,
