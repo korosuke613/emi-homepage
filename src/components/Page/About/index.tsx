@@ -44,6 +44,10 @@ export const About = ({ lang }: Props) => {
 In 2022, he graduated from stara Inc. and started working as an employment support for people with disabilities.<br />
 From 2023, I worked as an illustrator for 2 years, creating SNS icons and illustrations for blogs.<br />
 From 2025, he is currently serving as an English teacher in Laos with JICA Overseas Cooperation Volunteers.<br />`,
+                lo: `ຂ້ອຍເປັນຄູສອນພາສາອັງກິດຢູ່ລາວ, ເປັນພະນັກງານ PR ທາງໄກຂອງບໍລິສັດຍີ່ປຸ່ນ, ແລະເປັນນັກແຕ້ມຮູບສ່ວນຕົວ, ຫຼັກແມ່ນຢູ່ສຳນັກງານພິການ.<br />
+ໃນປີ 2022, ລາວໄດ້ຈົບການສຶກສາຈາກ stara Inc. ແລະເລີ່ມເຮັດວຽກສະໜັບສະໜູນການຈ້າງງານຄົນພິການ.<br />
+ຕັ້ງແຕ່ປີ 2023, ຂ້ອຍໄດ້ເຮັດວຽກເປັນນັກແຕ້ມຮູບເປັນເວລາ 2 ປີ, ສ້າງໄອຄອນ SNS ແລະຮູບປະກອບບລອກ.<br />
+ຕັ້ງແຕ່ປີ 2025, ລາວປັດຈຸບັນກຳລັງປະຈຳການເປັນຄູສອນພາສາອັງກິດຢູ່ລາວກັບ JICA ອາສາສະໝັກຮ່ວມມືຕ່າງປະເທດ.<br />`,
               },
             })}
           </Typography>
@@ -74,40 +78,48 @@ From 2025, he is currently serving as an English teacher in Laos with JICA Overs
                   key: tl({
                     ja: "名称",
                     en: "Name",
+                    lo: "ຊື່",
                   }),
                   value: tl({
                     ja: "牧浦 えみ（まきうら えみ）",
                     en: "Emi  Makiura (Amy)",
+                    lo: "ມາກິອູຣະ ເອມີ (Amy)",
                   }),
                 },
                 {
                   key: tl({
                     ja: "所在地",
                     en: "Location",
+                    lo: "ທີ່ຕັ້ງ",
                   }),
                   value: tl({
                     ja: "ラオス人民民主共和国　ビエンチャン",
                     en: "Vientiane, Lao People's Democratic Republic",
+                    lo: "ນະຄອນຫຼວງວຽງຈັນ, ສາທາລະນະລັດປະຊາທິປະໄຕປະຊາຊົນລາວ",
                   }),
                 },
                 {
                   key: tl({
                     ja: "お問い合わせ",
                     en: "Contact",
+                    lo: "ຕິດຕໍ່",
                   }),
                   value: tl({
                     ja: "考え中",
                     en: "TBD",
+                    lo: "ກຳລັງພິຈາລະນາ",
                   }),
                 },
                 {
                   key: tl({
                     ja: "事業内容",
                     en: "Business Activities",
+                    lo: "ກິດຈະກຳທຸລະກິດ",
                   }),
                   value: tl({
                     ja: "障害者就労継続支援、デジタル絵制作(SNSアイコン、名刺、商品パッケージ)、アナログ絵(デッサン全般)、英語教師",
                     en: "Continuous employment support for people with disabilities, digital picture production (SNS icons, business cards, product packaging), analog pictures (general sketching), English teacher",
+                    lo: "ການສະໜັບສະໜູນການຈ້າງງານຕໍ່ເນື່ອງສຳລັບຄົນພິການ, ການຜະລິດຮູບແບບດິຈິຕອນ (ໄອຄອນ SNS, ນາມບັດ, ບັນຈຸສິນຄ້າ), ຮູບແບບອະນາລອກ (ການແຕ້ມຮູບທົ່ວໄປ), ຄູສອນພາສາອັງກິດ",
                   }),
                 },
               ].map((row) => (

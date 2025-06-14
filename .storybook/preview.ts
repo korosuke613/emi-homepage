@@ -1,4 +1,4 @@
-import type { Preview } from "@storybook/react";
+import type { Preview } from "@storybook/react-vite";
 
 const preview: Preview = {
   parameters: {
@@ -12,6 +12,8 @@ const preview: Preview = {
       defaultViewport: "desktop",
     },
   },
+
+  tags: ["autodocs"]
 };
 
 export default preview;

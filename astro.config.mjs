@@ -8,7 +8,7 @@ import { setupMicroCMS } from './src/utils/integration';
 export default defineConfig({
   i18n: {
     defaultLocale: 'ja',
-    locales: ['ja', 'en']
+    locales: ['ja', 'en', 'lo']
   },
   integrations: [react(), setupMicroCMS()],
   output: "static",

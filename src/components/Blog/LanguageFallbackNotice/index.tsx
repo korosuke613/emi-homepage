@@ -28,11 +28,13 @@ export const LanguageFallbackNotice = ({ blog, currentLang }: Props) => {
   const warningMessage = t({
     en: `This blog is not available in ${languageEmojis.en}. Displaying in ${languageEmojis[availableLanguages[0]]}.`,
     ja: `このブログは日本語では利用できません。${languageEmojis[availableLanguages[0]]} で表示しています。`,
+    lo: `ບລອກນີ້ບໍ່ມີຢູ່ໃນ ${languageEmojis.lo}. ສະແດງໃນ ${languageEmojis[availableLanguages[0]]}.`,
   });
 
   const availableLanguagesLabel = t({
     en: "Available languages:",
     ja: "利用可能な言語:",
+    lo: "ພາສາທີ່ມີ:",
   });
 
   return (

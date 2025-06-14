@@ -1,5 +1,5 @@
 import { Facebook, GitHub, Instagram, Twitter } from "@mui/icons-material";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SocialNetworksTemplate } from ".";
 import type { ReactProps } from "../../../utils/react";
 

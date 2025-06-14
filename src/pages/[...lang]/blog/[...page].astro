@@ -2,6 +2,7 @@
 import type { GetStaticPathsOptions } from "astro";
 import blogJson from "../../../../generated/blogs.json";
 import type { Languages } from "../../../i18n/ui";
+import { languageKeys } from "../../../i18n/ui";
 import BlogList from "../../../layouts/BlogList.astro";
 import type { BlogSchema } from "../../../utils/microcms";
 
@@ -12,7 +13,7 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const blogMap = new Map<string, BlogSchema>();
 
   // 各言語のページ用統合処理
-  const languages: Languages[] = ["ja", "en"];
+  const languages = languageKeys;
 
   const consolidatedBlogs = languages.map((currentLang) => {
     const langBlogMap = new Map<string, BlogSchema>();
@@ -25,10 +26,18 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
           new Set([...existing.language, ...blog.language]),
         ) as Languages[];
 
-        // 現在の言語のタイトルを優先
-        const shouldUseCurrentBlogTitle =
-          blog.language.includes(currentLang) &&
-          !existing.language.includes(currentLang);
+        // 現在の言語のタイトルを優先、次にlanguageKeysの順序で決定
+        const getLanguagePriority = (blogLanguages: Languages[]) => {
+          if (blogLanguages.includes(currentLang)) return 0;
+          for (let i = 0; i < languageKeys.length; i++) {
+            if (blogLanguages.includes(languageKeys[i])) return i + 1;
+          }
+          return 999;
+        };
+
+        const blogPriority = getLanguagePriority(blog.language);
+        const existingPriority = getLanguagePriority(existing.language);
+        const shouldUseCurrentBlogTitle = blogPriority < existingPriority;
 
         langBlogMap.set(blog.slug, {
           ...(shouldUseCurrentBlogTitle ? blog : existing),

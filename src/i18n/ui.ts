@@ -1,16 +1,18 @@
-export type Languages = "ja" | "en";
+export type Languages = "ja" | "en" | "lo";
 
 export const languageNames: Record<Languages, string> = {
   ja: "日本語",
   en: "English",
+  lo: "ລາວ",
 };
 
 export const languageEmojis: Record<Languages, string> = {
   ja: "🇯🇵",
   en: "🇬🇧",
+  lo: "🇱🇦",
 };
 
-export const languageKeys = Object.keys(languageNames) as Languages[];
+export const languageKeys: Languages[] = ["ja", "en", "lo"];
 
 export const defaultLang = "ja";
 
@@ -41,6 +43,20 @@ export const ui = {
     document: "Document",
     "document.desc": "Learn how Astro works and explore the official API docs.",
     "nav.about": "About",
+    "nav.twitter": "Twitter",
+  },
+  lo: {
+    title: "Emi Makiura",
+    description: "ນີ້ແມ່ນໜ້າເວັບຂອງ Emi Makiura.",
+    header: "Emi Makiura",
+    "route.career": "Career",
+    "route.link": "Link",
+    "route.blog": "Blog",
+    "link.sns": "SNS",
+    "link.service": "ບໍລິການ",
+    document: "ເອກະສານ",
+    "document.desc": "ຮຽນຮູ້ວິທີການເຮັດວຽກຂອງ Astro ແລະສຳຫຼວດເອກະສານ API ທາງການ.",
+    "nav.about": "ກ່ຽວກັບ",
     "nav.twitter": "Twitter",
   },
 } as const;

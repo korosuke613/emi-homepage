@@ -2,7 +2,6 @@ import {
   Box,
   Dropdown,
   IconButton,
-  Link,
   Menu,
   MenuButton,
   MenuItem,
@@ -28,7 +27,9 @@ const generateHref = (lang: Languages, path: string): string => {
 
   // ブログページかどうかをチェック
   const isBlogPage =
-    normalizedPath.startsWith("blog/") || normalizedPath.startsWith("en/blog/");
+    normalizedPath.startsWith("blog/") ||
+    normalizedPath.startsWith("en/blog/") ||
+    normalizedPath.startsWith("lo/blog/");
 
   if (isBlogPage) {
     // ブログページの場合、スラッグを抽出
@@ -79,16 +80,14 @@ export const LangSelector = ({ path, currentLang, open }: Props) => (
           if (lang === defaultLang) className = `${idPrefix}-default`;
 
           return (
-            <MenuItem key={lang} selected={lang === currentLang}>
+            <MenuItem
+              key={lang}
+              selected={lang === currentLang}
+              component="a"
+              href={generateHref(lang, path)}
+            >
               <Box className={className} aria-label={lang}>
-                <Link
-                  underline="none"
-                  color="neutral"
-                  href={generateHref(lang, path)}
-                  textAlign="left"
-                >
-                  {`${languageEmojis[lang]} ${languageNames[lang]}`}
-                </Link>
+                {`${languageEmojis[lang]} ${languageNames[lang]}`}
               </Box>
             </MenuItem>
           );

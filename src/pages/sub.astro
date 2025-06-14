@@ -15,7 +15,7 @@ const t = useSharedTranslations(lang);
 const tl = useLocalTranslations(lang);
 ---
 
-<Layout title={`${tl({ja: "サブページ", en: "Sub page."})}: ${t('title')}`} description={tl({ja: "サブページ", en: "Sub page."})} lang={lang}>
+<Layout title={`${tl({ja: "サブページ", en: "Sub page.", lo: "ຫຼັນບອີ"})}:  ${t('title')}`} description={tl({ja: "サブページ", en: "Sub page.", lo: "ຫຼັນບອີ"})} lang={lang}>
   <h1>{t('nav.about')}</h1>
   <a href={getRelativeLocaleUrl(lang, '/')}>ホームへ</a>
 </Layout>
