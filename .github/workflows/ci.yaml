@@ -24,7 +24,7 @@ jobs:
         run: npm run build
 
       - name: Setup Playwright
-        run: npx playwright install --with-deps
+        run: npx playwright install --with-deps chromium
 
       - name: e2e-test
         run: npm run test:e2e
