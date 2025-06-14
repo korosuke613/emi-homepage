@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ServiceLinkCardMobile } from ".";
 import type { ReactProps } from "../../../utils/react";
 

@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { expect, screen, userEvent, within } from "@storybook/test";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, screen, userEvent, within } from "storybook/test";
 import { LangSelector } from ".";
 
 const metaData: Meta = {
@@ -22,12 +22,10 @@ export const Default: StoryObj<typeof LangSelector> = {
 
     const items = screen.getAllByRole("menuitem");
     for (const item of items) {
-      const link = within(item).getByRole("link");
-      const href = link.getAttribute("href");
-      const linkParent = link.parentElement;
-      const classNames = linkParent?.className.split(" ") ?? [];
-      const ariaLabel = linkParent?.getAttribute("aria-label");
-
+      const div = item.children[0] as HTMLDivElement;
+      const classNames = div?.className.split(" ") ?? [];
+      const ariaLabel = div?.getAttribute("aria-label");
+      const href = item.getAttribute("href");
       if (classNames.includes("lang-selector-default")) {
         expect(href).toBe("/");
       } else {
@@ -50,17 +48,58 @@ export const SubDirectory: StoryObj<typeof LangSelector> = {
 
     const items = screen.getAllByRole("menuitem");
     for (const item of items) {
-      const link = within(item).getByRole("link");
-      const href = link.getAttribute("href");
-      const linkParent = link.parentElement;
-      const classNames = linkParent?.className.split(" ") ?? [];
-      const ariaLabel = linkParent?.getAttribute("aria-label");
+      const div = item.children[0] as HTMLDivElement;
+      const classNames = div?.className.split(" ") ?? [];
+      const ariaLabel = div?.getAttribute("aria-label");
 
+      const href = item.getAttribute("href");
       if (classNames.includes("lang-selector-default")) {
         expect(href).toBe("/hoge");
       } else {
         expect(href).toBe(`/${ariaLabel}/hoge`);
       }
     }
+  },
+};
+
+export const LaotianLanguage: StoryObj<typeof LangSelector> = {
+  args: {
+    path: "/",
+    currentLang: "lo",
+  },
+
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // ラオス語フラグボタンが表示されることを確認
+    const laosButton = canvas.getByRole("button", { name: "🇱🇦" });
+    expect(laosButton).toBeInTheDocument();
+
+    await userEvent.click(laosButton);
+
+    // 全ての言語オプションが表示されることを確認
+    const items = screen.getAllByRole("menuitem");
+    expect(items).toHaveLength(3); // ja, en, lo
+
+    // ラオス語オプションが存在することを確認
+    const laosMenuItem = screen.getByText("🇱🇦 ລາວ");
+    expect(laosMenuItem).toBeInTheDocument();
+  },
+};
+
+export const LaotianBlogPage: StoryObj<typeof LangSelector> = {
+  args: {
+    path: "/lo/blog/sample/",
+    currentLang: "lo",
+  },
+
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByRole("button", { name: "🇱🇦" }));
+
+    // ブログページでのラオス語言語切り替えが機能することを確認
+    const laosMenuItem = screen.getByText("🇱🇦 ລາວ");
+    expect(laosMenuItem).toBeInTheDocument();
   },
 };

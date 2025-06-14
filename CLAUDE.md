@@ -32,10 +32,14 @@ npm run biome:fix    # リンティング問題の自動修正
 npm run storybook    # コンポーネント開発用Storybook起動
 ```
 
-**E2Eテスト:**
+**テスト:**
 ```bash
-npm run test:e2e     # Playwrightテスト実行
-npm run test:e2e:ui  # Playwrightテスト（UI付き）実行
+npm run test           # 全テスト実行（unit + storybook + e2e）
+npm run test:unit      # Vitestユニットテスト実行
+npm run test:unit:ui   # Vitestユニットテスト（UI付き）実行
+npm run test:storybook # Storybookテスト実行
+npm run test:e2e       # Playwrightテスト実行
+npm run test:e2e:ui    # Playwrightテスト（UI付き）実行
 ```
 
 ## アーキテクチャ概要
@@ -48,13 +52,15 @@ npm run test:e2e:ui  # Playwrightテスト（UI付き）実行
 - **コンテンツ**: ハイブリッド方式 - ローカルAstro Content Collections + MicroCMS
 - **スタイリング**: Emotion CSS-in-JS
 - **コード品質**: Biome (ESLint/Prettierの代替)
+- **テスト**: Vitest (ユニットテスト) + Storybook (コンポーネントテスト) + Playwright (E2Eテスト)
 - **デプロイ**: Vercel (静的アダプター)
 
 ### 国際化 (i18n)
-- **対応言語**: 日本語（デフォルト）と英語
+- **対応言語**: 日本語（デフォルト）、英語、ラオス語
 - **ルーティング**: 
   - 日本語: `/`, `/career`, `/blog` (デフォルトルート)
   - 英語: `/en/`, `/en/career`, `/en/blog` (プレフィックス付き)
+  - ラオス語: `/lo/`, `/lo/career`, `/lo/blog` (プレフィックス付き)
 - **翻訳ファイル**: `/src/i18n/ui.ts` に共通翻訳
 - **ユーティリティ**: `/src/i18n/utils.tsx` でReact統合
 
@@ -102,8 +108,9 @@ npm run test:e2e:ui  # Playwrightテスト（UI付き）実行
 - **実行**: `npm run test:e2e` で多言語切り替えとURL正規化をテスト
 
 ### 開発時の注意点
+
+#### 基本ルール
 - 日本語で回答する
-- コミットはタスクごとにこまめに行う
 - npm install時は -E を付けてバージョン固定する
 - コードフォーマットには**ESLint/Prettierではなく、Biome**を使用
 - 全コンポーネントには対応する**Storybookストーリー**が必要
@@ -112,6 +119,28 @@ npm run test:e2e:ui  # Playwrightテスト（UI付き）実行
 - サイトに変更を加えた場合、playwright mcp を利用して動作確認
 - ルートは**ビルド時に静的生成**されパフォーマンス最適化
 - チャットを通じてCLAUDE.mdに書くべきがあれば随時更新
-- コミット、プルリクエスト作成時は日本語を使用
-- issueを元にプルリクエストを作成する際は、プルリクエストのdescriptionに `closed #<issue番号>`を含める
-- テストケースのタイトルは日本語で記述し、「〜するべき」という形式で書く
+
+#### コミット・プルリクエストルール
+- **言語**: コミット、プルリクエスト作成時は英語を使用
+- **コミット粒度**: 機能別・論理的まとまり別にコミットを分ける（wipコミットは避ける）
+- **コミットメッセージプレフィックス**:
+  - `feat:` 新機能追加
+  - `fix:` バグ修正
+  - `ci:` テスト環境整備、CI/CD関連
+  - `test:` テストファイルの追加・修正
+  - `chore:` 設定ファイル更新、依存関係更新
+  - `docs:` ドキュメント更新
+- **プルリクエスト**: issueを元に作成する際は、descriptionに `closed #<issue番号>`を含める
+
+#### Gitワークフロー
+- **コミット整理**: 複数のwipコミットがある場合は`git reset --soft HEAD~N`で整理してから論理的な単位で再コミット
+- **コミット例**:
+  ```bash
+  git reset --soft HEAD~3  # 直近3つのコミットを取り消し
+  git add [関連ファイル群]   # 論理的まとまりでステージング
+  git commit -m "適切なメッセージ"
+  ```
+
+#### テスト関連
+- **テストケースタイトル**: 日本語で記述し、「〜するべき」という形式で書く
+- **テスト実行**: 機能追加後は必ず関連するテストを実行して動作確認
