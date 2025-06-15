@@ -19,18 +19,18 @@ const defaultArgs: ReactProps<typeof ServiceLinkCards> = {
       tags: ["Nature", "Mountain", "Lake"],
     },
     {
-      title: "Yosemite National Park",
-      description: "California, USA",
+      title: "Grand Canyon National Park",
+      description: "Arizona, USA",
       cardImg:
         "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318",
-      tags: ["Nature", "Mountain", "Lake"],
+      tags: ["Nature", "Canyon", "Desert"],
     },
     {
-      title: "Yosemite National Park",
-      description: "California, USA",
+      title: "Yellowstone National Park",
+      description: "Wyoming, USA",
       cardImg:
         "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318",
-      tags: ["Nature", "Mountain", "Lake"],
+      tags: ["Nature", "Geysers", "Wildlife"],
     },
   ],
 };

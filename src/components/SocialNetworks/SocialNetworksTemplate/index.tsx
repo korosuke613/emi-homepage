@@ -18,18 +18,16 @@ export const SocialNetworksTemplate = ({ socialLinks }: Props) => (
     marginBottom={"1rem"}
   >
     {socialLinks.map((card) => (
-      <>
-        <Grid
-          key={card.title}
-          xs={12}
-          sm={6}
-          md={4}
-          textAlign={"left"}
-          sx={{ display: "flex", justifyContent: "center" }}
-        >
-          <ServiceLinkCardMobile key={card.title} {...card} />
-        </Grid>
-      </>
+      <Grid
+        key={card.title}
+        xs={12}
+        sm={6}
+        md={4}
+        textAlign={"left"}
+        sx={{ display: "flex", justifyContent: "center" }}
+      >
+        <ServiceLinkCardMobile {...card} />
+      </Grid>
     ))}
   </Grid>
 );
