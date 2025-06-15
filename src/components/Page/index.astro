@@ -1,8 +1,5 @@
 ---
 import { Box, Grid, Link, List, ListItem, ListItemButton } from "@mui/joy";
-import { Typography } from "../Typography";
-import { MobileMenuWithTheme } from "./Header/MobileMenuWithTheme";
-import { LangSelectorWithTheme } from "./Header/LangSelectorWithTheme";
 import { type Languages, defaultLang } from "../../i18n/ui";
 import {
   getRoutePathWithLang,
@@ -10,6 +7,9 @@ import {
   useSharedTranslations,
 } from "../../i18n/utils";
 import { STATIC_ROUTES } from "../../utils/staticRoute";
+import { Typography } from "../Typography";
+import { LangSelectorWithTheme } from "./Header/LangSelectorWithTheme";
+import { MobileMenuWithTheme } from "./Header/MobileMenuWithTheme";
 
 type Props = {
   lang: Languages;

@@ -4,13 +4,12 @@ import {
   Card,
   CardContent,
   Chip,
-  CssVarsProvider,
   Link,
   Typography,
-  extendTheme,
 } from "@mui/joy";
 
 import type { ReactNode } from "react";
+import { MinimalThemeProvider } from "../../MinimalThemeProvider";
 
 type Props = {
   title: string;
@@ -21,18 +20,6 @@ type Props = {
   tags: string[];
 };
 
-const theme = extendTheme({
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 400,
-      md: 600,
-      lg: 900,
-      xl: 1200,
-    },
-  },
-});
-
 export const ServiceLinkCardMobile = ({
   title,
   description,
@@ -41,7 +28,7 @@ export const ServiceLinkCardMobile = ({
   link = "#",
   tags,
 }: Props) => (
-  <CssVarsProvider theme={theme}>
+  <MinimalThemeProvider>
     <Card
       variant="outlined"
       orientation="horizontal"
@@ -113,5 +100,5 @@ export const ServiceLinkCardMobile = ({
         </Box>
       </CardContent>
     </Card>
-  </CssVarsProvider>
+  </MinimalThemeProvider>
 );

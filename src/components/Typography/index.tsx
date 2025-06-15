@@ -1,8 +1,9 @@
 import { Typography as TypographyBase, type TypographyTypeMap } from "@mui/joy";
+import type { ReactNode } from "react";
 
 type Props = {
   level?: TypographyTypeMap["props"]["level"];
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export const Typography = ({

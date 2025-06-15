@@ -99,7 +99,8 @@ npm run test:e2e:ui    # Playwrightテスト（UI付き）実行
 - **`src/content/config.ts`**: コンテンツコレクションスキーマ
 - **`src/utils/staticRoute.ts`**: ページルート定義
 - **`src/layouts/Layout.astro`**: フォントpreload設定
-- **`src/components/ThemeProvider/index.tsx`**: 環境別フォント設定
+- **`src/utils/theme.ts`**: 共通テーマ設定とフォント定義
+- **`src/components/MinimalThemeProvider/index.tsx`**: 最小限のMaterial-UIテーマプロバイダー
 - **`vercel.json`**: デプロイ設定
 
 ### ソフトウェア仕様
