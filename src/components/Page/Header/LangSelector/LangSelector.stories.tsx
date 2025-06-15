@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, screen, userEvent, within } from "storybook/test";
+import { expect, screen, userEvent, waitFor, within } from "storybook/test";
 import { LangSelector } from ".";
 
 const metaData: Meta = {
@@ -20,6 +20,8 @@ export const Default: StoryObj<typeof LangSelector> = {
 
     await userEvent.click(canvas.getByRole("button"));
 
+    // Wait for menu to open and items to be rendered - menu renders in body
+    await waitFor(() => screen.getByRole("menu"));
     const items = screen.getAllByRole("menuitem");
     for (const item of items) {
       const div = item.children[0] as HTMLDivElement;
@@ -46,6 +48,8 @@ export const SubDirectory: StoryObj<typeof LangSelector> = {
 
     await userEvent.click(canvas.getByRole("button"));
 
+    // Wait for menu to open and items to be rendered - menu renders in body
+    await waitFor(() => screen.getByRole("menu"));
     const items = screen.getAllByRole("menuitem");
     for (const item of items) {
       const div = item.children[0] as HTMLDivElement;
@@ -77,6 +81,9 @@ export const LaotianLanguage: StoryObj<typeof LangSelector> = {
 
     await userEvent.click(laosButton);
 
+    // Wait for menu to open and items to be rendered - menu renders in body
+    await waitFor(() => screen.getByRole("menu"));
+
     // 全ての言語オプションが表示されることを確認
     const items = screen.getAllByRole("menuitem");
     expect(items).toHaveLength(3); // ja, en, lo
@@ -97,6 +104,9 @@ export const LaotianBlogPage: StoryObj<typeof LangSelector> = {
     const canvas = within(canvasElement);
 
     await userEvent.click(canvas.getByRole("button", { name: "🇱🇦" }));
+
+    // Wait for menu to open and items to be rendered - menu renders in body
+    await waitFor(() => screen.getByRole("menu"));
 
     // ブログページでのラオス語言語切り替えが機能することを確認
     const laosMenuItem = screen.getByText("🇱🇦 ລາວ");

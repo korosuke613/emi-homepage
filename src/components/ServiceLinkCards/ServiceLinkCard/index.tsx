@@ -63,9 +63,8 @@ export const ServiceLinkCard = ({
       <CardContent orientation="horizontal">
         {tags?.map((tag, index) => {
           return (
-            <>
+            <div key={tag} style={{ display: "contents" }}>
               <Typography
-                key={tag}
                 level="body-xs"
                 fontWeight="sm"
                 textColor="text.secondary"
@@ -73,7 +72,7 @@ export const ServiceLinkCard = ({
                 {tag.startsWith("#") ? tag : `＃${tag}`}
               </Typography>
               {index !== tags.length - 1 && <Divider orientation="vertical" />}
-            </>
+            </div>
           );
         })}
       </CardContent>

@@ -21,19 +21,17 @@ export const ServiceLinkCards = ({ serviceLinkCard = [] }: Props) => (
       display={{ xs: "none", sm: "flex" }}
     >
       {serviceLinkCard.map((card) => (
-        <>
-          <Grid
-            key={card.title}
-            xs={12}
-            sm={6}
-            md={4}
-            lg={3}
-            textAlign={"left"}
-            sx={{ display: "flex", justifyContent: "center" }}
-          >
-            <ServiceLinkCard key={card.title} {...card} />
-          </Grid>
-        </>
+        <Grid
+          key={card.title}
+          xs={12}
+          sm={6}
+          md={4}
+          lg={3}
+          textAlign={"left"}
+          sx={{ display: "flex", justifyContent: "center" }}
+        >
+          <ServiceLinkCard {...card} />
+        </Grid>
       ))}
     </Grid>
 
@@ -49,16 +47,14 @@ export const ServiceLinkCards = ({ serviceLinkCard = [] }: Props) => (
       display={{ xs: "flex", sm: "none" }}
     >
       {serviceLinkCard.map((card) => (
-        <>
-          <Grid
-            key={card.title}
-            xs={12}
-            textAlign={"left"}
-            sx={{ display: "flex", justifyContent: "center" }}
-          >
-            <ServiceLinkCardMobile key={card.title} {...card} />
-          </Grid>
-        </>
+        <Grid
+          key={card.title}
+          xs={12}
+          textAlign={"left"}
+          sx={{ display: "flex", justifyContent: "center" }}
+        >
+          <ServiceLinkCardMobile {...card} />
+        </Grid>
       ))}
     </Grid>
   </>

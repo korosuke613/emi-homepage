@@ -123,40 +123,38 @@ From 2025, he is currently serving as an English teacher in Laos with JICA Overs
                   }),
                 },
               ].map((row) => (
-                <>
-                  <tr key={row.key}>
-                    <Box
-                      component="td"
-                      sx={{
-                        height: "auto",
-                        width: {
-                          xs: "30%",
-                          sm: "20%",
-                          md: "15%",
-                        },
-                        alignContent: "center",
-                      }}
-                    >
-                      <Typography level="body-md" fontWeight={"lg"}>
-                        {row.key}:
-                      </Typography>
-                    </Box>
-                    <Box
-                      component="td"
-                      sx={{
-                        width: {
-                          xs: "70%",
-                          sm: "75%",
-                          md: "80%",
-                        },
-                        height: "auto",
-                        alignContent: "center",
-                      }}
-                    >
-                      <Typography level="body-md">{row.value}</Typography>
-                    </Box>
-                  </tr>
-                </>
+                <tr key={row.key}>
+                  <Box
+                    component="td"
+                    sx={{
+                      height: "auto",
+                      width: {
+                        xs: "30%",
+                        sm: "20%",
+                        md: "15%",
+                      },
+                      alignContent: "center",
+                    }}
+                  >
+                    <Typography level="body-md" fontWeight={"lg"}>
+                      {row.key}:
+                    </Typography>
+                  </Box>
+                  <Box
+                    component="td"
+                    sx={{
+                      width: {
+                        xs: "70%",
+                        sm: "75%",
+                        md: "80%",
+                      },
+                      height: "auto",
+                      alignContent: "center",
+                    }}
+                  >
+                    <Typography level="body-md">{row.value}</Typography>
+                  </Box>
+                </tr>
               ))}
             </tbody>
           </Table>
