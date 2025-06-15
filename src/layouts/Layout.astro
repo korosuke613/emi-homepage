@@ -1,6 +1,6 @@
 ---
 import SpeedInsights from "@vercel/speed-insights/astro";
-import { Page } from "../components/Page";
+import Page from "../components/Page/index.astro";
 import { type Languages, defaultLang } from "../i18n/ui";
 import { useSharedTranslations } from "../i18n/utils";
 
@@ -82,15 +82,9 @@ const normalizedTitle =
 	</head>
 	<body>
 		<Page 
-			headerProp={{
-				lang,
-				currentPathWithoutLang: asPathWithoutLocale,
-			}}
-			pageCoverProp={{
-				title: secondTitle ? secondTitle : title,
-			}}
-
-			client:visible
+			lang={lang}
+			currentPathWithoutLang={asPathWithoutLocale}
+			title={secondTitle ? secondTitle : title}
 		>
 			<slot />
 		</Page>

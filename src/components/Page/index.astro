@@ -1,0 +1,135 @@
+---
+import { Box, Grid, Link, List, ListItem, ListItemButton } from "@mui/joy";
+import { Typography } from "../Typography";
+import { MobileMenuWithTheme } from "./Header/MobileMenuWithTheme";
+import { LangSelectorWithTheme } from "./Header/LangSelectorWithTheme";
+import { type Languages, defaultLang } from "../../i18n/ui";
+import {
+  getRoutePathWithLang,
+  isUIKey,
+  useSharedTranslations,
+} from "../../i18n/utils";
+import { STATIC_ROUTES } from "../../utils/staticRoute";
+
+type Props = {
+  lang: Languages;
+  currentPathWithoutLang: string;
+  title: string;
+  keepOpen?: boolean;
+};
+
+const { lang, currentPathWithoutLang = "/", title, keepOpen } = Astro.props;
+const t = useSharedTranslations(lang);
+---
+
+<!-- 静的ヘッダー（サーバーレンダリング） -->
+<header>
+  <Box component="nav" aria-label="My site">
+    <List role="menubar" orientation="horizontal" sx={{ padding: "0px" }}>
+      <ListItem
+        sx={{
+          padding: "2px",
+        }}
+      >
+        <Link
+          aria-label="to Home"
+          underline="none"
+          href={lang === defaultLang ? "/" : `/${lang}`}
+        >
+          <Typography level="h1">{t("header")}</Typography>
+        </Link>
+      </ListItem>
+
+      <!-- デスクトップ用メニュー（静的） -->
+      {STATIC_ROUTES.map((route, index) => {
+        const uiKey = `route.${route}`;
+        if (!isUIKey(lang, uiKey)) return null;
+        const routePath = getRoutePathWithLang(route, lang);
+        return (
+          <ListItem
+            key={route}
+            sx={{
+              display: { xs: "none", sm: "flex" },
+              marginInlineStart: index === 0 ? "auto" : "unset",
+            }}
+          >
+            <ListItemButton
+              role="menuitem"
+              component="a"
+              href={routePath}
+              selected={currentPathWithoutLang === `/${route}`}
+            >
+              {t(uiKey)}
+            </ListItemButton>
+          </ListItem>
+        );
+      })}
+
+      <!-- モバイル用メニューボタン（クライアントハイドレーション） -->
+      <ListItem
+        sx={{
+          marginInlineStart: { xs: "auto", sm: "0" },
+          display: { xs: "flex", sm: "none" },
+        }}
+      >
+        <ListItemButton
+          role="menuitem"
+          sx={{
+            padding: "unset",
+          }}
+        >
+          <MobileMenuWithTheme
+            lang={lang}
+            keepOpen={keepOpen}
+            currentPathWithoutLang={currentPathWithoutLang}
+            client:visible
+          />
+        </ListItemButton>
+      </ListItem>
+
+      <!-- 言語切り替えボタン（クライアントハイドレーション） -->
+      <ListItem
+        sx={{
+          padding: "5px",
+          borderRadius: "0%",
+        }}
+      >
+        <LangSelectorWithTheme
+          path={currentPathWithoutLang}
+          currentLang={lang}
+          client:visible
+        />
+      </ListItem>
+    </List>
+  </Box>
+</header>
+
+<main>
+  <!-- PageCover（静的） -->
+  <Box
+    sx={{
+      textAlign: "center",
+    }}
+  >
+    <Grid container spacing={2} sx={{ flexGrow: 1 }}>
+      <Grid xs={12}>
+        <Box
+          height={{
+            xs: "6rem",
+            sm: "8rem",
+            md: "10rem",
+          }}
+          sx={{
+            alignContent: "center",
+          }}
+        >
+          <Typography level="h1">{title}</Typography>
+        </Box>
+      </Grid>
+    </Grid>
+  </Box>
+
+  <!-- メインコンテンツ（静的） -->
+  <slot />
+</main>
+{/* TODO: footer */}
