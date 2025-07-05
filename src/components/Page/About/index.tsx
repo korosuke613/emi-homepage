@@ -40,11 +40,11 @@ export const About = ({ lang }: Props) => {
 2022年新卒で株式会社staraにて障害者の就労支援を始める。<br />
 2023年から2年間SNSアイコン作成やブログの挿絵などのイラストレーター業務を行う。<br />
 2025年よりJICA海外協力隊でラオスで英語教師として在任中。<br />`,
-                en: `I am an English teacher in Laos, a remote PR person for a Japanese company, and a private illustrator, mainly at a facility for the disabled.<br />
+                en: `I am an English teacher in Laos, a remote PR person for <a href="https://stara.co.jp" target="_blank" rel="noopener noreferrer">stara Inc.</a>, and a private illustrator, mainly at a facility for the disabled.<br />
 In 2022, he graduated from stara Inc. and started working as an employment support for people with disabilities.<br />
 From 2023, I worked as an illustrator for 2 years, creating SNS icons and illustrations for blogs.<br />
 From 2025, he is currently serving as an English teacher in Laos with JICA Overseas Cooperation Volunteers.<br />`,
-                lo: `ຂ້ອຍເປັນຄູສອນພາສາອັງກິດຢູ່ລາວ, ເປັນພະນັກງານ PR ທາງໄກຂອງບໍລິສັດຍີ່ປຸ່ນ, ແລະເປັນນັກແຕ້ມຮູບສ່ວນຕົວ, ຫຼັກແມ່ນຢູ່ສຳນັກງານພິການ.<br />
+                lo: `ຂ້ອຍເປັນຄູສອນພາສາອັງກິດຢູ່ລາວ, ເປັນພະນັກງານ PR <a href="https://stara.co.jp" target="_blank" rel="noopener noreferrer">ບໍລິສັດ stara</a>, ແລະເປັນນັກແຕ້ມຮູບສ່ວນຕົວ, ຫຼັກແມ່ນຢູ່ສຳນັກງານພິການ.<br />
 ໃນປີ 2022, ລາວໄດ້ຈົບການສຶກສາຈາກ stara Inc. ແລະເລີ່ມເຮັດວຽກສະໜັບສະໜູນການຈ້າງງານຄົນພິການ.<br />
 ຕັ້ງແຕ່ປີ 2023, ຂ້ອຍໄດ້ເຮັດວຽກເປັນນັກແຕ້ມຮູບເປັນເວລາ 2 ປີ, ສ້າງໄອຄອນ SNS ແລະຮູບປະກອບບລອກ.<br />
 ຕັ້ງແຕ່ປີ 2025, ລາວປັດຈຸບັນກຳລັງປະຈຳການເປັນຄູສອນພາສາອັງກິດຢູ່ລາວກັບ JICA ອາສາສະໝັກຮ່ວມມືຕ່າງປະເທດ.<br />`,
