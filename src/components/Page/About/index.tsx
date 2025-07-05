@@ -36,7 +36,7 @@ export const About = ({ lang }: Props) => {
           <Typography level="body-md">
             {tle({
               dict: {
-                ja: `hogehogeオスにての英語教師、リモートで日本の会社の広報、個人でイラストレーターをしております。<br />
+                ja: `障害者施設をメインに、ラオスにての英語教師（2025年9月～）、リモートで<a href="https://stara.co.jp" target="_blank" rel="noopener noreferrer">株式会社stara</a>の広報、個人でイラストレーター。<br />
 2022年新卒で株式会社staraにて障害者の就労支援を始める。<br />
 2023年から2年間SNSアイコン作成やブログの挿絵などのイラストレーター業務を行う。<br />
 2025年よりJICA海外協力隊でラオスで英語教師として在任中。<br />`,
