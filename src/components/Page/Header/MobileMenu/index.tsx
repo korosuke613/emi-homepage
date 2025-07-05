@@ -6,6 +6,8 @@ import {
   Menu,
   MenuButton,
   MenuItem,
+  CssVarsProvider,
+  extendTheme,
 } from "@mui/joy";
 
 import type { Languages } from "../../../../i18n/ui";
@@ -15,6 +17,7 @@ import {
   useSharedTranslations,
 } from "../../../../i18n/utils";
 import { STATIC_ROUTES } from "../../../../utils/staticRoute";
+import { getFontFamily } from "../../../../utils/theme";
 
 type Props = {
   lang: Languages;
@@ -23,26 +26,40 @@ type Props = {
   currentPathWithoutLang?: string;
 };
 
+// テーマを直接作成
+const createTheme = () =>
+  extendTheme({
+    fontFamily: {
+      body: getFontFamily(),
+      display: getFontFamily(),
+    },
+  });
+
 export const MobileMenu = ({
   lang,
   keepOpen = false,
   currentPathWithoutLang = "/",
 }: Props) => {
   const t = useSharedTranslations(lang);
+  const theme = createTheme();
+
+  console.log("MobileMenu rendered with keepOpen:", keepOpen);
 
   return (
-    <Dropdown>
-      <MenuButton
-        variant="plain"
-        sx={{
-          padding: "unset",
-          width: "48px",
-          height: "48px",
-          borderRadius: "0%",
-        }}
-      >
-        <MoreVert />
-      </MenuButton>
+    <CssVarsProvider theme={theme}>
+      <Dropdown>
+        <MenuButton
+          variant="plain"
+          onClick={() => console.log("MenuButton clicked")}
+          sx={{
+            padding: "unset",
+            width: "48px",
+            height: "48px",
+            borderRadius: "0%",
+          }}
+        >
+          <MoreVert />
+        </MenuButton>
       <Menu
         placement="bottom-end"
         size="lg"
@@ -82,5 +99,6 @@ export const MobileMenu = ({
         <ListDivider />
       </Menu>
     </Dropdown>
+    </CssVarsProvider>
   );
 };

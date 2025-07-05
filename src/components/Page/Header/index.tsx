@@ -72,20 +72,14 @@ export const Header = ({
             sx={{
               marginInlineStart: { xs: "auto", sm: "0" },
               display: { xs: "flex", sm: "none" },
+              padding: "unset",
             }}
           >
-            <ListItemButton
-              role="menuitem"
-              sx={{
-                padding: "unset",
-              }}
-            >
-              <MobileMenu
-                lang={lang}
-                keepOpen={keepOpen}
-                currentPathWithoutLang={currentPathWithoutLang}
-              />
-            </ListItemButton>
+            <MobileMenu
+              lang={lang}
+              keepOpen={keepOpen}
+              currentPathWithoutLang={currentPathWithoutLang}
+            />
           </ListItem>
 
           {/* 言語切り替えボタン */}

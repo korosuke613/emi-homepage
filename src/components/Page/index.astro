@@ -9,7 +9,7 @@ import {
 import { STATIC_ROUTES } from "../../utils/staticRoute";
 import { Typography } from "../Typography";
 import { LangSelectorWithTheme } from "./Header/LangSelectorWithTheme";
-import { MobileMenuWithTheme } from "./Header/MobileMenuWithTheme";
+import { SimpleMobileMenu } from "./Header/SimpleMobileMenu";
 
 type Props = {
   lang: Languages;
@@ -65,26 +65,64 @@ const t = useSharedTranslations(lang);
         );
       })}
 
-      <!-- モバイル用メニューボタン（クライアントハイドレーション） -->
+      <!-- モバイル用メニューボタン（Pure HTML/CSS） -->
       <ListItem
         sx={{
           marginInlineStart: { xs: "auto", sm: "0" },
           display: { xs: "flex", sm: "none" },
+          padding: "unset",
         }}
       >
-        <ListItemButton
-          role="menuitem"
-          sx={{
-            padding: "unset",
-          }}
-        >
-          <MobileMenuWithTheme
-            lang={lang}
-            keepOpen={keepOpen}
-            currentPathWithoutLang={currentPathWithoutLang}
-            client:visible
-          />
-        </ListItemButton>
+        <div style="position: relative;">
+          <button 
+            type="button"
+            style="background: none; border: none; padding: 12px; cursor: pointer; font-size: 24px;"
+            onclick="
+              const dropdown = this.nextElementSibling;
+              dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            "
+            aria-label="メニューを開く"
+          >
+            ⋮
+          </button>
+          <div 
+            style="
+              display: none;
+              position: absolute;
+              top: 100%;
+              right: 0;
+              background-color: white;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+              min-width: 150px;
+              z-index: 1000;
+            "
+          >
+            {STATIC_ROUTES.map((route) => {
+              const uiKey = `route.${route}`;
+              const routePath = getRoutePathWithLang(route, lang);
+              if (isUIKey(lang, uiKey)) {
+                return (
+                  <a
+                    href={routePath}
+                    style={{
+                      display: "block",
+                      padding: "12px 16px",
+                      textDecoration: "none",
+                      color: "black",
+                      borderBottom: "1px solid #eee",
+                      backgroundColor: currentPathWithoutLang === `/${route}` ? "#f0f0f0" : "transparent",
+                    }}
+                  >
+                    {t(uiKey)}
+                  </a>
+                );
+              }
+              return null;
+            })}
+          </div>
+        </div>
       </ListItem>
 
       <!-- 言語切り替えボタン（クライアントハイドレーション） -->
