@@ -1,4 +1,14 @@
 import { type Languages, defaultLang, languageKeys, ui } from "./ui";
+import {
+  aboutContent,
+  socialContent,
+  navigationContent,
+  pagesContent,
+  type AboutContentKey,
+  type SocialContentKey,
+  type NavigationContentKey,
+  type PagesContentKey,
+} from "./content";
 
 export function getLangFromUrl(url: URL) {
   const [, lang] = url.pathname.split("/");
@@ -43,3 +53,37 @@ export const isUIKey = (
 ): key is keyof (typeof ui)[typeof lang] => {
   return Object.hasOwn(ui[lang], key);
 };
+
+// New utility functions for content-based translations
+export function useContentTranslations(lang: Languages) {
+  return {
+    // About page content
+    about: (key: AboutContentKey) => aboutContent[key][lang],
+    
+    // Social networks content
+    social: (key: SocialContentKey) => socialContent[key][lang],
+    
+    // Navigation content
+    navigation: (key: NavigationContentKey) => navigationContent[key][lang],
+    
+    // Pages content
+    pages: (key: PagesContentKey) => pagesContent[key][lang],
+  };
+}
+
+// Helper function for content with HTML (like profile description)
+export function useContentTranslationsWithElement(lang: Languages) {
+  return {
+    // About page content with HTML support
+    about: (key: AboutContentKey): React.ReactNode => {
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+      return <span dangerouslySetInnerHTML={{ __html: aboutContent[key][lang] }} />;
+    },
+    
+    // Pages content with HTML support
+    pages: (key: PagesContentKey): React.ReactNode => {
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+      return <span dangerouslySetInnerHTML={{ __html: pagesContent[key][lang] }} />;
+    },
+  };
+}
