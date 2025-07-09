@@ -11,8 +11,9 @@
  */
 
 import type { Languages } from "../ui";
+import type { ContentRecord } from "./types";
 
-export const aboutContent = {
+export const aboutContent: ContentRecord = {
   // About page title
   About: {
     ja: "About",

@@ -11,8 +11,9 @@
  */
 
 import type { Languages } from "../ui";
+import type { ContentRecord } from "./types";
 
-export const pagesContent = {
+export const pagesContent: ContentRecord = {
   // Welcome messages
   "牧浦えみのホームページへようこそ！": {
     ja: "牧浦えみのホームページへようこそ！",

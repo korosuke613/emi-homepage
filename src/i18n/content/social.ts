@@ -11,8 +11,9 @@
  */
 
 import type { Languages } from "../ui";
+import type { ContentRecord } from "./types";
 
-export const socialContent = {
+export const socialContent: ContentRecord = {
   // Social network descriptions
   顔: {
     ja: "顔",

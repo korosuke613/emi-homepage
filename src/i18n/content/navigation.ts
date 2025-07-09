@@ -11,8 +11,9 @@
  */
 
 import type { Languages } from "../ui";
+import type { ContentRecord } from "./types";
 
-export const navigationContent = {
+export const navigationContent: ContentRecord = {
   // Page navigation
   サブページ: {
     ja: "サブページ",
