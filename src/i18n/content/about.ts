@@ -1,9 +1,9 @@
 /**
  * About Page Content
- * 
+ *
  * このファイルはAboutページの文言を管理します。
  * 非エンジニアの方が編集しやすいよう、日本語の文言をキーとして使用しています。
- * 
+ *
  * 編集方法:
  * 1. 変更したい文言を日本語で検索
  * 2. ja, en, lo の3言語すべてを同時に更新
@@ -14,29 +14,29 @@ import type { Languages } from "../ui";
 
 export const aboutContent = {
   // About page title
-  "About": {
+  About: {
     ja: "About",
-    en: "About", 
+    en: "About",
     lo: "About",
   },
 
   // Profile table labels
-  "名称": {
+  名称: {
     ja: "名称",
     en: "Name",
     lo: "ຊື່",
   },
-  "所在地": {
+  所在地: {
     ja: "所在地",
     en: "Location",
     lo: "ທີ່ຕັ້ງ",
   },
-  "お問い合わせ": {
+  お問い合わせ: {
     ja: "お問い合わせ",
     en: "Contact",
     lo: "ຕິດຕໍ່",
   },
-  "事業内容": {
+  事業内容: {
     ja: "事業内容",
     en: "Business Activities",
     lo: "ກິດຈະກຳທຸລະກິດ",
@@ -53,19 +53,20 @@ export const aboutContent = {
     en: "Vientiane, Lao People's Democratic Republic",
     lo: "ນະຄອນຫຼວງວຽງຈັນ, ສາທາລະນະລັດປະຊາທິປະໄຕປະຊາຊົນລາວ",
   },
-  "考え中": {
+  考え中: {
     ja: "考え中",
     en: "TBD",
     lo: "ກຳລັງພິຈາລະນາ",
   },
-  "障害者就労継続支援、デジタル絵制作(SNSアイコン、名刺、商品パッケージ)、アナログ絵(デッサン全般)、英語教師": {
-    ja: "障害者就労継続支援、デジタル絵制作(SNSアイコン、名刺、商品パッケージ)、アナログ絵(デッサン全般)、英語教師",
-    en: "Continuous employment support for people with disabilities, digital picture production (SNS icons, business cards, product packaging), analog pictures (general sketching), English teacher",
-    lo: "ການສະໜັບສະໜູນການຈ້າງງານຕໍ່ເນື່ອງສຳລັບຄົນພິການ, ການຜະລິດຮູບແບບດິຈິຕອນ (ໄອຄອນ SNS, ນາມບັດ, ບັນຈຸສິນຄ້າ), ຮູບແບບອະນາລອກ (ການແຕ້ມຮູບທົ່ວໄປ), ຄູສອນພາສາອັງກິດ",
-  },
+  "障害者就労継続支援、デジタル絵制作(SNSアイコン、名刺、商品パッケージ)、アナログ絵(デッサン全般)、英語教師":
+    {
+      ja: "障害者就労継続支援、デジタル絵制作(SNSアイコン、名刺、商品パッケージ)、アナログ絵(デッサン全般)、英語教師",
+      en: "Continuous employment support for people with disabilities, digital picture production (SNS icons, business cards, product packaging), analog pictures (general sketching), English teacher",
+      lo: "ການສະໜັບສະໜູນການຈ້າງງານຕໍ່ເນື່ອງສຳລັບຄົນພິການ, ການຜະລິດຮູບແບບດິຈິຕອນ (ໄອຄອນ SNS, ນາມບັດ, ບັນຈຸສິນຄ້າ), ຮູບແບບອະນາລອກ (ການແຕ້ມຮູບທົ່ວໄປ), ຄູສອນພາສາອັງກິດ",
+    },
 
   // Profile description (biography)
-  "profile_description": {
+  profile_description: {
     ja: `障害者施設をメインに、ラオスにての英語教師（2025年9月～）、リモートで<a href="https://stara.co.jp" target="_blank" rel="noopener noreferrer">株式会社stara</a>の広報、個人でイラストレーター。<br />
 2022年新卒で株式会社staraにて障害者の就労支援を始める。<br />
 2023年から2年間SNSアイコン作成やブログの挿絵などのイラストレーター業務を行う。<br />

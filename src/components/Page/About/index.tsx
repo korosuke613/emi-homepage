@@ -73,7 +73,9 @@ export const About = ({ lang }: Props) => {
                 },
                 {
                   key: content.about("事業内容"),
-                  value: content.about("障害者就労継続支援、デジタル絵制作(SNSアイコン、名刺、商品パッケージ)、アナログ絵(デッサン全般)、英語教師"),
+                  value: content.about(
+                    "障害者就労継続支援、デジタル絵制作(SNSアイコン、名刺、商品パッケージ)、アナログ絵(デッサン全般)、英語教師",
+                  ),
                 },
               ].map((row) => (
                 <tr key={row.key}>

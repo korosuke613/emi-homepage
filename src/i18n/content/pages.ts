@@ -1,9 +1,9 @@
 /**
  * General Page Content
- * 
+ *
  * このファイルは一般的なページコンテンツの文言を管理します。
  * 非エンジニアの方が編集しやすいよう、日本語の文言をキーとして使用しています。
- * 
+ *
  * 編集方法:
  * 1. 変更したい文言を日本語で検索
  * 2. ja, en, lo の3言語すべてを同時に更新
@@ -26,24 +26,24 @@ export const pagesContent = {
     en: "Emi Makiura! Happy 25th Birthday!!",
     lo: "ມາກິອູຣະ ເອມີ! ຊູ່ມເຊີຍວັນເກີດ 25 ປີ!!",
   },
-  "めでたいねぇ": {
+  めでたいねぇ: {
     ja: "めでたいねぇ",
     en: "How wonderful!",
     lo: "ດີໃຈຈັງ!",
   },
 
   // Service descriptions (for link page)
-  "障害者就労継続支援": {
+  障害者就労継続支援: {
     ja: "障害者就労継続支援",
     en: "Continuous employment support for people with disabilities",
     lo: "ການສະໜັບສະໜູນການຈ້າງງານຕໍ່ເນື່ອງສຳລັບຄົນພິການ",
   },
-  "英語の授業": {
+  英語の授業: {
     ja: "英語の授業",
     en: "English lessons",
     lo: "ບົດຮຽນພາສາອັງກິດ",
   },
-  "デジタル絵作成": {
+  デジタル絵作成: {
     ja: "デジタル絵作成",
     en: "Digital illustration creation",
     lo: "ການສ້າງຮູບແຕ້ມດິຈິຕອລ",

@@ -1,7 +1,7 @@
 import { Facebook, Instagram } from "@mui/icons-material";
-import { SocialNetworksTemplate } from "./SocialNetworksTemplate";
-import { useContentTranslations } from "../../i18n/utils";
 import type { Languages } from "../../i18n/ui";
+import { useContentTranslations } from "../../i18n/utils";
+import { SocialNetworksTemplate } from "./SocialNetworksTemplate";
 
 type Props = {
   lang: Languages;
@@ -9,7 +9,7 @@ type Props = {
 
 export const SocialNetworks = ({ lang }: Props) => {
   const content = useContentTranslations(lang);
-  
+
   return (
     <SocialNetworksTemplate
       socialLinks={[
