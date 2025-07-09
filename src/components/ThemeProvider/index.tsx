@@ -1,11 +1,8 @@
 import { CssVarsProvider, extendTheme } from "@mui/joy";
 
-// フォントはLayout.astroでpreloadされ、ここで最適化されたCSSを読み込み
+// フォントはLayout.astroでpreloadされ、@font-face定義も直接Layout.astroに含まれる
 // 本番環境のみフォント読み込み（開発時高速化のため）
 // font-display: swap を使用した最適化版を使用
-if (import.meta.env.PROD || import.meta.env.PUBLIC_PRODUCTION) {
-  import("../../styles/fonts-optimized.css");
-}
 
 const fontSize = {
   "1": "0.625rem",
