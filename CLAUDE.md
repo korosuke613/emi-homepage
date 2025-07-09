@@ -88,10 +88,29 @@ npm run test:e2e:ui    # Playwrightテスト（UI付き）実行
 - **レスポンシブ**: MUI Joyブレークポイントでモバイルファースト設計
 
 ### フォント最適化
-- **フォントpreload**: Layout.astroでNoto Serif JPの重要なウェイトをpreload
+- **全ウェイトプリロード**: Layout.astroでNoto Serif JPの全ウェイト（400、500、700）をpreload
+- **font-display最適化**: `font-display: swap`を使用してフォント読み込み時の視覚的な伸び縮みを軽減
 - **環境別フォント**: 開発時はシステムセリフフォント、本番時はNoto Serif JP
-- **FOUC防止**: フォントプリロードによりFlash of Unstyled Contentを軽減
+- **カスタムCSS**: `/src/styles/fonts-optimized.css`で最適化されたフォント定義
+- **FOUC防止**: フォントプリロードとfont-displayによりFlash of Unstyled Contentを軽減
 - **パフォーマンス最適化**: 開発時はフォント読み込みを無効化して高速化
+
+### フォント問題の解決アプローチ
+
+#### 問題: ページ表示時のフォント遅延ロード
+サイトでWebフォント（Noto Serif JP）使用時に、フォント読み込みによる視覚的な伸び縮みが発生
+
+#### 解決方法1: システムフォントのみ使用
+- **ブランチ**: `claude/issue-52-20250709_152817`
+- **アプローチ**: Webフォントを完全に削除し、システムフォント（Times New Roman等）のみを使用
+- **利点**: フォント読み込み遅延の完全解決、パフォーマンス向上
+- **欠点**: デザイン面でのフォント統一性が失われる
+
+#### 解決方法2: Noto Serif JP最適化使用
+- **ブランチ**: `claude/issue-52-noto-serif-jp-optimized`
+- **アプローチ**: 全ウェイトプリロード + `font-display: swap` + カスタムフォント定義
+- **利点**: デザイン統一性を保ちながらフォント読み込み最適化
+- **欠点**: 初期読み込みサイズが若干増加
 
 ### 重要ファイル
 - **`astro.config.mts`**: メインAstro設定（i18nと統合）
@@ -100,6 +119,7 @@ npm run test:e2e:ui    # Playwrightテスト（UI付き）実行
 - **`src/utils/staticRoute.ts`**: ページルート定義
 - **`src/layouts/Layout.astro`**: フォントpreload設定
 - **`src/components/ThemeProvider/index.tsx`**: 環境別フォント設定
+- **`src/styles/fonts-optimized.css`**: 最適化されたフォント定義（font-display: swap使用）
 - **`vercel.json`**: デプロイ設定
 
 ### ソフトウェア仕様

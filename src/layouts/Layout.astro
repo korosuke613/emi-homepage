@@ -7,6 +7,10 @@ import { useSharedTranslations } from "../i18n/utils";
 // フォントファイルのインポート（本番環境のみ）
 let notoSerifJapanese400Woff2: string | undefined;
 let notoSerifLatin400Woff2: string | undefined;
+let notoSerifJapanese500Woff2: string | undefined;
+let notoSerifLatin500Woff2: string | undefined;
+let notoSerifJapanese700Woff2: string | undefined;
+let notoSerifLatin700Woff2: string | undefined;
 
 if (import.meta.env.PROD || import.meta.env.PUBLIC_PRODUCTION) {
   notoSerifJapanese400Woff2 = (
@@ -17,6 +21,26 @@ if (import.meta.env.PROD || import.meta.env.PUBLIC_PRODUCTION) {
   notoSerifLatin400Woff2 = (
     await import(
       "@fontsource/noto-serif-jp/files/noto-serif-jp-latin-400-normal.woff2?url"
+    )
+  ).default;
+  notoSerifJapanese500Woff2 = (
+    await import(
+      "@fontsource/noto-serif-jp/files/noto-serif-jp-japanese-500-normal.woff2?url"
+    )
+  ).default;
+  notoSerifLatin500Woff2 = (
+    await import(
+      "@fontsource/noto-serif-jp/files/noto-serif-jp-latin-500-normal.woff2?url"
+    )
+  ).default;
+  notoSerifJapanese700Woff2 = (
+    await import(
+      "@fontsource/noto-serif-jp/files/noto-serif-jp-japanese-700-normal.woff2?url"
+    )
+  ).default;
+  notoSerifLatin700Woff2 = (
+    await import(
+      "@fontsource/noto-serif-jp/files/noto-serif-jp-latin-700-normal.woff2?url"
     )
   ).default;
 }
@@ -72,6 +96,42 @@ const normalizedTitle =
 			<link
 				rel="preload"
 				href={notoSerifLatin400Woff2}
+				as="font"
+				type="font/woff2"
+				crossorigin="anonymous"
+			/>
+		)}
+		{notoSerifJapanese500Woff2 && (
+			<link
+				rel="preload"
+				href={notoSerifJapanese500Woff2}
+				as="font"
+				type="font/woff2"
+				crossorigin="anonymous"
+			/>
+		)}
+		{notoSerifLatin500Woff2 && (
+			<link
+				rel="preload"
+				href={notoSerifLatin500Woff2}
+				as="font"
+				type="font/woff2"
+				crossorigin="anonymous"
+			/>
+		)}
+		{notoSerifJapanese700Woff2 && (
+			<link
+				rel="preload"
+				href={notoSerifJapanese700Woff2}
+				as="font"
+				type="font/woff2"
+				crossorigin="anonymous"
+			/>
+		)}
+		{notoSerifLatin700Woff2 && (
+			<link
+				rel="preload"
+				href={notoSerifLatin700Woff2}
 				as="font"
 				type="font/woff2"
 				crossorigin="anonymous"

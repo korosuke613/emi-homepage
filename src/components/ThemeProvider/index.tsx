@@ -1,14 +1,10 @@
 import { CssVarsProvider, extendTheme } from "@mui/joy";
 
-// フォントはLayout.astroでpreloadされ、ここでCSSを読み込み
+// フォントはLayout.astroでpreloadされ、ここで最適化されたCSSを読み込み
 // 本番環境のみフォント読み込み（開発時高速化のため）
+// font-display: swap を使用した最適化版を使用
 if (import.meta.env.PROD || import.meta.env.PUBLIC_PRODUCTION) {
-  import("@fontsource/noto-serif-jp/japanese-400.css");
-  import("@fontsource/noto-serif-jp/japanese-500.css");
-  import("@fontsource/noto-serif-jp/japanese-700.css");
-  import("@fontsource/noto-serif-jp/latin-400.css");
-  import("@fontsource/noto-serif-jp/latin-500.css");
-  import("@fontsource/noto-serif-jp/latin-700.css");
+  import("../../styles/fonts-optimized.css");
 }
 
 const fontSize = {
