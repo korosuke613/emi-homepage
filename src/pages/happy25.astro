@@ -2,7 +2,11 @@
 import { Box, Grid } from "@mui/joy";
 import { Typography } from "../components/Typography";
 import type { Languages } from "../i18n/ui";
-import { useLocalTranslations, useSharedTranslations } from "../i18n/utils";
+import {
+  useContentTranslations,
+  useLocalTranslations,
+  useSharedTranslations,
+} from "../i18n/utils";
 import Layout from "../layouts/Layout.astro";
 
 interface Props {
@@ -14,13 +18,10 @@ const props = Astro.props;
 const lang = props.lang ?? "ja";
 const t = useSharedTranslations(lang);
 const tl = useLocalTranslations(lang);
+const content = useContentTranslations(lang);
 ---
 
-<Layout title={tl({
-	ja: "牧浦えみ！祝 25 歳！！",
-	en: "Emi Makura! Happy 25th Birthday!!",
-	lo: "Emi Makura! ສຸກສານວັນເກີດ 25 ປີ!!",
-})} description={t('description')} lang={lang} noindex={true}>
+<Layout title={content.pages("牧浦えみ！祝 25 歳！！")} description={t('description')} lang={lang} noindex={true}>
 	<Box 
 		sx={{ 
 			height: "10rem",    
@@ -45,11 +46,7 @@ const tl = useLocalTranslations(lang);
 
 			<Grid xs={12}>
 				<Typography level="h4">
-					{tl({
-						ja: "めでたいねぇ",
-						en: "Congratulations!",
-						lo: "ຂໍແສດງ!",
-					})}
+					{content.pages("めでたいねぇ")}
 				</Typography>
 			</Grid>
 		</Grid>

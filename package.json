@@ -39,6 +39,7 @@
     "@types/react-dom": "18.3.0",
     "@vercel/speed-insights": "1.0.12",
     "astro": "5.9.3",
+    "isomorphic-dompurify": "2.26.0",
     "microcms-js-sdk": "3.2.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",

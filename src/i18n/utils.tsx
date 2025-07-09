@@ -1,3 +1,14 @@
+import DOMPurify from "isomorphic-dompurify";
+import {
+  type AboutContentKey,
+  type NavigationContentKey,
+  type PagesContentKey,
+  type SocialContentKey,
+  aboutContent,
+  navigationContent,
+  pagesContent,
+  socialContent,
+} from "./content";
 import { type Languages, defaultLang, languageKeys, ui } from "./ui";
 
 export function getLangFromUrl(url: URL) {
@@ -43,3 +54,39 @@ export const isUIKey = (
 ): key is keyof (typeof ui)[typeof lang] => {
   return Object.hasOwn(ui[lang], key);
 };
+
+// New utility functions for content-based translations
+export function useContentTranslations(lang: Languages) {
+  return {
+    // About page content
+    about: (key: AboutContentKey) => aboutContent[key][lang],
+
+    // Social networks content
+    social: (key: SocialContentKey) => socialContent[key][lang],
+
+    // Navigation content
+    navigation: (key: NavigationContentKey) => navigationContent[key][lang],
+
+    // Pages content
+    pages: (key: PagesContentKey) => pagesContent[key][lang],
+  };
+}
+
+// Helper function for content with HTML (like profile description)
+export function useContentTranslationsWithElement(lang: Languages) {
+  return {
+    // About page content with HTML support
+    about: (key: AboutContentKey): React.ReactNode => {
+      const sanitizedHtml = DOMPurify.sanitize(aboutContent[key][lang]);
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: Content is sanitized with DOMPurify
+      return <span dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />;
+    },
+
+    // Pages content with HTML support
+    pages: (key: PagesContentKey): React.ReactNode => {
+      const sanitizedHtml = DOMPurify.sanitize(pagesContent[key][lang]);
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: Content is sanitized with DOMPurify
+      return <span dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />;
+    },
+  };
+}

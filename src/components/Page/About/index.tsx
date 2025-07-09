@@ -1,8 +1,8 @@
 import { AspectRatio, Box, Grid, Table } from "@mui/joy";
 import type { Languages } from "../../../i18n/ui";
 import {
-  useLocalTranslations,
-  useLocalTranslationsWithElement,
+  useContentTranslations,
+  useContentTranslationsWithElement,
 } from "../../../i18n/utils";
 import { Typography } from "../../Typography";
 
@@ -11,8 +11,8 @@ type Props = {
 };
 
 export const About = ({ lang }: Props) => {
-  const tl = useLocalTranslations(lang);
-  const tle = useLocalTranslationsWithElement(lang);
+  const content = useContentTranslations(lang);
+  const contentWithElement = useContentTranslationsWithElement(lang);
 
   return (
     <>
@@ -30,26 +30,11 @@ export const About = ({ lang }: Props) => {
         marginBottom={"1rem"}
       >
         <Grid xs={12} textAlign={"left"}>
-          <Typography level="h2">About</Typography>
+          <Typography level="h2">{content.about("About")}</Typography>
         </Grid>
         <Grid xs={12} textAlign={"left"}>
           <Typography level="body-md">
-            {tle({
-              dict: {
-                ja: `障害者施設をメインに、ラオスにての英語教師（2025年9月～）、リモートで<a href="https://stara.co.jp" target="_blank" rel="noopener noreferrer">株式会社stara</a>の広報、個人でイラストレーター。<br />
-2022年新卒で株式会社staraにて障害者の就労支援を始める。<br />
-2023年から2年間SNSアイコン作成やブログの挿絵などのイラストレーター業務を行う。<br />
-2025年よりJICA海外協力隊でラオスで英語教師として在任中。<br />`,
-                en: `I am an English teacher in Laos, a remote PR person for <a href="https://stara.co.jp" target="_blank" rel="noopener noreferrer">stara Inc.</a>, and a private illustrator, mainly at a facility for the disabled.<br />
-In 2022, he graduated from stara Inc. and started working as an employment support for people with disabilities.<br />
-From 2023, I worked as an illustrator for 2 years, creating SNS icons and illustrations for blogs.<br />
-From 2025, he is currently serving as an English teacher in Laos with JICA Overseas Cooperation Volunteers.<br />`,
-                lo: `ຂ້ອຍເປັນຄູສອນພາສາອັງກິດຢູ່ລາວ, ເປັນພະນັກງານ PR <a href="https://stara.co.jp" target="_blank" rel="noopener noreferrer">ບໍລິສັດ stara</a>, ແລະເປັນນັກແຕ້ມຮູບສ່ວນຕົວ, ຫຼັກແມ່ນຢູ່ສຳນັກງານພິການ.<br />
-ໃນປີ 2022, ລາວໄດ້ຈົບການສຶກສາຈາກ stara Inc. ແລະເລີ່ມເຮັດວຽກສະໜັບສະໜູນການຈ້າງງານຄົນພິການ.<br />
-ຕັ້ງແຕ່ປີ 2023, ຂ້ອຍໄດ້ເຮັດວຽກເປັນນັກແຕ້ມຮູບເປັນເວລາ 2 ປີ, ສ້າງໄອຄອນ SNS ແລະຮູບປະກອບບລອກ.<br />
-ຕັ້ງແຕ່ປີ 2025, ລາວປັດຈຸບັນກຳລັງປະຈຳການເປັນຄູສອນພາສາອັງກິດຢູ່ລາວກັບ JICA ອາສາສະໝັກຮ່ວມມືຕ່າງປະເທດ.<br />`,
-              },
-            })}
+            {contentWithElement.about("profile_description")}
           </Typography>
         </Grid>
         <Grid
@@ -75,52 +60,22 @@ From 2025, he is currently serving as an English teacher in Laos with JICA Overs
             <tbody>
               {[
                 {
-                  key: tl({
-                    ja: "名称",
-                    en: "Name",
-                    lo: "ຊື່",
-                  }),
-                  value: tl({
-                    ja: "牧浦 えみ（まきうら えみ）",
-                    en: "Emi  Makiura (Amy)",
-                    lo: "ມາກິອູຣະ ເອມີ (Amy)",
-                  }),
+                  key: content.about("名称"),
+                  value: content.about("牧浦 えみ（まきうら えみ）"),
                 },
                 {
-                  key: tl({
-                    ja: "所在地",
-                    en: "Location",
-                    lo: "ທີ່ຕັ້ງ",
-                  }),
-                  value: tl({
-                    ja: "ラオス人民民主共和国　ビエンチャン",
-                    en: "Vientiane, Lao People's Democratic Republic",
-                    lo: "ນະຄອນຫຼວງວຽງຈັນ, ສາທາລະນະລັດປະຊາທິປະໄຕປະຊາຊົນລາວ",
-                  }),
+                  key: content.about("所在地"),
+                  value: content.about("ラオス人民民主共和国　ビエンチャン"),
                 },
                 {
-                  key: tl({
-                    ja: "お問い合わせ",
-                    en: "Contact",
-                    lo: "ຕິດຕໍ່",
-                  }),
-                  value: tl({
-                    ja: "考え中",
-                    en: "TBD",
-                    lo: "ກຳລັງພິຈາລະນາ",
-                  }),
+                  key: content.about("お問い合わせ"),
+                  value: content.about("考え中"),
                 },
                 {
-                  key: tl({
-                    ja: "事業内容",
-                    en: "Business Activities",
-                    lo: "ກິດຈະກຳທຸລະກິດ",
-                  }),
-                  value: tl({
-                    ja: "障害者就労継続支援、デジタル絵制作(SNSアイコン、名刺、商品パッケージ)、アナログ絵(デッサン全般)、英語教師",
-                    en: "Continuous employment support for people with disabilities, digital picture production (SNS icons, business cards, product packaging), analog pictures (general sketching), English teacher",
-                    lo: "ການສະໜັບສະໜູນການຈ້າງງານຕໍ່ເນື່ອງສຳລັບຄົນພິການ, ການຜະລິດຮູບແບບດິຈິຕອນ (ໄອຄອນ SNS, ນາມບັດ, ບັນຈຸສິນຄ້າ), ຮູບແບບອະນາລອກ (ການແຕ້ມຮູບທົ່ວໄປ), ຄູສອນພາສາອັງກິດ",
-                  }),
+                  key: content.about("事業内容"),
+                  value: content.about(
+                    "障害者就労継続支援、デジタル絵制作(SNSアイコン、名刺、商品パッケージ)、アナログ絵(デッサン全般)、英語教師",
+                  ),
                 },
               ].map((row) => (
                 <tr key={row.key}>
