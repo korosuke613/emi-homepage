@@ -1,3 +1,4 @@
+import DOMPurify from "dompurify";
 import {
   type AboutContentKey,
   type NavigationContentKey,
@@ -76,18 +77,16 @@ export function useContentTranslationsWithElement(lang: Languages) {
   return {
     // About page content with HTML support
     about: (key: AboutContentKey): React.ReactNode => {
-      // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
-      return (
-        <span dangerouslySetInnerHTML={{ __html: aboutContent[key][lang] }} />
-      );
+      const sanitizedHtml = DOMPurify.sanitize(aboutContent[key][lang]);
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: Content is sanitized with DOMPurify
+      return <span dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />;
     },
 
     // Pages content with HTML support
     pages: (key: PagesContentKey): React.ReactNode => {
-      // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
-      return (
-        <span dangerouslySetInnerHTML={{ __html: pagesContent[key][lang] }} />
-      );
+      const sanitizedHtml = DOMPurify.sanitize(pagesContent[key][lang]);
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: Content is sanitized with DOMPurify
+      return <span dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />;
     },
   };
 }
