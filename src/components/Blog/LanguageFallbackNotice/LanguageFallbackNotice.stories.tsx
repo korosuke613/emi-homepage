@@ -84,7 +84,7 @@ export const SameSlugMultipleLanguagesJapaneseAndEnglish: StoryObj<
     const canvas = within(canvasElement);
 
     // フォールバック通知が表示されることを確認
-    const warningMessage = canvas.getByText(/ບລອກນີ້ບໍ່ມີຢູ່ໃນ 🇱🇦\. ສະແດງໃນ 🇯🇵\./);
+    const warningMessage = canvas.getByText(/ບລອກນີ້ບໍ່ມີຢູ່ໃນ LO\. ສະແດງໃນ JA\./);
     expect(warningMessage).toBeInTheDocument();
 
     // 「利用可能な言語」ラベルが表示されることを確認
@@ -92,8 +92,8 @@ export const SameSlugMultipleLanguagesJapaneseAndEnglish: StoryObj<
     expect(availableLanguagesLabel).toBeInTheDocument();
 
     // 日本語と英語の両方の国旗リンクが表示されることを確認
-    const japaneseLink = canvas.getByRole("link", { name: "🇯🇵" });
-    const englishLink = canvas.getByRole("link", { name: "🇬🇧" });
+    const japaneseLink = canvas.getByRole("link", { name: "JA" });
+    const englishLink = canvas.getByRole("link", { name: "EN" });
 
     expect(japaneseLink).toBeInTheDocument();
     expect(englishLink).toBeInTheDocument();
@@ -103,7 +103,7 @@ export const SameSlugMultipleLanguagesJapaneseAndEnglish: StoryObj<
     expect(englishLink).toHaveAttribute("href", "/en/blog/sample/");
 
     // ラオス語の国旗は表示されないことを確認（利用可能言語に含まれていないため）
-    const laotianLink = canvas.queryByRole("link", { name: "🇱🇦" });
+    const laotianLink = canvas.queryByRole("link", { name: "LO" });
     expect(laotianLink).not.toBeInTheDocument();
   },
 };

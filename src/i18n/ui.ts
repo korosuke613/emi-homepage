@@ -7,9 +7,9 @@ export const languageNames: Record<Languages, string> = {
 };
 
 export const languageEmojis: Record<Languages, string> = {
-  ja: "🇯🇵",
-  en: "🇬🇧",
-  lo: "🇱🇦",
+  ja: "JA",
+  en: "EN",
+  lo: "LO",
 };
 
 export const languageKeys: Languages[] = ["ja", "en", "lo"];

@@ -76,7 +76,7 @@ export const LaotianLanguage: StoryObj<typeof LangSelector> = {
     const canvas = within(canvasElement);
 
     // ラオス語フラグボタンが表示されることを確認
-    const laosButton = canvas.getByRole("button", { name: "🇱🇦" });
+    const laosButton = canvas.getByRole("button", { name: "LO" });
     expect(laosButton).toBeInTheDocument();
 
     await userEvent.click(laosButton);
@@ -89,7 +89,7 @@ export const LaotianLanguage: StoryObj<typeof LangSelector> = {
     expect(items).toHaveLength(3); // ja, en, lo
 
     // ラオス語オプションが存在することを確認
-    const laosMenuItem = screen.getByText("🇱🇦 ລາວ");
+    const laosMenuItem = screen.getByText("LO ລາວ");
     expect(laosMenuItem).toBeInTheDocument();
   },
 };
@@ -103,13 +103,13 @@ export const LaotianBlogPage: StoryObj<typeof LangSelector> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    await userEvent.click(canvas.getByRole("button", { name: "🇱🇦" }));
+    await userEvent.click(canvas.getByRole("button", { name: "LO" }));
 
     // Wait for menu to open and items to be rendered - menu renders in body
     await waitFor(() => screen.getByRole("menu"));
 
     // ブログページでのラオス語言語切り替えが機能することを確認
-    const laosMenuItem = screen.getByText("🇱🇦 ລາວ");
+    const laosMenuItem = screen.getByText("LO ລາວ");
     expect(laosMenuItem).toBeInTheDocument();
   },
 };
