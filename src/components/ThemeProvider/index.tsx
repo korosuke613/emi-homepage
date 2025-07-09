@@ -1,15 +1,6 @@
 import { CssVarsProvider, extendTheme } from "@mui/joy";
 
-// フォントはLayout.astroでpreloadされ、ここでCSSを読み込み
-// 本番環境のみフォント読み込み（開発時高速化のため）
-if (import.meta.env.PROD || import.meta.env.PUBLIC_PRODUCTION) {
-  import("@fontsource/noto-serif-jp/japanese-400.css");
-  import("@fontsource/noto-serif-jp/japanese-500.css");
-  import("@fontsource/noto-serif-jp/japanese-700.css");
-  import("@fontsource/noto-serif-jp/latin-400.css");
-  import("@fontsource/noto-serif-jp/latin-500.css");
-  import("@fontsource/noto-serif-jp/latin-700.css");
-}
+// Webフォントを削除し、システムフォントのみを使用
 
 const fontSize = {
   "1": "0.625rem",
@@ -26,12 +17,8 @@ const fontSize = {
   "12": "3rem",
 };
 
-// 開発環境ではシステムセリフフォントを優先してFOUCを防止
-const isDevelopment =
-  !import.meta.env.PROD && !import.meta.env.PUBLIC_PRODUCTION;
-const fontFamily = isDevelopment
-  ? '"Times New Roman", "Times", "Georgia", serif'
-  : '"Noto Serif JP", "Times New Roman", serif';
+// システムセリフフォントのみを使用（フォント遅延ロード問題を解決）
+const fontFamily = '"Times New Roman", "Times", "Georgia", serif';
 
 const theme = extendTheme({
   fontFamily: {

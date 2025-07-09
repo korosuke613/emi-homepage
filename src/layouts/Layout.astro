@@ -4,22 +4,7 @@ import { Page } from "../components/Page";
 import { type Languages, defaultLang } from "../i18n/ui";
 import { useSharedTranslations } from "../i18n/utils";
 
-// フォントファイルのインポート（本番環境のみ）
-let notoSerifJapanese400Woff2: string | undefined;
-let notoSerifLatin400Woff2: string | undefined;
-
-if (import.meta.env.PROD || import.meta.env.PUBLIC_PRODUCTION) {
-  notoSerifJapanese400Woff2 = (
-    await import(
-      "@fontsource/noto-serif-jp/files/noto-serif-jp-japanese-400-normal.woff2?url"
-    )
-  ).default;
-  notoSerifLatin400Woff2 = (
-    await import(
-      "@fontsource/noto-serif-jp/files/noto-serif-jp-latin-400-normal.woff2?url"
-    )
-  ).default;
-}
+// Webフォントを削除し、システムフォントのみを使用
 
 interface Props {
   title: string;
@@ -58,25 +43,7 @@ const normalizedTitle =
 		<meta name="generator" content={Astro.generator} />
 		<title>{normalizedTitle}</title>
 
-		<!-- Noto Serif JP フォントプリロード（本番環境のみ） -->
-		{notoSerifJapanese400Woff2 && (
-			<link
-				rel="preload"
-				href={notoSerifJapanese400Woff2}
-				as="font"
-				type="font/woff2"
-				crossorigin="anonymous"
-			/>
-		)}
-		{notoSerifLatin400Woff2 && (
-			<link
-				rel="preload"
-				href={notoSerifLatin400Woff2}
-				as="font"
-				type="font/woff2"
-				crossorigin="anonymous"
-			/>
-		)}
+		<!-- フォントプリロード削除 - システムフォントのみ使用 -->
 
 		<SpeedInsights />
 	</head>
@@ -101,6 +68,6 @@ const normalizedTitle =
 body {
 	word-break: auto-phrase;
 	text-wrap: balance;
-	font-family: "Noto Serif JP", "Times New Roman", serif;
+	font-family: "Times New Roman", "Times", "Georgia", serif;
 }
 </style>
