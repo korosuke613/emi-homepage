@@ -2,39 +2,48 @@
 /* font-display: swap を使用してフォントの遅延読み込み時の視覚的な伸び縮みを軽減 */
 
 @font-face {
-  font-family: 'Noto Serif JP';
+  font-family: "Noto Serif JP";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('@fontsource/noto-serif-jp/files/noto-serif-jp-japanese-400-normal.woff2') format('woff2'),
-       url('@fontsource/noto-serif-jp/files/noto-serif-jp-latin-400-normal.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD, U+3000-303F, U+3040-309F, U+30A0-30FF, U+FF00-FFEF, U+4E00-9FAF;
+  src: url("@fontsource/noto-serif-jp/files/noto-serif-jp-japanese-400-normal.woff2")
+    format("woff2"),
+    url("@fontsource/noto-serif-jp/files/noto-serif-jp-latin-400-normal.woff2")
+    format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD, U+3000-303F, U+3040-309F, U+30A0-30FF, U+FF00-FFEF, U+4E00-9FAF;
 }
 
 @font-face {
-  font-family: 'Noto Serif JP';
+  font-family: "Noto Serif JP";
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url('@fontsource/noto-serif-jp/files/noto-serif-jp-japanese-500-normal.woff2') format('woff2'),
-       url('@fontsource/noto-serif-jp/files/noto-serif-jp-latin-500-normal.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD, U+3000-303F, U+3040-309F, U+30A0-30FF, U+FF00-FFEF, U+4E00-9FAF;
+  src: url("@fontsource/noto-serif-jp/files/noto-serif-jp-japanese-500-normal.woff2")
+    format("woff2"),
+    url("@fontsource/noto-serif-jp/files/noto-serif-jp-latin-500-normal.woff2")
+    format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD, U+3000-303F, U+3040-309F, U+30A0-30FF, U+FF00-FFEF, U+4E00-9FAF;
 }
 
 @font-face {
-  font-family: 'Noto Serif JP';
+  font-family: "Noto Serif JP";
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('@fontsource/noto-serif-jp/files/noto-serif-jp-japanese-700-normal.woff2') format('woff2'),
-       url('@fontsource/noto-serif-jp/files/noto-serif-jp-latin-700-normal.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD, U+3000-303F, U+3040-309F, U+30A0-30FF, U+FF00-FFEF, U+4E00-9FAF;
+  src: url("@fontsource/noto-serif-jp/files/noto-serif-jp-japanese-700-normal.woff2")
+    format("woff2"),
+    url("@fontsource/noto-serif-jp/files/noto-serif-jp-latin-700-normal.woff2")
+    format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD, U+3000-303F, U+3040-309F, U+30A0-30FF, U+FF00-FFEF, U+4E00-9FAF;
 }
 
 /* フォールバック用のフォントメトリクス調整 */
 /* Times New Roman と Noto Serif JP の違いを軽減 */
 .font-fallback {
-  font-family: 'Times New Roman', serif;
+  font-family: "Times New Roman", serif;
   font-size: 1.05em; /* Noto Serif JP より少し大きめに調整 */
   line-height: 1.6;
 }
@@ -42,6 +51,6 @@
 /* 本番環境でのみ Noto Serif JP を使用 */
 @media (min-width: 1px) {
   body {
-    font-family: 'Noto Serif JP', 'Times New Roman', serif;
+    font-family: "Noto Serif JP", "Times New Roman", serif;
   }
 }
