@@ -17,8 +17,8 @@ test.describe('多言語機能（重要テスト）', () => {
       const html = await page.locator('html');
       await expect(html).toHaveAttribute('lang', 'lo');
       
-      // 言語アイコンがラオス語（🇱🇦）になっている
-      await expect(page.getByRole('button', { name: '🇱🇦' })).toBeVisible();
+      // 言語アイコンがラオス語（LO）になっている
+      await expect(page.getByTestId('lang-selector-button')).toHaveText('LO');
     });
 
     test('ブログページでのラオス語アクセスが正常に動作するべき', async ({ page }) => {
@@ -28,8 +28,8 @@ test.describe('多言語機能（重要テスト）', () => {
       // ページが正常に読み込まれることを確認（メインコンテンツがある）
       await expect(page.getByRole('main')).toBeVisible();
       
-      // 言語アイコンがラオス語（🇱🇦）になっている
-      await expect(page.getByRole('button', { name: '🇱🇦' })).toBeVisible();
+      // 言語アイコンがラオス語（LO）になっている
+      await expect(page.getByTestId('lang-selector-button')).toHaveText('LO');
     });
   });
 
@@ -37,11 +37,11 @@ test.describe('多言語機能（重要テスト）', () => {
     test('日本語と英語のページが正常にアクセス可能であるべき', async ({ page }) => {
       // 日本語ページ
       await page.goto('/');
-      await expect(page.getByRole('button', { name: '🇯🇵' })).toBeVisible();
+      await expect(page.getByTestId('lang-selector-button')).toHaveText('JA');
       
       // 英語ページ  
       await page.goto('/en/');
-      await expect(page.getByRole('button', { name: '🇬🇧' })).toBeVisible();
+      await expect(page.getByTestId('lang-selector-button')).toHaveText('EN');
     });
   });
 
@@ -53,8 +53,8 @@ test.describe('多言語機能（重要テスト）', () => {
       // ページが正常に表示される（404にならない）
       await expect(page.getByRole('main')).toBeVisible();
       
-      // 言語アイコンが英語（🇬🇧）になっている
-      await expect(page.getByRole('button', { name: '🇬🇧' })).toBeVisible();
+      // 言語アイコンが英語（EN）になっている
+      await expect(page.getByTestId('lang-selector-button')).toHaveText('EN');
     });
   });
 });

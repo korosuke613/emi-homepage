@@ -66,10 +66,18 @@ export const LangSelector = ({ path, currentLang, open }: Props) => (
     <Dropdown open={open}>
       <MenuButton
         slots={{ root: IconButton }}
-        slotProps={{ root: { variant: "outlined", color: "neutral" } }}
+        slotProps={{
+          root: {
+            variant: "outlined",
+            color: "neutral",
+            "data-testid": "lang-selector-button",
+          },
+        }}
         sx={{
           height: "50px",
           width: "50px",
+          fontFamily: "ui-monospace, 'Courier New', monospace",
+          fontWeight: "bold",
         }}
       >
         {languageEmojis[currentLang]}
@@ -86,8 +94,24 @@ export const LangSelector = ({ path, currentLang, open }: Props) => (
               component="a"
               href={generateHref(lang, path)}
             >
-              <Box className={className} aria-label={lang}>
-                {`${languageEmojis[lang]} ${languageNames[lang]}`}
+              <Box
+                className={className}
+                aria-label={lang}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1.5,
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "ui-monospace, 'Courier New', monospace",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {languageEmojis[lang]}
+                </span>
+                <span>{languageNames[lang]}</span>
               </Box>
             </MenuItem>
           );

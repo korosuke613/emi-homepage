@@ -63,7 +63,13 @@ export const LanguageFallbackNotice = ({
               {availableLanguagesLabel}{" "}
               {availableLanguages.map((lang, index) => (
                 <span key={lang}>
-                  <Link href={generateBlogUrl(blog.slug, lang)}>
+                  <Link
+                    href={generateBlogUrl(blog.slug, lang)}
+                    sx={{
+                      fontFamily: "ui-monospace, 'Courier New', monospace",
+                      fontWeight: "bold",
+                    }}
+                  >
                     {languageEmojis[lang]}
                   </Link>
                   {index < availableLanguages.length - 1 && " "}
