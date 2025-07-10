@@ -31,7 +31,9 @@ npm run production-dev     # microCMSの実データで開発サーバー起動
 **コード品質とフォーマット:**
 ```bash
 npm run biome        # Biomeリンター/フォーマッター実行
-npm run biome:fix    # リンティング問題の自動修正
+npm run biome:apply  # リンティング問題の自動修正
+npm run biome:ci     # CI環境用のBiomeチェック
+npm run preCommit    # コミット前品質チェック（biome:apply実行）
 ```
 
 **コンポーネント開発:**
@@ -47,6 +49,12 @@ npm run test:unit:ui   # Vitestユニットテスト（UI付き）実行
 npm run test:storybook # Storybookテスト実行
 npm run test:e2e       # Playwrightテスト実行
 npm run test:e2e:ui    # Playwrightテスト（UI付き）実行
+```
+
+**プロジェクトチェック:**
+```bash
+npm run check          # Astroプロジェクトチェック
+astro check            # TypeScriptとAstroファイルの型チェック
 ```
 
 ## アーキテクチャ概要
@@ -151,6 +159,7 @@ npm run test:e2e:ui    # Playwrightテスト（UI付き）実行
 - 日本語で回答する
 - npm install時は -E を付けてバージョン固定する
 - コードフォーマットには**ESLint/Prettierではなく、Biome**を使用
+- **コードを編集したら必ず `npm run biome:apply` を実行**してフォーマットとリンティング修正を適用
 - 全コンポーネントには対応する**Storybookストーリー**が必要
 - ブログ投稿は**多言語コンテンツ**対応 - content configのスキーマを確認
 - MicroCMS統合は**環境別データ取得**を処理

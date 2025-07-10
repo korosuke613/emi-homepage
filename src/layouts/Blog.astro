@@ -39,7 +39,7 @@ const isCurrentLanguageSupported = availableLanguagesForSlug.includes(lang);
       height: "auto",
     },
   }}>
-  <LanguageFallbackNotice blog={blog} currentLang={lang} availableLanguagesForSlug={availableLanguagesForSlug} client:visible />
+  <LanguageFallbackNotice blog={blog} currentLang={lang} availableLanguagesForSlug={availableLanguagesForSlug} client:load />
   <Typography>{blog.createdAt}</Typography>
   <Box set:html={blog.content} sx={{
     "& p": {

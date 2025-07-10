@@ -24,7 +24,7 @@ const isDevelopment =
   !import.meta.env.PROD && !import.meta.env.PUBLIC_PRODUCTION;
 const fontFamily = isDevelopment
   ? '"Times New Roman", "Times", "Georgia", serif'
-  : '"Noto Serif JP", "Times New Roman", serif';
+  : '"Noto Serif JP", "Times New Roman", "Times", "Georgia", serif';
 
 const theme = extendTheme({
   fontFamily: {
