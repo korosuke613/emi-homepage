@@ -18,7 +18,7 @@ export const pagesContent: ContentRecord = {
   "牧浦えみのホームページへようこそ！": {
     ja: "牧浦えみのホームページへようこそ！",
     en: "Welcome to Emi Makiura's Homepage!",
-    lo: "ຍິນດີຕ້ອນຮັບສູ່ໜ້າເວັບຂອງ Emi Makiura!",
+    lo: "ຍິນດີຕ້ອນຮັບສູ່ໜ້າເວັບຂອງເອະມິມະກິອຸລະ!",
   },
 
   // Birthday celebration messages
