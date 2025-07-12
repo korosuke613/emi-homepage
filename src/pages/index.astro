@@ -1,5 +1,6 @@
 ---
 import { About } from "../components/Page/About";
+import { SocialNetworks } from "../components/SocialNetworks";
 import type { Languages } from "../i18n/ui";
 import {
   useContentTranslations,
@@ -23,5 +24,7 @@ const content = useContentTranslations(lang);
 <Layout title={t('title')} description={t('description')} lang={lang} secondTitle={content.pages("牧浦えみのホームページへようこそ！")}>
 
 <About lang={lang}/>
+
+<SocialNetworks lang={lang} client:visible />
 
 </Layout>

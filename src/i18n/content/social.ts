@@ -30,6 +30,11 @@ export const socialContent: ContentRecord = {
     en: "Main corporate PR",
     lo: "ປະຊາສຳພັນບໍລິສັດຫຼັກ",
   },
+  イラストポートフォリオ: {
+    ja: "イラストポートフォリオ",
+    en: "Illustration portfolio",
+    lo: "ແຟ້ມຮູບວາດ",
+  },
 } as const;
 
 // Type helper for better type safety

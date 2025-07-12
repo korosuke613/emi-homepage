@@ -1,4 +1,4 @@
-import { Facebook, Instagram } from "@mui/icons-material";
+import { Facebook, Instagram, Palette } from "@mui/icons-material";
 import type { Languages } from "../../i18n/ui";
 import { useContentTranslations } from "../../i18n/utils";
 import { SocialNetworksTemplate } from "./SocialNetworksTemplate";
@@ -33,6 +33,13 @@ export const SocialNetworks = ({ lang }: Props) => {
           description: content.social("社内広報メイン"),
           svgIcon: <Facebook />,
           tags: ["Facebook"],
+        },
+        {
+          title: "イラストポートフォリオ",
+          link: "https://arts.hp.peraichi.com/amy?_ga=2.128552268.1503877285.1735563908-405999167.1735563908&_gl=1*ucpmdk*_gcl_au*MjM2MDIwNDcyLjE3MzU1NjM5MDg",
+          description: content.social("イラストポートフォリオ"),
+          svgIcon: <Palette />,
+          tags: ["Portfolio"],
         },
       ]}
     />
