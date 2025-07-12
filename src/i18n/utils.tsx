@@ -3,11 +3,9 @@ import {
   type AboutContentKey,
   type NavigationContentKey,
   type PagesContentKey,
-  type SocialContentKey,
   aboutContent,
   navigationContent,
   pagesContent,
-  socialContent,
 } from "./content";
 import { type Languages, defaultLang, languageKeys, ui } from "./ui";
 
@@ -60,9 +58,6 @@ export function useContentTranslations(lang: Languages) {
   return {
     // About page content
     about: (key: AboutContentKey) => aboutContent[key][lang],
-
-    // Social networks content
-    social: (key: SocialContentKey) => socialContent[key][lang],
 
     // Navigation content
     navigation: (key: NavigationContentKey) => navigationContent[key][lang],

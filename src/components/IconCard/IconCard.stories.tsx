@@ -1,7 +1,7 @@
+import { Instagram } from "@mui/icons-material";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { IconCard } from ".";
 import type { ReactProps } from "../../utils/react";
-import { Instagram } from "@mui/icons-material";
 
 const metaData: Meta = {
   title: "IconCard",

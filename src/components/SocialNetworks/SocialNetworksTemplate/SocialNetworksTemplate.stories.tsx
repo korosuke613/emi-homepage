@@ -1,9 +1,9 @@
 import {
+  AirRounded,
   Facebook,
   GitHub,
   Instagram,
   Twitter,
-  AirRounded,
 } from "@mui/icons-material";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SocialNetworksTemplate } from ".";
