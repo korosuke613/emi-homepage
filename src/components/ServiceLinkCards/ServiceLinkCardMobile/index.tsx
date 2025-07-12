@@ -18,6 +18,7 @@ type Props = {
   svgIcon?: ReactNode;
   link?: string;
   tags: string[];
+  simplified?: boolean;
 };
 
 const theme = extendTheme({
@@ -70,6 +71,7 @@ export const ServiceLinkCardMobile = ({
   svgIcon,
   link = "#",
   tags,
+  simplified = false,
 }: Props) => {
   const brandColor = getBrandColor(tags);
 
@@ -146,7 +148,7 @@ export const ServiceLinkCardMobile = ({
           {svgIcon}
         </Box>
       )}
-      <CardContent sx={{ padding: "12px 16px" }}>
+      <CardContent sx={{ padding: simplified ? "8px 12px" : "12px 16px" }}>
         <Typography
           level="title-md"
           className="social-title"
@@ -156,20 +158,8 @@ export const ServiceLinkCardMobile = ({
               xs: "0.875rem",
               sm: "1rem",
             },
-            marginBottom: "4px",
+            marginBottom: simplified ? "0" : "4px",
             transition: "color 0.3s ease",
-          }}
-        >
-          {title}
-        </Typography>
-        <Typography
-          level="body-sm"
-          sx={{
-            fontSize: {
-              xs: "0.75rem",
-              sm: "0.875rem",
-            },
-            marginBottom: "8px",
           }}
         >
           <Link
@@ -177,47 +167,75 @@ export const ServiceLinkCardMobile = ({
             underline="none"
             href={link}
             sx={{
-              color: "text.tertiary",
-              overflow: "hidden",
-              display: "-webkit-box",
-              WebkitBoxOrient: "vertical",
-              WebkitLineClamp: 2,
-              minHeight: "1.25rem",
+              color: "inherit",
               "&:hover": {
                 color: brandColor.primary,
               },
             }}
           >
-            {description}
+            {title}
           </Link>
         </Typography>
-        <Box
-          sx={{
-            display: {
-              xs: "none",
-              sm: "flex",
-            },
-          }}
-        >
-          {tags?.map((tag) => {
-            return (
-              <Chip
-                key={tag}
-                variant="soft"
-                size="sm"
+        {!simplified && (
+          <>
+            <Typography
+              level="body-sm"
+              sx={{
+                fontSize: {
+                  xs: "0.75rem",
+                  sm: "0.875rem",
+                },
+                marginBottom: "8px",
+              }}
+            >
+              <Link
+                overlay
+                underline="none"
+                href={link}
                 sx={{
-                  pointerEvents: "none",
-                  backgroundColor: `${brandColor.primary}15`,
-                  color: brandColor.primary,
-                  fontWeight: 500,
-                  fontSize: "0.75rem",
+                  color: "text.tertiary",
+                  overflow: "hidden",
+                  display: "-webkit-box",
+                  WebkitBoxOrient: "vertical",
+                  WebkitLineClamp: 2,
+                  minHeight: "1.25rem",
+                  "&:hover": {
+                    color: brandColor.primary,
+                  },
                 }}
               >
-                {tag.startsWith("#") ? tag : `＃${tag}`}
-              </Chip>
-            );
-          })}
-        </Box>
+                {description}
+              </Link>
+            </Typography>
+            <Box
+              sx={{
+                display: {
+                  xs: "none",
+                  sm: "flex",
+                },
+              }}
+            >
+              {tags?.map((tag) => {
+                return (
+                  <Chip
+                    key={tag}
+                    variant="soft"
+                    size="sm"
+                    sx={{
+                      pointerEvents: "none",
+                      backgroundColor: `${brandColor.primary}15`,
+                      color: brandColor.primary,
+                      fontWeight: 500,
+                      fontSize: "0.75rem",
+                    }}
+                  >
+                    {tag.startsWith("#") ? tag : `＃${tag}`}
+                  </Chip>
+                );
+              })}
+            </Box>
+          </>
+        )}
       </CardContent>
     </Card>
   );
