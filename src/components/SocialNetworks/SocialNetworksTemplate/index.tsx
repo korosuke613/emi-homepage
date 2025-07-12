@@ -1,33 +1,17 @@
-import { Grid } from "@mui/joy";
+import { Box } from "@mui/joy";
 import type { ReactProps } from "../../../utils/react";
-import { ServiceLinkCardMobile } from "../../ServiceLinkCards/ServiceLinkCardMobile";
+import { IconCard } from "../../IconCard";
 
 type Props = {
-  socialLinks: ReactProps<typeof ServiceLinkCardMobile>[];
+  socialLinks: ReactProps<typeof IconCard>[];
 };
 
 export const SocialNetworksTemplate = ({ socialLinks }: Props) => (
-  <Grid
-    container
-    spacing={2}
-    maxWidth={1400}
-    margin={"auto"}
-    sx={{
-      flexGrow: 1,
-    }}
-    marginBottom={"1rem"}
-  >
+  <Box sx={{ display: "flex", gap: 1.5, justifyContent: "center" }}>
     {socialLinks.map((card) => (
-      <Grid
-        key={card.title}
-        xs={12}
-        sm={6}
-        md={4}
-        textAlign={"left"}
-        sx={{ display: "flex", justifyContent: "center" }}
-      >
-        <ServiceLinkCardMobile {...card} />
-      </Grid>
+      <Box key={card.link} sx={{ display: "flex", justifyContent: "center" }}>
+        <IconCard {...card} />
+      </Box>
     ))}
-  </Grid>
+  </Box>
 );

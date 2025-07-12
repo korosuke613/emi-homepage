@@ -11,25 +11,31 @@ export const SocialNetworks = ({ lang }: Props) => {
     <SocialNetworksTemplate
       socialLinks={[
         {
-          title: "@yesmypanda",
           link: "https://www.instagram.com/yesmypanda",
           svgIcon: <Instagram />,
-          tags: ["Instagram"],
-          simplified: true,
+          color: {
+            primary: "#E4405F",
+            secondary: "#F77737",
+            gradient: "linear-gradient(45deg, #F77737, #E4405F, #C13584)",
+          },
         },
         {
-          title: "牧浦えみ  (Amy)",
           link: "https://www.facebook.com/yesmypanda",
           svgIcon: <Facebook />,
-          tags: ["Facebook"],
-          simplified: true,
+          color: {
+            primary: "#1877F2",
+            secondary: "#42A5F5",
+            gradient: "linear-gradient(45deg, #42A5F5, #1877F2)",
+          },
         },
         {
-          title: "イラストポートフォリオ",
-          link: "https://arts.hp.peraichi.com/amy?_ga=2.128552268.1503877285.1735563908-405999167.1735563908&_gl=1*ucpmdk*_gcl_au*MjM2MDIwNDcyLjE3MzU1NjM5MDg",
+          link: "https://arts.hp.peraichi.com/amy",
           svgIcon: <Palette />,
-          tags: ["Portfolio"],
-          simplified: true,
+          color: {
+            primary: "#9C27B0",
+            secondary: "#BA68C8",
+            gradient: "linear-gradient(45deg, #BA68C8, #9C27B0)",
+          },
         },
       ]}
     />
