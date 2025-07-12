@@ -12,12 +12,10 @@
  */
 
 export * from "./about";
-export * from "./social";
 export * from "./navigation";
 export * from "./pages";
 
 // Re-export all content in a single object for convenience
 export { aboutContent } from "./about";
-export { socialContent } from "./social";
 export { navigationContent } from "./navigation";
 export { pagesContent } from "./pages";

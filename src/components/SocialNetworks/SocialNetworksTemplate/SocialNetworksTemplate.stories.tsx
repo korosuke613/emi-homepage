@@ -1,10 +1,16 @@
-import { Facebook, GitHub, Instagram, Twitter } from "@mui/icons-material";
+import {
+  AirRounded,
+  Facebook,
+  GitHub,
+  Instagram,
+  Twitter,
+} from "@mui/icons-material";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SocialNetworksTemplate } from ".";
 import type { ReactProps } from "../../../utils/react";
 
 const metaData: Meta = {
-  title: "SocialNetworksTemplate",
+  title: "SocialNetworks/SocialNetworksTemplate",
   component: SocialNetworksTemplate,
 };
 
@@ -13,38 +19,44 @@ export default metaData;
 const defaultArgs: ReactProps<typeof SocialNetworksTemplate> = {
   socialLinks: [
     {
-      title: "Futa Hirakoba",
-      description: "滅多に使ってない",
       link: "https://www.facebook.com",
       svgIcon: <Facebook />,
-      tags: ["Facebook"],
+      color: {
+        primary: "#1877F2",
+        secondary: "#42A5F5",
+        gradient: "linear-gradient(45deg, #42A5F5, #1877F2)",
+      },
     },
     {
-      title: "@Shitimi_613",
       link: "https://www.twitter.com",
-      description: "エンジニアアカウント",
       svgIcon: <Twitter />,
-      tags: ["Twitter"],
+      color: {
+        primary: "#1DA1F2",
+        secondary: "#AAB8C2",
+        gradient: "linear-gradient(45deg, #AAB8C2, #1DA1F2)",
+      },
     },
     {
-      title: "@AiraKagoshima",
-      link: "https://www.twitter.com",
-      description: "裏アカウント",
-      svgIcon: <Twitter />,
-      tags: ["Twitter"],
-    },
-    {
-      title: "@tibi_auwa_auwa",
       link: "https://www.instagram.com",
-      description: "ストーリーメイン",
       svgIcon: <Instagram />,
-      tags: ["Instagram"],
+      color: {
+        primary: "#E4405F",
+        secondary: "#F77737",
+        gradient: "linear-gradient(45deg, #F77737, #E4405F, #C13584)",
+      },
     },
     {
-      title: "@korosuke613",
       link: "https://www.github.com",
       svgIcon: <GitHub />,
-      tags: ["GitHub"],
+      color: {
+        primary: "#181717",
+        secondary: "#24292E",
+        gradient: "linear-gradient(45deg, #24292E, #181717)",
+      },
+    },
+    {
+      link: "https://korosuke613.dev",
+      svgIcon: <AirRounded />,
     },
   ],
 };
