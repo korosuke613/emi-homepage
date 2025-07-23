@@ -28,3 +28,39 @@ export const getAvailableLanguagesForSlug = (
 
   return availableLanguages;
 };
+
+/**
+ * 時系列順に並べられたブログリストから前の記事・次の記事を取得する
+ */
+export const getPreviousAndNextBlog = (
+  blogs: BlogSchema[],
+  currentSlug: string,
+): { previousBlog: BlogSchema | null; nextBlog: BlogSchema | null } => {
+  const normalizedCurrentSlug = normalizeSlug(currentSlug);
+
+  // createdAtで降順（新しい順）にソート
+  const sortedBlogs = blogs.sort((a, b) => {
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+  });
+
+  // 現在のブログのインデックスを見つける
+  const currentIndex = sortedBlogs.findIndex((blog) => {
+    const blogNormalizedSlug = normalizeSlug(blog.slug);
+    return blogNormalizedSlug === normalizedCurrentSlug;
+  });
+
+  if (currentIndex === -1) {
+    return { previousBlog: null, nextBlog: null };
+  }
+
+  // 前の記事（より新しい記事）
+  const previousBlog = currentIndex > 0 ? sortedBlogs[currentIndex - 1] : null;
+
+  // 次の記事（より古い記事）
+  const nextBlog =
+    currentIndex < sortedBlogs.length - 1
+      ? sortedBlogs[currentIndex + 1]
+      : null;
+
+  return { previousBlog, nextBlog };
+};
