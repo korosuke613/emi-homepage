@@ -7,6 +7,7 @@ import {
   useSharedTranslations,
 } from "../../../i18n/utils";
 import { STATIC_ROUTES } from "../../../utils/staticRoute";
+import { DarkModeToggle } from "../../DarkModeToggle";
 import { Typography } from "../../Typography";
 import { LangSelector } from "./LangSelector";
 import { MobileMenu } from "./MobileMenu";
@@ -86,6 +87,15 @@ export const Header = ({
                 currentPathWithoutLang={currentPathWithoutLang}
               />
             </ListItemButton>
+          </ListItem>
+
+          {/* ダークモード切り替えボタン */}
+          <ListItem
+            sx={{
+              padding: "5px",
+            }}
+          >
+            <DarkModeToggle />
           </ListItem>
 
           {/* 言語切り替えボタン */}
