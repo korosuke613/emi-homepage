@@ -64,8 +64,25 @@ const theme = extendTheme({
     dark: {
       palette: {
         background: {
-          body: "var(--joy-palette-common-black, #09090D)",
-          surface: "var(--joy-palette-neutral-900, #171A1C)",
+          body: "#22282F", // RGB(34,40,47) - softer dark background
+          surface: "#2A3038", // Slightly lighter surface for contrast
+        },
+        primary: {
+          // Links and primary elements in dark mode - ensure exact color match
+          50: "#EDF4FF",
+          100: "#DBE7FF",
+          200: "#BED3FF",
+          300: "#91B5FF",
+          400: "#5C89FF",
+          500: "#5889DF", // RGB(88,137,223) - better visibility in dark mode
+          600: "#4C7AC8",
+          700: "#4066A8",
+          800: "#37528A",
+          900: "#314372",
+        },
+        text: {
+          primary: "#E8EAED", // Softer white text for better readability
+          secondary: "#BDC1C6", // Muted text color
         },
       },
     },

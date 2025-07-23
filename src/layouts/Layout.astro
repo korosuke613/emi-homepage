@@ -171,6 +171,32 @@ const normalizedTitle =
 			</style>
 		)}
 
+		<!-- Dark mode FOUC prevention script -->
+		<script is:inline>
+			// Prevent flash of white content during page transitions in dark mode
+			(function() {
+				const storageKey = 'joy-color-scheme';
+				const savedMode = localStorage.getItem(storageKey);
+				const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+				
+				let colorScheme = 'light'; // default
+				
+				if (savedMode === 'dark' || (savedMode === 'system' && systemPrefersDark) || (!savedMode && systemPrefersDark)) {
+					colorScheme = 'dark';
+				}
+				
+				// Apply dark mode styles immediately if needed
+				if (colorScheme === 'dark') {
+					document.documentElement.style.setProperty('--joy-palette-background-body', '#22282F');
+					document.documentElement.style.setProperty('--joy-palette-text-primary', '#E8EAED');
+					document.documentElement.style.setProperty('--joy-palette-primary-500', '#5889DF');
+					document.documentElement.setAttribute('data-joy-color-scheme', 'dark');
+				} else {
+					document.documentElement.setAttribute('data-joy-color-scheme', 'light');
+				}
+			})();
+		</script>
+
 		<SpeedInsights />
 	</head>
 	<body>
