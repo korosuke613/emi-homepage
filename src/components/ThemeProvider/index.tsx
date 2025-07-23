@@ -1,4 +1,4 @@
-import { CssVarsProvider, extendTheme } from "@mui/joy";
+import { CssVarsProvider, extendTheme, useColorScheme } from "@mui/joy";
 import { createContext, useContext, useEffect, useState } from "react";
 
 // フォントはLayout.astroでpreloadされ、@font-face定義も直接Layout.astroに含まれる
@@ -46,37 +46,28 @@ export const useThemeMode = () => {
   return context;
 };
 
-// システムのダークモード設定を検出
-const getSystemColorScheme = (): "light" | "dark" => {
-  if (typeof window === "undefined") return "light";
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-};
-
-// ローカルストレージからテーマ設定を取得
-const getStoredMode = (): ColorMode => {
-  if (typeof window === "undefined") return "system";
-  try {
-    const stored = localStorage.getItem("color-mode") as ColorMode;
-    return stored || "system";
-  } catch {
-    return "system";
-  }
-};
-
 const theme = extendTheme({
   fontFamily: {
     body: fontFamily,
     display: fontFamily,
   },
-  // ダークモード用の追加設定
+  // MUI Joy のデフォルトダークモードカラーを使用
   colorSchemes: {
     light: {
-      // ライトモード固有の設定（必要に応じて追加）
+      palette: {
+        background: {
+          body: "var(--joy-palette-common-white, #FFF)",
+          surface: "var(--joy-palette-neutral-50, #F7F7F8)",
+        },
+      },
     },
     dark: {
-      // ダークモード固有の設定（必要に応じて追加）
+      palette: {
+        background: {
+          body: "var(--joy-palette-common-black, #09090D)",
+          surface: "var(--joy-palette-neutral-900, #171A1C)",
+        },
+      },
     },
   },
 });
@@ -140,54 +131,53 @@ type Props = {
   children: React.ReactNode;
 };
 
+// MUI Joy の color scheme を使った実装
 const ThemeProviderInner = ({ children }: Props) => {
-  const [mode, setModeState] = useState<ColorMode>("system");
+  return (
+    <CssVarsProvider
+      theme={theme}
+      defaultMode="system"
+      modeStorageKey="joy-color-scheme"
+    >
+      <ThemeModeManager>{children}</ThemeModeManager>
+    </CssVarsProvider>
+  );
+};
 
-  // 初期化時にストレージからモードを読み込み
+// MUI Joy の useColorScheme を使ってモード管理
+const ThemeModeManager = ({ children }: { children: React.ReactNode }) => {
+  const { mode, setMode } = useColorScheme();
+  const [customMode, setCustomMode] = useState<ColorMode>("system");
+
+  // MUI Joy のモードと同期
   useEffect(() => {
-    const storedMode = getStoredMode();
-    setModeState(storedMode);
-  }, []);
-
-  // モード変更時にストレージに保存し、MUI Joy のカラースキームを設定
-  const setMode = (newMode: ColorMode) => {
-    setModeState(newMode);
-    if (typeof window !== "undefined") {
-      try {
-        localStorage.setItem("color-mode", newMode);
-      } catch {
-        // ストレージが利用できない場合は無視
-      }
+    if (mode) {
+      setCustomMode(mode as ColorMode);
     }
+  }, [mode]);
+
+  // カスタムモード設定
+  const setCustomModeWithSync = (newMode: ColorMode) => {
+    setCustomMode(newMode);
+    setMode(newMode);
   };
 
   // トグル機能（light -> dark -> system -> light の順）
   const toggleMode = () => {
     const modes: ColorMode[] = ["light", "dark", "system"];
-    const currentIndex = modes.indexOf(mode);
+    const currentIndex = modes.indexOf(customMode);
     const nextIndex = (currentIndex + 1) % modes.length;
-    setMode(modes[nextIndex]);
+    setCustomModeWithSync(modes[nextIndex]);
   };
 
-  // システムモードの場合の実際のカラースキーム計算
-  const resolvedColorScheme = mode === "system" ? getSystemColorScheme() : mode;
-
   const value: ThemeContextType = {
-    mode,
-    setMode,
+    mode: customMode,
+    setMode: setCustomModeWithSync,
     toggleMode,
   };
 
   return (
-    <ThemeContext.Provider value={value}>
-      <CssVarsProvider
-        theme={theme}
-        defaultMode={resolvedColorScheme}
-        modeStorageKey="joy-mode"
-      >
-        {children}
-      </CssVarsProvider>
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 };
 
