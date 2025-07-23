@@ -28,6 +28,7 @@ const mockPreviousBlog: BlogSchema = {
     revisedAt: "2024-09-10T10:00:00.000Z",
     name: "テストカテゴリ",
   },
+  eyecatch: { url: "", width: 0, height: 0 },
   content: "<p>前の記事の内容</p>",
 };
 
@@ -48,6 +49,7 @@ const mockNextBlog: BlogSchema = {
     revisedAt: "2024-09-08T10:00:00.000Z",
     name: "テストカテゴリ",
   },
+  eyecatch: { url: "", width: 0, height: 0 },
   content: "<p>次の記事の内容</p>",
 };
 
