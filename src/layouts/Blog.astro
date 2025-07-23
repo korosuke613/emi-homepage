@@ -1,10 +1,14 @@
 ---
 import { Box } from "@mui/joy";
 import blogJson from "../../generated/blogs.json";
+import { BlogNavigation } from "../components/Blog/BlogNavigation";
 import { LanguageFallbackNotice } from "../components/Blog/LanguageFallbackNotice";
 import { Typography } from "../components/Typography";
 import type { Languages } from "../i18n/ui";
-import { getAvailableLanguagesForSlug } from "../utils/blogUtils";
+import {
+  getAvailableLanguagesForSlug,
+  getPreviousAndNextBlog,
+} from "../utils/blogUtils";
 import type { BlogSchema } from "../utils/microcms";
 import Layout from "./Layout.astro";
 
@@ -23,6 +27,9 @@ const availableLanguagesForSlug = getAvailableLanguagesForSlug(
 );
 
 const isCurrentLanguageSupported = availableLanguagesForSlug.includes(lang);
+
+// 前の記事・次の記事を取得
+const { previousBlog, nextBlog } = getPreviousAndNextBlog(blogs, blog.slug);
 ---
 
 <Layout title={blog.title} description={""} lang={lang} noindex={!isCurrentLanguageSupported}>
@@ -46,6 +53,7 @@ const isCurrentLanguageSupported = availableLanguagesForSlug.includes(lang);
       wordBreak: "break-all",
       textWrap: "auto",
     },
-  }}/>      
+  }}/>
+  <BlogNavigation previousBlog={previousBlog} nextBlog={nextBlog} currentLang={lang} client:load />      
   </Box>
 </Layout>
