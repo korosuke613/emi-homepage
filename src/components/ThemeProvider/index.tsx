@@ -184,6 +184,7 @@ const applyThemeToDOM = (resolvedMode: "light" | "dark") => {
 
   if (resolvedMode === "dark") {
     // ダークモードのCSS variables を即座に適用
+    root.style.backgroundColor = "#22282F";
     root.style.setProperty("--joy-palette-background-body", "#22282F");
     root.style.setProperty("--joy-palette-background-surface", "#2A3038");
     root.style.setProperty("--joy-palette-text-primary", "#E8EAED");
@@ -191,9 +192,11 @@ const applyThemeToDOM = (resolvedMode: "light" | "dark") => {
     root.style.setProperty("--joy-palette-primary-500", "#8BC5FF");
     root.style.setProperty("--joy-palette-primary-visited", "#B19CD9");
     root.setAttribute("data-joy-color-scheme", "dark");
+    root.setAttribute("data-color-scheme", "dark");
   } else {
     // ライトモードのCSS variables を即座に適用
-    root.style.setProperty("--joy-palette-background-body", "#FFF");
+    root.style.backgroundColor = "#FFFFFF";
+    root.style.setProperty("--joy-palette-background-body", "#FFFFFF");
     root.style.setProperty("--joy-palette-background-surface", "#F7F7F8");
     root.style.setProperty("--joy-palette-text-primary", "rgba(25, 25, 25, 1)");
     root.style.setProperty(
@@ -206,6 +209,7 @@ const applyThemeToDOM = (resolvedMode: "light" | "dark") => {
     );
     root.style.setProperty("--joy-palette-primary-visited", "#7C3AED");
     root.setAttribute("data-joy-color-scheme", "light");
+    root.setAttribute("data-color-scheme", "light");
   }
 };
 

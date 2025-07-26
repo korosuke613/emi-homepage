@@ -72,9 +72,92 @@ const normalizedTitle =
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} style="background: #FFFFFF !important; color: rgba(25, 25, 25, 1) !important; margin: 0 !important; padding: 0 !important; min-height: 100vh !important;">
 	<head>
+		<!-- META must be first to prevent encoding issues -->
 		<meta charset="UTF-8" />
+		
+		<!-- Critical inline styles to prevent FOUC during page transitions -->
+		<style>
+			/* Prevent any background flashing during page transitions */
+			html, body, #__astro, #__astro > * {
+				background: #FFFFFF !important;
+				color: rgba(25, 25, 25, 1) !important;
+				margin: 0 !important;
+				padding: 0 !important;
+				min-height: 100vh !important;
+				transition: none !important; /* Prevent transition flashing */
+			}
+			
+			/* Dark mode overrides */
+			html[data-color-scheme="dark"], 
+			html[data-color-scheme="dark"] body,
+			html[data-color-scheme="dark"] #__astro,
+			html[data-color-scheme="dark"] #__astro > * {
+				background: #22282F !important;
+				color: #E8EAED !important;
+			}
+			
+			/* Ensure all elements inherit background consistently */
+			* {
+				background-color: inherit !important;
+			}
+			
+			/* Font fallback to prevent layout shift */
+			body, * {
+				font-family: "Times New Roman", "Georgia", serif !important;
+			}
+		</style>
+		
+		<!-- Immediate FOUC prevention - must be as early as possible -->
+		<script is:inline>
+			(function() {
+				// Prevent any flash by immediately applying theme
+				const storageKey = 'joy-color-scheme';
+				let colorScheme = 'light';
+				
+				try {
+					const savedMode = localStorage.getItem(storageKey);
+					const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+					
+					if (savedMode === 'dark' || (savedMode === 'system' && systemPrefersDark) || (!savedMode && systemPrefersDark)) {
+						colorScheme = 'dark';
+					}
+				} catch (e) {
+					// Fallback to light mode if localStorage is not available
+					colorScheme = 'light';
+				}
+				
+				// Apply data attribute and direct styles immediately to all elements
+				const htmlElement = document.documentElement;
+				htmlElement.setAttribute('data-color-scheme', colorScheme);
+				
+				// Create and inject critical CSS to prevent flashing
+				const criticalStyle = document.createElement('style');
+				criticalStyle.textContent = `
+					html, body, #__astro, #__astro > * {
+						background: ${colorScheme === 'dark' ? '#22282F' : '#FFFFFF'} !important;
+						color: ${colorScheme === 'dark' ? '#E8EAED' : 'rgba(25, 25, 25, 1)'} !important;
+						transition: none !important;
+					}
+				`;
+				document.head.appendChild(criticalStyle);
+				
+				// Set root styles immediately
+				if (colorScheme === 'dark') {
+					htmlElement.style.background = '#22282F';
+					htmlElement.style.color = '#E8EAED';
+					document.body && (document.body.style.background = '#22282F');
+					document.body && (document.body.style.color = '#E8EAED');
+				} else {
+					htmlElement.style.background = '#FFFFFF';
+					htmlElement.style.color = 'rgba(25, 25, 25, 1)';
+					document.body && (document.body.style.background = '#FFFFFF');
+					document.body && (document.body.style.color = 'rgba(25, 25, 25, 1)');
+				}
+			})();
+		</script>
+
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
 		{noindex ? <meta name="robots" content="noindex" /> : null}
@@ -168,34 +251,63 @@ const normalizedTitle =
 						 url('@fontsource/noto-serif-jp/files/noto-serif-jp-latin-700-normal.woff2') format('woff2');
 					unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD, U+3000-303F, U+3040-309F, U+30A0-30FF, U+FF00-FFEF, U+4E00-9FAF;
 				}
+				
+				/* Fallback font styles to prevent layout shift during font loading */
+				body, * {
+					font-family: "Noto Serif JP", "Times New Roman", "Georgia", serif;
+					font-synthesis: weight style;
+				}
 			</style>
 		)}
 
-		<!-- Dark mode FOUC prevention script -->
+		<!-- Additional CSS variables setup with enhanced FOUC prevention -->
 		<script is:inline>
-			// Prevent flash of white content during page transitions in dark mode
+			// Apply additional CSS variables for consistency and prevent page transition flashing
 			(function() {
 				const storageKey = 'joy-color-scheme';
-				const savedMode = localStorage.getItem(storageKey);
-				const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+				let colorScheme = 'light';
 				
-				let colorScheme = 'light'; // default
-				
-				if (savedMode === 'dark' || (savedMode === 'system' && systemPrefersDark) || (!savedMode && systemPrefersDark)) {
-					colorScheme = 'dark';
+				try {
+					const savedMode = localStorage.getItem(storageKey);
+					const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+					
+					if (savedMode === 'dark' || (savedMode === 'system' && systemPrefersDark) || (!savedMode && systemPrefersDark)) {
+						colorScheme = 'dark';
+					}
+				} catch (e) {
+					colorScheme = 'light';
 				}
 				
-				// Apply dark mode styles immediately if needed
+				const root = document.documentElement;
+				
+				// Apply comprehensive CSS variables and prevent any transition effects
 				if (colorScheme === 'dark') {
-					document.documentElement.style.setProperty('--joy-palette-background-body', '#22282F');
-					document.documentElement.style.setProperty('--joy-palette-text-primary', '#E8EAED');
-					document.documentElement.style.setProperty('--joy-palette-primary-500', '#8BC5FF');
-					document.documentElement.style.setProperty('--joy-palette-primary-visited', '#B19CD9');
-					document.documentElement.setAttribute('data-joy-color-scheme', 'dark');
+					root.style.setProperty('--joy-palette-background-body', '#22282F');
+					root.style.setProperty('--joy-palette-text-primary', '#E8EAED');
+					root.style.setProperty('--joy-palette-primary-500', '#8BC5FF');
+					root.style.setProperty('--joy-palette-primary-visited', '#B19CD9');
+					root.setAttribute('data-joy-color-scheme', 'dark');
+					// Ensure body background is set immediately
+					root.style.background = '#22282F';
+					root.style.color = '#E8EAED';
 				} else {
-					document.documentElement.style.setProperty('--joy-palette-primary-visited', '#7C3AED');
-					document.documentElement.setAttribute('data-joy-color-scheme', 'light');
+					root.style.setProperty('--joy-palette-background-body', '#FFFFFF');
+					root.style.setProperty('--joy-palette-text-primary', 'rgba(25, 25, 25, 1)');
+					root.style.setProperty('--joy-palette-primary-500', 'rgba(25, 118, 210, 1)');
+					root.style.setProperty('--joy-palette-primary-visited', '#7C3AED');
+					root.setAttribute('data-joy-color-scheme', 'light');
+					// Ensure body background is set immediately
+					root.style.background = '#FFFFFF';
+					root.style.color = 'rgba(25, 25, 25, 1)';
 				}
+				
+				// Disable transitions temporarily to prevent flashing
+				root.style.setProperty('transition', 'none');
+				
+				// Re-enable transitions after a short delay to allow proper initialization
+				setTimeout(() => {
+					root.style.removeProperty('transition');
+				}, 100);
 			})();
 		</script>
 
@@ -211,7 +323,7 @@ const normalizedTitle =
 				title: secondTitle ? secondTitle : title,
 			}}
 
-			client:load
+			client:idle
 		>
 			<slot />
 		</Page>
@@ -219,12 +331,45 @@ const normalizedTitle =
 </html>
 
 <style is:global>
+/* Enhanced global styles for preventing page transition flashing */
 body {
 	word-break: auto-phrase;
 	text-wrap: balance;
 	font-family: "Noto Serif JP", "Times New Roman", serif;
-	/* Use MUI Joy CSS variables for background color */
-	background-color: var(--joy-palette-background-body);
-	color: var(--joy-palette-text-primary);
+	/* Use MUI Joy CSS variables for background color with fallback */
+	background-color: var(--joy-palette-background-body, #FFFFFF) !important;
+	color: var(--joy-palette-text-primary, rgba(25, 25, 25, 1));
+	/* Ensure no margin/padding that could show underlying color */
+	margin: 0;
+	padding: 0;
+	/* Ensure full height coverage */
+	min-height: 100vh;
+}
+
+/* Prevent transition flashing during page navigation */
+html, body, #__astro {
+	transition: none !important;
+}
+
+/* Ensure consistent background inheritance */
+* {
+	background-color: inherit;
+}
+
+/* Dark mode global styles */
+html[data-color-scheme="dark"] body {
+	background-color: #22282F !important;
+	color: #E8EAED !important;
+}
+
+/* Ensure React components inherit correct colors during hydration */
+[data-color-scheme="light"] * {
+	--default-bg: #FFFFFF;
+	--default-text: rgba(25, 25, 25, 1);
+}
+
+[data-color-scheme="dark"] * {
+	--default-bg: #22282F;
+	--default-text: #E8EAED;
 }
 </style>
