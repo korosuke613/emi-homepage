@@ -68,17 +68,17 @@ const theme = extendTheme({
           surface: "#2A3038", // Slightly lighter surface for contrast
         },
         primary: {
-          // Links and primary elements in dark mode - ensure exact color match
+          // Links and primary elements in dark mode - better contrast and visibility
           50: "#EDF4FF",
           100: "#DBE7FF",
           200: "#BED3FF",
           300: "#91B5FF",
-          400: "#5C89FF",
-          500: "#5889DF", // RGB(88,137,223) - better visibility in dark mode
-          600: "#4C7AC8",
-          700: "#4066A8",
-          800: "#37528A",
-          900: "#314372",
+          400: "#6B9AFF",
+          500: "#8BC5FF", // RGB(139,197,255) - even brighter blue for better visibility in dark mode
+          600: "#5A9AFF",
+          700: "#4A84E6",
+          800: "#3B6DB8",
+          900: "#2D5490",
         },
         text: {
           primary: "#E8EAED", // Softer white text for better readability
@@ -171,7 +171,7 @@ const applyThemeToDOM = (resolvedMode: "light" | "dark") => {
     root.style.setProperty("--joy-palette-background-surface", "#2A3038");
     root.style.setProperty("--joy-palette-text-primary", "#E8EAED");
     root.style.setProperty("--joy-palette-text-secondary", "#BDC1C6");
-    root.style.setProperty("--joy-palette-primary-500", "#5889DF");
+    root.style.setProperty("--joy-palette-primary-500", "#8BC5FF");
     root.setAttribute("data-joy-color-scheme", "dark");
   } else {
     // ライトモードのCSS variables を即座に適用
