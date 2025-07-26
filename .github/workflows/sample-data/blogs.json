@@ -40,7 +40,7 @@
         "revisedAt": "2024-09-08T07:16:14.425Z",
         "name": "テストカテゴリ"
       },
-      "content": "<h2 id=\"hdb41525ba7\">これは日本語のみのコンテンツです 🇯🇵</h2><p>このブログ投稿は日本語でのみ存在し、/blog/japanese-only/ と /en/blog/japanese-only/ の両方のURLからアクセス可能である必要があります。</p>"
+      "content": "<h2 id=\"hdb41525ba7\">これは日本語のみのコンテンツです 🇯🇵</h2><p>このブログ投稿は日本語でのみ存在し、/blog/japanese-only/ と /en/blog/japanese-only/ の両方のURLからアクセス可能である必要があります。<a href=\"/en/blog/japanese-only/\" target=\"_blank\" rel=\"noopener noreferrer\">英語版はこちら</a><a href=\"/en/blog/japanese-only/\">英語版はこちら</a></p>"
     },
     {
       "id": "jber5f4jt",

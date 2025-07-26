@@ -88,9 +88,13 @@ export const LaotianLanguage: StoryObj<typeof LangSelector> = {
     const items = screen.getAllByRole("menuitem");
     expect(items).toHaveLength(3); // ja, en, lo
 
-    // ラオス語オプションが存在することを確認
-    const laosMenuItem = screen.getByText("LO ລາວ");
+    // ラオス語オプションが存在することを確認（aria-labelでlo要素を特定）
+    const laosMenuItem = items.find((item) => {
+      const box = item.querySelector('[aria-label="lo"]');
+      return box !== null;
+    });
     expect(laosMenuItem).toBeInTheDocument();
+    expect(laosMenuItem).toBeVisible();
   },
 };
 
@@ -108,8 +112,13 @@ export const LaotianBlogPage: StoryObj<typeof LangSelector> = {
     // Wait for menu to open and items to be rendered - menu renders in body
     await waitFor(() => screen.getByRole("menu"));
 
-    // ブログページでのラオス語言語切り替えが機能することを確認
-    const laosMenuItem = screen.getByText("LO ລາວ");
+    // ブログページでのラオス語言語切り替えが機能することを確認（aria-labelでlo要素を特定）
+    const items = screen.getAllByRole("menuitem");
+    const laosMenuItem = items.find((item) => {
+      const box = item.querySelector('[aria-label="lo"]');
+      return box !== null;
+    });
     expect(laosMenuItem).toBeInTheDocument();
+    expect(laosMenuItem).toBeVisible();
   },
 };

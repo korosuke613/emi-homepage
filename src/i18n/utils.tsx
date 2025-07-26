@@ -1,3 +1,8 @@
+import { Link } from "@mui/joy";
+import parse, {
+  type Element as ParsedElement,
+  type HTMLReactParserOptions,
+} from "html-react-parser";
 import DOMPurify from "isomorphic-dompurify";
 import {
   type AboutContentKey,
@@ -72,16 +77,90 @@ export function useContentTranslationsWithElement(lang: Languages) {
   return {
     // About page content with HTML support
     about: (key: AboutContentKey): React.ReactNode => {
-      const sanitizedHtml = DOMPurify.sanitize(aboutContent[key][lang]);
+      const sanitizedHtml = DOMPurify.sanitize(aboutContent[key][lang], {
+        ADD_ATTR: ["target"], // Allow target attribute for links
+      });
       // biome-ignore lint/security/noDangerouslySetInnerHtml: Content is sanitized with DOMPurify
       return <span dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />;
     },
 
     // Pages content with HTML support
     pages: (key: PagesContentKey): React.ReactNode => {
-      const sanitizedHtml = DOMPurify.sanitize(pagesContent[key][lang]);
+      const sanitizedHtml = DOMPurify.sanitize(pagesContent[key][lang], {
+        ADD_ATTR: ["target"], // Allow target attribute for links
+      });
       // biome-ignore lint/security/noDangerouslySetInnerHtml: Content is sanitized with DOMPurify
       return <span dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />;
+    },
+  };
+}
+
+// Helper function to extract text content from parsed DOM node
+function extractTextContent(node: ParsedElement): string {
+  if (!node.children) return "";
+
+  return node.children
+    .map((child) => {
+      if (child.type === "text") {
+        return (child as { data: string }).data;
+      }
+      if (child.type === "tag") {
+        return extractTextContent(child as ParsedElement);
+      }
+      return "";
+    })
+    .join("");
+}
+
+// Helper function to parse HTML and replace <a> tags with MUI Joy Link components
+export function parseHtmlWithMuiLinks(htmlString: string): React.ReactNode {
+  const sanitizedHtml = DOMPurify.sanitize(htmlString, {
+    ADD_ATTR: ["target"], // Allow target attribute for links
+  });
+
+  const options: HTMLReactParserOptions = {
+    replace: (domNode) => {
+      // Type assertion for html-react-parser Element type
+      const node = domNode as ParsedElement;
+      if (node.type === "tag" && node.name === "a") {
+        const href = node.attribs?.href;
+        const target = node.attribs?.target;
+        const rel = node.attribs?.rel;
+
+        return (
+          <Link
+            href={href}
+            target={target}
+            rel={rel}
+            sx={{
+              "&:visited": {
+                color: "var(--joy-palette-primary-visited)",
+              },
+            }}
+          >
+            {extractTextContent(node)}
+          </Link>
+        );
+      }
+    },
+  };
+
+  return parse(sanitizedHtml, options);
+}
+
+// Helper function for content with MUI Joy Link components
+export function useContentWithMuiLinks(lang: Languages) {
+  return {
+    // About page content with MUI Link support
+    about: (key: AboutContentKey): React.ReactNode => {
+      const htmlContent = aboutContent[key][lang];
+      return parseHtmlWithMuiLinks(htmlContent);
+    },
+
+    // Pages content with MUI Link support
+    pages: (key: PagesContentKey): React.ReactNode => {
+      const htmlContent = pagesContent[key][lang];
+      return parseHtmlWithMuiLinks(htmlContent);
     },
   };
 }

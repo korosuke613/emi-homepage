@@ -32,7 +32,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 0
+          filter: "blob:none"
 
       - name: Run Claude PR Action
         uses: anthropics/claude-code-action@v0

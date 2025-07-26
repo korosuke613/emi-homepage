@@ -30,6 +30,9 @@ export const ui = {
     "document.desc": "Astroの仕組みと公式APIドキュメントをご覧ください。",
     "nav.about": "概要",
     "nav.twitter": "ツイッター",
+    "theme.light": "ライトモード",
+    "theme.dark": "ダークモード",
+    "theme.system": "システム設定に従う",
   },
   en: {
     title: "Emi Makiura",
@@ -44,6 +47,9 @@ export const ui = {
     "document.desc": "Learn how Astro works and explore the official API docs.",
     "nav.about": "About",
     "nav.twitter": "Twitter",
+    "theme.light": "Light mode",
+    "theme.dark": "Dark mode",
+    "theme.system": "Follow system settings",
   },
   lo: {
     title: "Emi Makiura",
@@ -58,5 +64,8 @@ export const ui = {
     "document.desc": "ຮຽນຮູ້ວິທີການເຮັດວຽກຂອງ Astro ແລະສຳຫຼວດເອກະສານ API ທາງການ.",
     "nav.about": "ກ່ຽວກັບ",
     "nav.twitter": "Twitter",
+    "theme.light": "ໂໝດແສງສະຫວ່າງ",
+    "theme.dark": "ໂໝດມືດ",
+    "theme.system": "ຕາມການຕັ້ງຄ່າຂອງລະບົບ",
   },
 } as const;
