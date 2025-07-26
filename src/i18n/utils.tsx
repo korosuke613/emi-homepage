@@ -79,7 +79,7 @@ export function useContentTranslationsWithElement(lang: Languages) {
     // About page content with HTML support
     about: (key: AboutContentKey): React.ReactNode => {
       const sanitizedHtml = DOMPurify.sanitize(aboutContent[key][lang], {
-        ADD_ATTR: ['target'], // Allow target attribute for links
+        ADD_ATTR: ["target"], // Allow target attribute for links
       });
       // biome-ignore lint/security/noDangerouslySetInnerHtml: Content is sanitized with DOMPurify
       return <span dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />;
@@ -88,7 +88,7 @@ export function useContentTranslationsWithElement(lang: Languages) {
     // Pages content with HTML support
     pages: (key: PagesContentKey): React.ReactNode => {
       const sanitizedHtml = DOMPurify.sanitize(pagesContent[key][lang], {
-        ADD_ATTR: ['target'], // Allow target attribute for links
+        ADD_ATTR: ["target"], // Allow target attribute for links
       });
       // biome-ignore lint/security/noDangerouslySetInnerHtml: Content is sanitized with DOMPurify
       return <span dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />;
@@ -99,7 +99,7 @@ export function useContentTranslationsWithElement(lang: Languages) {
 // Helper function to parse HTML and replace <a> tags with MUI Joy Link components
 export function parseHtmlWithMuiLinks(htmlString: string): React.ReactNode {
   const sanitizedHtml = DOMPurify.sanitize(htmlString, {
-    ADD_ATTR: ['target'], // Allow target attribute for links
+    ADD_ATTR: ["target"], // Allow target attribute for links
   });
 
   const options: HTMLReactParserOptions = {

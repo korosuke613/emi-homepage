@@ -72,7 +72,7 @@ const theme = extendTheme({
           800: "#0A3D91",
           900: "#072F72",
           // Visited link color for light mode - distinguishable purple
-          visited: "#7C3AED", // RGB(124,58,237) - purple for visited links
+          // visited: "#7C3AED", // RGB(124,58,237) - purple for visited links
         },
       },
     },
@@ -95,7 +95,7 @@ const theme = extendTheme({
           800: "#3B6DB8",
           900: "#2D5490",
           // Visited link color for dark mode - distinguishable purple/lavender
-          visited: "#B19CD9", // RGB(177,156,217) - soft purple for visited links
+          // visited: "#B19CD9", // RGB(177,156,217) - soft purple for visited links
         },
         text: {
           primary: "#E8EAED", // Softer white text for better readability
