@@ -29,7 +29,16 @@ const sanitizeSlug = (slug: string) => {
         const sanitizedSlug = sanitizeSlug(blog.slug);
         return (
           <li>
-            <Link href={getRelativeLocaleUrl(lang, `/blog/${sanitizedSlug}`)}>{new Date(blog.createdAt).toLocaleDateString(lang)}: {blog.title}</Link>
+            <Link 
+              href={getRelativeLocaleUrl(lang, `/blog/${sanitizedSlug}`)}
+              sx={{
+                "&:visited": {
+                  color: "var(--joy-palette-primary-visited)",
+                },
+              }}
+            >
+              {new Date(blog.createdAt).toLocaleDateString(lang)}: {blog.title}
+            </Link>
             - {blog.language
               .sort((a, b) => {
                 // 現在の言語を最前に配置
@@ -38,7 +47,15 @@ const sanitizeSlug = (slug: string) => {
                 return 0;
               })
               .map(l => (
-                <Link href={getRelativeLocaleUrl(l, `/blog/${sanitizedSlug}`)} className="language-emoji-link">
+                <Link 
+                  href={getRelativeLocaleUrl(l, `/blog/${sanitizedSlug}`)} 
+                  className="language-emoji-link"
+                  sx={{
+                    "&:visited": {
+                      color: "var(--joy-palette-primary-visited)",
+                    },
+                  }}
+                >
                   {languageEmojis[l]}
                 </Link>
               ))}

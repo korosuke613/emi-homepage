@@ -66,13 +66,13 @@ const theme = extendTheme({
           200: "#90CAF9",
           300: "#64B5F6",
           400: "#42A5F5",
-          500: "#1976D2", // Default MUI blue for light mode
+          500: "#3077e2", // Darker blue for better contrast with visited links in light mode
           600: "#1565C0",
           700: "#0D47A1",
           800: "#0A3D91",
           900: "#072F72",
-          // Visited link color for light mode - distinguishable purple
-          // visited: "#7C3AED", // RGB(124,58,237) - purple for visited links
+          // Visited link color for light mode - high contrast purple
+          // visited: "#6B21A8", // RGB(107,33,168) - darker purple for better contrast
         },
       },
     },
@@ -94,8 +94,8 @@ const theme = extendTheme({
           700: "#4A84E6",
           800: "#3B6DB8",
           900: "#2D5490",
-          // Visited link color for dark mode - distinguishable purple/lavender
-          // visited: "#B19CD9", // RGB(177,156,217) - soft purple for visited links
+          // Visited link color for dark mode - high contrast purple/lavender
+          // visited: "#D8B4FE", // RGB(216,180,254) - brighter purple for better contrast in dark mode
         },
         text: {
           primary: "#E8EAED", // Softer white text for better readability
@@ -190,7 +190,7 @@ const applyThemeToDOM = (resolvedMode: "light" | "dark") => {
     root.style.setProperty("--joy-palette-text-primary", "#E8EAED");
     root.style.setProperty("--joy-palette-text-secondary", "#BDC1C6");
     root.style.setProperty("--joy-palette-primary-500", "#8BC5FF");
-    root.style.setProperty("--joy-palette-primary-visited", "#B19CD9");
+    root.style.setProperty("--joy-palette-primary-visited", "#D8B4FE");
     root.setAttribute("data-joy-color-scheme", "dark");
     root.setAttribute("data-color-scheme", "dark");
   } else {
@@ -203,11 +203,8 @@ const applyThemeToDOM = (resolvedMode: "light" | "dark") => {
       "--joy-palette-text-secondary",
       "rgba(25, 25, 25, 0.6)",
     );
-    root.style.setProperty(
-      "--joy-palette-primary-500",
-      "rgba(25, 118, 210, 1)",
-    );
-    root.style.setProperty("--joy-palette-primary-visited", "#7C3AED");
+    root.style.setProperty("--joy-palette-primary-500", "#3077e2");
+    root.style.setProperty("--joy-palette-primary-visited", "#6B21A8");
     root.setAttribute("data-joy-color-scheme", "light");
     root.setAttribute("data-color-scheme", "light");
   }
