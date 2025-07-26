@@ -161,9 +161,38 @@ const ThemeProviderInner = ({ children }: Props) => {
   );
 };
 
+// CSS Custom Properties を即座に更新する関数
+const applyThemeToDOM = (resolvedMode: "light" | "dark") => {
+  const root = document.documentElement;
+
+  if (resolvedMode === "dark") {
+    // ダークモードのCSS variables を即座に適用
+    root.style.setProperty("--joy-palette-background-body", "#22282F");
+    root.style.setProperty("--joy-palette-background-surface", "#2A3038");
+    root.style.setProperty("--joy-palette-text-primary", "#E8EAED");
+    root.style.setProperty("--joy-palette-text-secondary", "#BDC1C6");
+    root.style.setProperty("--joy-palette-primary-500", "#5889DF");
+    root.setAttribute("data-joy-color-scheme", "dark");
+  } else {
+    // ライトモードのCSS variables を即座に適用
+    root.style.setProperty("--joy-palette-background-body", "#FFF");
+    root.style.setProperty("--joy-palette-background-surface", "#F7F7F8");
+    root.style.setProperty("--joy-palette-text-primary", "rgba(25, 25, 25, 1)");
+    root.style.setProperty(
+      "--joy-palette-text-secondary",
+      "rgba(25, 25, 25, 0.6)",
+    );
+    root.style.setProperty(
+      "--joy-palette-primary-500",
+      "rgba(25, 118, 210, 1)",
+    );
+    root.setAttribute("data-joy-color-scheme", "light");
+  }
+};
+
 // MUI Joy の useColorScheme を使ってモード管理
 const ThemeModeManager = ({ children }: { children: React.ReactNode }) => {
-  const { mode, setMode } = useColorScheme();
+  const { mode, setMode, systemMode } = useColorScheme();
   const [customMode, setCustomMode] = useState<ColorMode>("system");
 
   // MUI Joy のモードと同期
@@ -173,10 +202,38 @@ const ThemeModeManager = ({ children }: { children: React.ReactNode }) => {
     }
   }, [mode]);
 
+  // システムモードまたはカスタムモード変更時にDOMを即座に更新
+  useEffect(() => {
+    if (customMode === "system") {
+      const resolvedMode =
+        systemMode ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light");
+      applyThemeToDOM(resolvedMode);
+    } else if (customMode === "light" || customMode === "dark") {
+      applyThemeToDOM(customMode);
+    }
+  }, [customMode, systemMode]);
+
   // カスタムモード設定
   const setCustomModeWithSync = (newMode: ColorMode) => {
     setCustomMode(newMode);
     setMode(newMode);
+
+    // 実際に適用されるテーマを計算して即座にDOMに適用
+    let resolvedMode: "light" | "dark";
+    if (newMode === "system") {
+      resolvedMode =
+        systemMode ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light");
+    } else {
+      resolvedMode = newMode as "light" | "dark";
+    }
+
+    applyThemeToDOM(resolvedMode);
   };
 
   // トグル機能（light -> dark -> system -> light の順）
