@@ -66,7 +66,7 @@ export const aboutContent: ContentRecord = {
       lo: "ການສະໜັບສະໜູນການຈ້າງງານຕໍ່ເນື່ອງສຳລັບຄົນພິການ, ການຜະລິດຮູບແບບດິຈິຕອນ (ໄອຄອນ SNS, ນາມບັດ, ບັນຈຸສິນຄ້າ), ຮູບແບບອະນາລອກ (ການແຕ້ມຮູບທົ່ວໄປ), ຄູສອນພາສາອັງກິດ",
     },
 
-  // Profile description (biography)
+  // Profile description (biography) - HTML version with MUI Link support
   profile_description: {
     ja: `障害者施設をメインに、ラオスにての英語教師（2025年9月～）、リモートで<a href="https://stara.co.jp" target="_blank" rel="noopener noreferrer">株式会社stara</a>の広報、個人でイラストレーター。<br />
 2022年新卒で株式会社staraにて障害者の就労支援を始める。<br />
@@ -88,5 +88,9 @@ export type AboutContentKey = keyof typeof aboutContent;
 
 // Helper function to get translated text
 export function getAboutText(key: AboutContentKey, lang: Languages): string {
-  return aboutContent[key][lang];
+  const content = aboutContent[key][lang];
+  if (typeof content === "string") {
+    return content;
+  }
+  throw new Error(`Content for key "${key}" is not a string`);
 }

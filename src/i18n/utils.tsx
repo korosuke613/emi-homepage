@@ -1,3 +1,9 @@
+import { Link } from "@mui/joy";
+import parse, {
+  type Element as ParsedElement,
+  type HTMLReactParserOptions,
+  type Text,
+} from "html-react-parser";
 import DOMPurify from "isomorphic-dompurify";
 import {
   type AboutContentKey,
@@ -82,6 +88,50 @@ export function useContentTranslationsWithElement(lang: Languages) {
       const sanitizedHtml = DOMPurify.sanitize(pagesContent[key][lang]);
       // biome-ignore lint/security/noDangerouslySetInnerHtml: Content is sanitized with DOMPurify
       return <span dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />;
+    },
+  };
+}
+
+// Helper function to parse HTML and replace <a> tags with MUI Joy Link components
+function parseHtmlWithMuiLinks(htmlString: string): React.ReactNode {
+  const sanitizedHtml = DOMPurify.sanitize(htmlString);
+
+  const options: HTMLReactParserOptions = {
+    replace: (domNode) => {
+      // Type assertion for html-react-parser Element type
+      const node = domNode as ParsedElement;
+      if (node.type === "tag" && node.name === "a") {
+        const href = node.attribs?.href;
+        const target = node.attribs?.target;
+        const rel = node.attribs?.rel;
+
+        return (
+          <Link href={href} target={target} rel={rel}>
+            {node.children?.[0]?.type === "text"
+              ? (node.children[0] as Text).data
+              : ""}
+          </Link>
+        );
+      }
+    },
+  };
+
+  return parse(sanitizedHtml, options);
+}
+
+// Helper function for content with MUI Joy Link components
+export function useContentWithMuiLinks(lang: Languages) {
+  return {
+    // About page content with MUI Link support
+    about: (key: AboutContentKey): React.ReactNode => {
+      const htmlContent = aboutContent[key][lang];
+      return parseHtmlWithMuiLinks(htmlContent);
+    },
+
+    // Pages content with MUI Link support
+    pages: (key: PagesContentKey): React.ReactNode => {
+      const htmlContent = pagesContent[key][lang];
+      return parseHtmlWithMuiLinks(htmlContent);
     },
   };
 }

@@ -2,7 +2,7 @@ import { AspectRatio, Box, Grid, Table } from "@mui/joy";
 import type { Languages } from "../../../i18n/ui";
 import {
   useContentTranslations,
-  useContentTranslationsWithElement,
+  useContentWithMuiLinks,
 } from "../../../i18n/utils";
 import { Typography } from "../../Typography";
 
@@ -12,7 +12,7 @@ type Props = {
 
 export const About = ({ lang }: Props) => {
   const content = useContentTranslations(lang);
-  const contentWithElement = useContentTranslationsWithElement(lang);
+  const muiContent = useContentWithMuiLinks(lang);
 
   return (
     <>
@@ -34,7 +34,7 @@ export const About = ({ lang }: Props) => {
         </Grid>
         <Grid xs={12} textAlign={"left"}>
           <Typography level="body-md">
-            {contentWithElement.about("profile_description")}
+            {muiContent.about("profile_description")}
           </Typography>
         </Grid>
         <Grid
