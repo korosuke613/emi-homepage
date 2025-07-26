@@ -1,9 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Header } from ".";
+import { ThemeProvider } from "../../ThemeProvider";
 
 const metaData: Meta = {
   title: "Page/Header",
   component: Header,
+  decorators: [
+    (Story) => (
+      <ThemeProvider>
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
 };
 
 export default metaData;

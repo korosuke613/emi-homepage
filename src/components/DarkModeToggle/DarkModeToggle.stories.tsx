@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { DarkModeToggle } from ".";
+import { ThemeProvider } from "../ThemeProvider";
 
 const metaData: Meta = {
   title: "DarkModeToggle",
@@ -7,6 +8,13 @@ const metaData: Meta = {
   args: {
     lang: "ja",
   },
+  decorators: [
+    (Story) => (
+      <ThemeProvider>
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
 };
 
 export default metaData;
