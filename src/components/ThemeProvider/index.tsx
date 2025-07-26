@@ -59,6 +59,21 @@ const theme = extendTheme({
           body: "var(--joy-palette-common-white, #FFF)",
           surface: "var(--joy-palette-neutral-50, #F7F7F8)",
         },
+        primary: {
+          // Links and primary elements in light mode
+          50: "#E3F2FD",
+          100: "#BBDEFB",
+          200: "#90CAF9",
+          300: "#64B5F6",
+          400: "#42A5F5",
+          500: "#1976D2", // Default MUI blue for light mode
+          600: "#1565C0",
+          700: "#0D47A1",
+          800: "#0A3D91",
+          900: "#072F72",
+          // Visited link color for light mode - distinguishable purple
+          visited: "#7C3AED", // RGB(124,58,237) - purple for visited links
+        },
       },
     },
     dark: {
@@ -79,6 +94,8 @@ const theme = extendTheme({
           700: "#4A84E6",
           800: "#3B6DB8",
           900: "#2D5490",
+          // Visited link color for dark mode - distinguishable purple/lavender
+          visited: "#B19CD9", // RGB(177,156,217) - soft purple for visited links
         },
         text: {
           primary: "#E8EAED", // Softer white text for better readability
@@ -172,6 +189,7 @@ const applyThemeToDOM = (resolvedMode: "light" | "dark") => {
     root.style.setProperty("--joy-palette-text-primary", "#E8EAED");
     root.style.setProperty("--joy-palette-text-secondary", "#BDC1C6");
     root.style.setProperty("--joy-palette-primary-500", "#8BC5FF");
+    root.style.setProperty("--joy-palette-primary-visited", "#B19CD9");
     root.setAttribute("data-joy-color-scheme", "dark");
   } else {
     // ライトモードのCSS variables を即座に適用
@@ -186,6 +204,7 @@ const applyThemeToDOM = (resolvedMode: "light" | "dark") => {
       "--joy-palette-primary-500",
       "rgba(25, 118, 210, 1)",
     );
+    root.style.setProperty("--joy-palette-primary-visited", "#7C3AED");
     root.setAttribute("data-joy-color-scheme", "light");
   }
 };

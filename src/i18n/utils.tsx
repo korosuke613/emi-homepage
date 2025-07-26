@@ -106,7 +106,16 @@ export function parseHtmlWithMuiLinks(htmlString: string): React.ReactNode {
         const rel = node.attribs?.rel;
 
         return (
-          <Link href={href} target={target} rel={rel}>
+          <Link
+            href={href}
+            target={target}
+            rel={rel}
+            sx={{
+              "&:visited": {
+                color: "var(--joy-palette-primary-visited)",
+              },
+            }}
+          >
             {node.children?.[0]?.type === "text"
               ? (node.children[0] as Text).data
               : ""}
