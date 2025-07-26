@@ -1,42 +1,49 @@
+import { DarkMode, LightMode, SettingsBrightness } from "@mui/icons-material";
 import { IconButton, Tooltip } from "@mui/joy";
-import { MdDarkMode, MdLightMode, MdSettingsBrightness } from "react-icons/md";
-
+import type { Languages } from "../../i18n/ui";
+import { useSharedTranslations } from "../../i18n/utils";
 import { useThemeMode } from "../ThemeProvider";
 
-const icons = {
-  light: <MdLightMode />,
-  dark: <MdDarkMode />,
-  system: <MdSettingsBrightness />,
-};
-
-const tooltipTexts = {
-  light: "ライトモード",
-  dark: "ダークモード",
-  system: "システム設定に従う",
-};
-
 type Props = {
-  size?: "sm" | "md" | "lg";
-  variant?: "plain" | "outlined" | "soft" | "solid";
+  lang: Languages;
 };
 
-export const DarkModeToggle = ({ size = "sm", variant = "plain" }: Props) => {
-  const { mode, toggleMode } = useThemeMode();
+export const DarkModeToggle = ({ lang }: Props) => {
+  const { mode, setMode } = useThemeMode();
+  const t = useSharedTranslations(lang);
+
+  const icons = {
+    light: <LightMode />,
+    dark: <DarkMode />,
+    system: <SettingsBrightness />,
+  };
+
+  const tooltipTexts = {
+    light: t("theme.light"),
+    dark: t("theme.dark"),
+    system: t("theme.system"),
+  };
+
+  const handleToggle = () => {
+    if (mode === "light") {
+      setMode("dark");
+    } else if (mode === "dark") {
+      setMode("system");
+    } else {
+      setMode("light");
+    }
+  };
 
   return (
-    <Tooltip title={tooltipTexts[mode]} placement="bottom">
+    <Tooltip title={tooltipTexts[mode]} arrow>
       <IconButton
-        size={size}
-        variant={variant}
-        onClick={toggleMode}
-        aria-label={`現在のテーマモード: ${tooltipTexts[mode]}`}
+        variant="outlined"
+        color="neutral"
+        onClick={handleToggle}
+        aria-label={tooltipTexts[mode]}
         sx={{
-          color: "neutral.500",
-          "&:hover": {
-            color: "neutral.700",
-            backgroundColor: "neutral.100",
-          },
-          transition: "all 0.2s ease",
+          height: "50px",
+          width: "50px",
         }}
       >
         {icons[mode]}

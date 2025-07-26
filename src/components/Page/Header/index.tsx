@@ -95,7 +95,7 @@ export const Header = ({
               padding: "5px",
             }}
           >
-            <DarkModeToggle />
+            <DarkModeToggle lang={lang} />
           </ListItem>
 
           {/* 言語切り替えボタン */}

@@ -4,32 +4,35 @@ import { DarkModeToggle } from ".";
 const metaData: Meta = {
   title: "DarkModeToggle",
   component: DarkModeToggle,
+  args: {
+    lang: "ja",
+  },
 };
 
 export default metaData;
 
 export const Default: StoryObj<typeof DarkModeToggle> = {
-  args: {},
+  args: {
+    lang: "ja",
+  },
   render: (args) => <DarkModeToggle {...args} />,
 };
 
-export const Variants: StoryObj<typeof DarkModeToggle> = {
+export const Languages: StoryObj<typeof DarkModeToggle> = {
   render: () => (
-    <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-      <DarkModeToggle variant="plain" />
-      <DarkModeToggle variant="outlined" />
-      <DarkModeToggle variant="soft" />
-      <DarkModeToggle variant="solid" />
-    </div>
-  ),
-};
-
-export const Sizes: StoryObj<typeof DarkModeToggle> = {
-  render: () => (
-    <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-      <DarkModeToggle size="sm" />
-      <DarkModeToggle size="md" />
-      <DarkModeToggle size="lg" />
+    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <div>
+        <strong>Japanese (ja)</strong>
+        <DarkModeToggle lang="ja" />
+      </div>
+      <div>
+        <strong>English (en)</strong>
+        <DarkModeToggle lang="en" />
+      </div>
+      <div>
+        <strong>Laotian (lo)</strong>
+        <DarkModeToggle lang="lo" />
+      </div>
     </div>
   ),
 };
