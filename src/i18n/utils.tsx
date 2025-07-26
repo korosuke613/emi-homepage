@@ -93,7 +93,7 @@ export function useContentTranslationsWithElement(lang: Languages) {
 }
 
 // Helper function to parse HTML and replace <a> tags with MUI Joy Link components
-function parseHtmlWithMuiLinks(htmlString: string): React.ReactNode {
+export function parseHtmlWithMuiLinks(htmlString: string): React.ReactNode {
   const sanitizedHtml = DOMPurify.sanitize(htmlString);
 
   const options: HTMLReactParserOptions = {

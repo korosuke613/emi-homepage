@@ -1,6 +1,7 @@
 ---
 import { Box } from "@mui/joy";
 import blogJson from "../../generated/blogs.json";
+import { ContentRenderer } from "../components/Blog/ContentRenderer";
 import { LanguageFallbackNotice } from "../components/Blog/LanguageFallbackNotice";
 import { Typography } from "../components/Typography";
 import type { Languages } from "../i18n/ui";
@@ -41,11 +42,6 @@ const isCurrentLanguageSupported = availableLanguagesForSlug.includes(lang);
   }}>
   <LanguageFallbackNotice blog={blog} currentLang={lang} availableLanguagesForSlug={availableLanguagesForSlug} client:load />
   <Typography>{blog.createdAt}</Typography>
-  <Box set:html={blog.content} sx={{
-    "& p": {
-      wordBreak: "break-all",
-      textWrap: "auto",
-    },
-  }}/>      
+  <ContentRenderer content={blog.content} client:load />
   </Box>
 </Layout>
