@@ -46,6 +46,30 @@ export const useThemeMode = () => {
   return context;
 };
 
+// Color scheme constants to prevent duplication
+const colorScheme = {
+  dark: {
+    backgroundColor: "#22282F",
+    "--joy-palette-background-body": "#22282F",
+    "--joy-palette-background-surface": "#2A3038",
+    "--joy-palette-text-primary": "#E8EAED",
+    "--joy-palette-text-secondary": "#BDC1C6",
+    "--joy-palette-primary-500": "#8BC5FF",
+    "--joy-palette-primary-visited": "#D8B4FE",
+    dataColorScheme: "dark",
+  },
+  light: {
+    backgroundColor: "#FFFFFF",
+    "--joy-palette-background-body": "#FFFFFF",
+    "--joy-palette-background-surface": "#F7F7F8",
+    "--joy-palette-text-primary": "rgba(10, 10, 10, 1)",
+    "--joy-palette-text-secondary": "rgba(10, 10, 10, 0.8)",
+    "--joy-palette-primary-500": "#3077e2",
+    "--joy-palette-primary-visited": "#6B21A8",
+    dataColorScheme: "light",
+  },
+} as const;
+
 const theme = extendTheme({
   fontFamily: {
     body: fontFamily,
@@ -56,8 +80,8 @@ const theme = extendTheme({
     light: {
       palette: {
         background: {
-          body: "var(--joy-palette-common-white, #FFF)",
-          surface: "var(--joy-palette-neutral-50, #F7F7F8)",
+          body: colorScheme.light["--joy-palette-background-body"],
+          surface: colorScheme.light["--joy-palette-background-surface"],
         },
         primary: {
           // Links and primary elements in light mode
@@ -66,21 +90,21 @@ const theme = extendTheme({
           200: "#90CAF9",
           300: "#64B5F6",
           400: "#42A5F5",
-          500: "#3077e2", // Darker blue for better contrast with visited links in light mode
+          500: colorScheme.light["--joy-palette-primary-500"], // Darker blue for better contrast with visited links in light mode
           600: "#1565C0",
           700: "#0D47A1",
           800: "#0A3D91",
           900: "#072F72",
           // Visited link color for light mode - high contrast purple
-          // visited: "#6B21A8", // RGB(107,33,168) - darker purple for better contrast
+          // visited: colorScheme.light["--joy-palette-primary-visited"], // RGB(107,33,168) - darker purple for better contrast
         },
       },
     },
     dark: {
       palette: {
         background: {
-          body: "#22282F", // RGB(34,40,47) - softer dark background
-          surface: "#2A3038", // Slightly lighter surface for contrast
+          body: colorScheme.dark["--joy-palette-background-body"], // RGB(34,40,47) - softer dark background
+          surface: colorScheme.dark["--joy-palette-background-surface"], // Slightly lighter surface for contrast
         },
         primary: {
           // Links and primary elements in dark mode - better contrast and visibility
@@ -89,17 +113,17 @@ const theme = extendTheme({
           200: "#BED3FF",
           300: "#91B5FF",
           400: "#6B9AFF",
-          500: "#8BC5FF", // RGB(139,197,255) - even brighter blue for better visibility in dark mode
+          500: colorScheme.dark["--joy-palette-primary-500"], // RGB(139,197,255) - even brighter blue for better visibility in dark mode
           600: "#5A9AFF",
           700: "#4A84E6",
           800: "#3B6DB8",
           900: "#2D5490",
           // Visited link color for dark mode - high contrast purple/lavender
-          // visited: "#D8B4FE", // RGB(216,180,254) - brighter purple for better contrast in dark mode
+          // visited: colorScheme.dark["--joy-palette-primary-visited"], // RGB(216,180,254) - brighter purple for better contrast in dark mode
         },
         text: {
-          primary: "#E8EAED", // Softer white text for better readability
-          secondary: "#BDC1C6", // Muted text color
+          primary: colorScheme.dark["--joy-palette-text-primary"], // Softer white text for better readability
+          secondary: colorScheme.dark["--joy-palette-text-secondary"], // Muted text color
         },
       },
     },
@@ -181,33 +205,16 @@ const ThemeProviderInner = ({ children }: Props) => {
 // CSS Custom Properties を即座に更新する関数
 const applyThemeToDOM = (resolvedMode: "light" | "dark") => {
   const root = document.documentElement;
+  const scheme = colorScheme[resolvedMode];
 
-  if (resolvedMode === "dark") {
-    // ダークモードのCSS variables を即座に適用
-    root.style.backgroundColor = "#22282F";
-    root.style.setProperty("--joy-palette-background-body", "#22282F");
-    root.style.setProperty("--joy-palette-background-surface", "#2A3038");
-    root.style.setProperty("--joy-palette-text-primary", "#E8EAED");
-    root.style.setProperty("--joy-palette-text-secondary", "#BDC1C6");
-    root.style.setProperty("--joy-palette-primary-500", "#8BC5FF");
-    root.style.setProperty("--joy-palette-primary-visited", "#D8B4FE");
-    root.setAttribute("data-joy-color-scheme", "dark");
-    root.setAttribute("data-color-scheme", "dark");
-  } else {
-    // ライトモードのCSS variables を即座に適用
-    root.style.backgroundColor = "#FFFFFF";
-    root.style.setProperty("--joy-palette-background-body", "#FFFFFF");
-    root.style.setProperty("--joy-palette-background-surface", "#F7F7F8");
-    root.style.setProperty("--joy-palette-text-primary", "rgba(25, 25, 25, 1)");
-    root.style.setProperty(
-      "--joy-palette-text-secondary",
-      "rgba(25, 25, 25, 0.6)",
-    );
-    root.style.setProperty("--joy-palette-primary-500", "#3077e2");
-    root.style.setProperty("--joy-palette-primary-visited", "#6B21A8");
-    root.setAttribute("data-joy-color-scheme", "light");
-    root.setAttribute("data-color-scheme", "light");
+  root.style.backgroundColor = scheme.backgroundColor;
+  for (const [key, value] of Object.entries(scheme)) {
+    if (key.startsWith("--")) {
+      root.style.setProperty(key, value);
+    }
   }
+  root.setAttribute("data-joy-color-scheme", scheme.dataColorScheme);
+  root.setAttribute("data-color-scheme", scheme.dataColorScheme);
 };
 
 // MUI Joy の useColorScheme を使ってモード管理

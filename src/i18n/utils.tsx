@@ -2,7 +2,6 @@ import { Link } from "@mui/joy";
 import parse, {
   type Element as ParsedElement,
   type HTMLReactParserOptions,
-  type Text,
 } from "html-react-parser";
 import DOMPurify from "isomorphic-dompurify";
 import {
@@ -96,6 +95,23 @@ export function useContentTranslationsWithElement(lang: Languages) {
   };
 }
 
+// Helper function to extract text content from parsed DOM node
+function extractTextContent(node: ParsedElement): string {
+  if (!node.children) return "";
+
+  return node.children
+    .map((child) => {
+      if (child.type === "text") {
+        return (child as { data: string }).data;
+      }
+      if (child.type === "tag") {
+        return extractTextContent(child as ParsedElement);
+      }
+      return "";
+    })
+    .join("");
+}
+
 // Helper function to parse HTML and replace <a> tags with MUI Joy Link components
 export function parseHtmlWithMuiLinks(htmlString: string): React.ReactNode {
   const sanitizedHtml = DOMPurify.sanitize(htmlString, {
@@ -122,9 +138,7 @@ export function parseHtmlWithMuiLinks(htmlString: string): React.ReactNode {
               },
             }}
           >
-            {node.children?.[0]?.type === "text"
-              ? (node.children[0] as Text).data
-              : ""}
+            {extractTextContent(node)}
           </Link>
         );
       }

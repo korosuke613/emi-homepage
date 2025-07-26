@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const DarkModeToggle = ({ lang }: Props) => {
-  const { mode, setMode } = useThemeMode();
+  const { mode, toggleMode } = useThemeMode();
   const t = useSharedTranslations(lang);
 
   const icons = {
@@ -24,22 +24,12 @@ export const DarkModeToggle = ({ lang }: Props) => {
     system: t("theme.system"),
   };
 
-  const handleToggle = () => {
-    if (mode === "light") {
-      setMode("dark");
-    } else if (mode === "dark") {
-      setMode("system");
-    } else {
-      setMode("light");
-    }
-  };
-
   return (
     <Tooltip title={tooltipTexts[mode]} arrow>
       <IconButton
         variant="outlined"
         color="neutral"
-        onClick={handleToggle}
+        onClick={toggleMode}
         aria-label={tooltipTexts[mode]}
         sx={{
           height: "50px",

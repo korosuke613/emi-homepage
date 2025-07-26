@@ -72,7 +72,7 @@ const normalizedTitle =
 ---
 
 <!doctype html>
-<html lang={lang} style="background: #FFFFFF !important; color: rgba(25, 25, 25, 1) !important; min-height: 100vh !important;">
+<html lang={lang} style="background: #FFFFFF !important; color: rgb(6, 6, 6) !important; min-height: 100vh !important;">
 	<head>
 		<!-- META must be first to prevent encoding issues -->
 		<meta charset="UTF-8" />
@@ -80,12 +80,12 @@ const normalizedTitle =
 		<!-- Immediate inline styles to prevent any flashing -->
 		<style>
 			/* Aggressive FOUC prevention - applied immediately */
-			* {
-				background-color: inherit !important;
+			body, div, section, article, header, footer, main, aside, nav {
+				background-color: transparent;
 			}
 			html, body {
 				background: #FFFFFF !important;
-				color: rgba(25, 25, 25, 1) !important;
+				color: rgb(6, 6, 6) !important;
 				min-height: 100vh !important;
 			}
 			html[data-color-scheme="dark"], html[data-color-scheme="dark"] body {
@@ -96,7 +96,8 @@ const normalizedTitle =
 		
 		<!-- Immediate FOUC prevention - must be as early as possible -->
 		<script is:inline>
-			(function() {
+			// Reusable function to apply CSS variables based on color scheme
+			function applyColorScheme() {
 				const storageKey = 'joy-color-scheme';
 				let colorScheme = 'light';
 				
@@ -112,17 +113,36 @@ const normalizedTitle =
 					colorScheme = 'light';
 				}
 				
-				// Apply data attribute and direct styles immediately
 				const htmlElement = document.documentElement;
-				htmlElement.setAttribute('data-color-scheme', colorScheme);
+				const root = document.documentElement;
 				
+				// Apply data attributes
+				htmlElement.setAttribute('data-color-scheme', colorScheme);
+				root.setAttribute('data-joy-color-scheme', colorScheme);
+				
+				// Apply direct styles and CSS variables
 				if (colorScheme === 'dark') {
 					htmlElement.style.background = '#22282F';
 					htmlElement.style.color = '#E8EAED';
+					root.style.setProperty('--joy-palette-background-body', '#22282F');
+					root.style.setProperty('--joy-palette-text-primary', '#E8EAED');
+					root.style.setProperty('--joy-palette-primary-500', '#8BC5FF');
+					root.style.setProperty('--joy-palette-primary-visited', '#D8B4FE');
 				} else {
 					htmlElement.style.background = '#FFFFFF';
-					htmlElement.style.color = 'rgba(25, 25, 25, 1)';
+					htmlElement.style.color = 'rgba(10, 10, 10, 1)';
+					root.style.setProperty('--joy-palette-background-body', '#FFFFFF');
+					root.style.setProperty('--joy-palette-text-primary', 'rgba(10, 10, 10, 1)');
+					root.style.setProperty('--joy-palette-primary-500', '#3077e2');
+					root.style.setProperty('--joy-palette-primary-visited', '#6B21A8');
 				}
+				
+				return colorScheme;
+			}
+			
+			// Execute immediately for FOUC prevention
+			(function() {
+				applyColorScheme();
 			})();
 		</script>
 
@@ -222,43 +242,6 @@ const normalizedTitle =
 			</style>
 		)}
 
-		<!-- Additional CSS variables setup -->
-		<script is:inline>
-			// Apply additional CSS variables for consistency
-			(function() {
-				const storageKey = 'joy-color-scheme';
-				let colorScheme = 'light';
-				
-				try {
-					const savedMode = localStorage.getItem(storageKey);
-					const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-					
-					if (savedMode === 'dark' || (savedMode === 'system' && systemPrefersDark) || (!savedMode && systemPrefersDark)) {
-						colorScheme = 'dark';
-					}
-				} catch (e) {
-					colorScheme = 'light';
-				}
-				
-				const root = document.documentElement;
-				
-				// Apply comprehensive CSS variables
-				if (colorScheme === 'dark') {
-					root.style.setProperty('--joy-palette-background-body', '#22282F');
-					root.style.setProperty('--joy-palette-text-primary', '#E8EAED');
-					root.style.setProperty('--joy-palette-primary-500', '#8BC5FF');
-					root.style.setProperty('--joy-palette-primary-visited', '#D8B4FE');
-					root.setAttribute('data-joy-color-scheme', 'dark');
-				} else {
-					root.style.setProperty('--joy-palette-background-body', '#FFFFFF');
-					root.style.setProperty('--joy-palette-text-primary', 'rgba(25, 25, 25, 1)');
-					root.style.setProperty('--joy-palette-primary-500', '#3077e2');
-					root.style.setProperty('--joy-palette-primary-visited', '#6B21A8');
-					root.setAttribute('data-joy-color-scheme', 'light');
-				}
-			})();
-		</script>
-
 		<SpeedInsights />
 	</head>
 	<body>
@@ -286,7 +269,7 @@ body {
 	font-family: "Noto Serif JP", "Times New Roman", serif;
 	/* Use MUI Joy CSS variables for background color with fallback */
 	background-color: var(--joy-palette-background-body, #FFFFFF) !important;
-	color: var(--joy-palette-text-primary, rgba(25, 25, 25, 1));
+	color: var(--joy-palette-text-primary, rgba(10, 10, 10, 1));
 	/* Ensure full height coverage */
 	min-height: 100vh;
 }
