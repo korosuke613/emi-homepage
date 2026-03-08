@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-このファイルは、このリポジトリでコードを扱う際のClaude Code (claude.ai/code)向けのガイダンスです。
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## ルール
 - **重要** やりとりは日本語で回答すること
@@ -9,191 +9,109 @@
 
 **開発サーバー起動:**
 ```bash
-pnpm run dev
-# または
-pnpm start
+pnpm run dev                # テストデータで開発サーバー起動
+pnpm run production-dev     # microCMSの実データで開発サーバー起動
 ```
 
-**ビルド:**
+**ビルド・プレビュー:**
 ```bash
-pnpm run build              # テストデータでビルド
+pnpm run build              # テストデータでビルド（astro check含む）
 pnpm run production-build   # microCMSの実データでビルド
-```
-
-**プレビュー:**
-```bash
 pnpm run preview            # テストデータでプレビュー
 pnpm run production-preview # microCMSの実データでプレビュー
 ```
 
-**開発サーバー（microCMSデータ使用）:**
-```bash
-pnpm run production-dev     # microCMSの実データで開発サーバー起動
-```
-
 **コード品質とフォーマット:**
 ```bash
-pnpm run biome        # Biomeリンター/フォーマッター実行
+pnpm run biome        # Biomeリンター/フォーマッター実行（src/のみ対象）
 pnpm run biome:apply  # リンティング問題の自動修正
-pnpm run biome:ci     # CI環境用のBiomeチェック
-pnpm run preCommit    # コミット前品質チェック（biome:apply実行）
-```
-
-**コンポーネント開発:**
-```bash
-pnpm run storybook    # コンポーネント開発用Storybook起動
+pnpm run preCommit    # コミット前品質チェック（= biome:apply）
 ```
 
 **テスト:**
 ```bash
 pnpm run test           # 全テスト実行（unit + storybook + e2e）
 pnpm run test:unit      # Vitestユニットテスト実行
-pnpm run test:unit:ui   # Vitestユニットテスト（UI付き）実行
 pnpm run test:storybook # Storybookテスト実行
 pnpm run test:e2e       # Playwrightテスト実行
-pnpm run test:e2e:ui    # Playwrightテスト（UI付き）実行
+```
+
+**単一テスト実行:**
+```bash
+pnpm run test:unit -- src/path/to/test.test.ts   # 特定のユニットテスト
+pnpm run test:e2e -- e2e/specific.spec.ts         # 特定のE2Eテスト
 ```
 
 **プロジェクトチェック:**
 ```bash
-pnpm run check          # Astroプロジェクトチェック
-astro check            # TypeScriptとAstroファイルの型チェック
+pnpm run check    # Astro型チェック（astro check）
 ```
 
 ## アーキテクチャ概要
 
-これはReactコンポーネントを使った**Astroベースの静的サイト**で、国際化対応の個人ホームページです。
+Reactコンポーネントを使った**Astroベースの静的サイト**。国際化対応の個人ホームページ。
 
 ### 技術スタック
-- **フレームワーク**: Astro 4.16+ (静的出力)
+- **フレームワーク**: Astro (静的出力) + Vercelアダプター
 - **UI**: React + TypeScript + Material-UI (MUI Joy)
-- **コンテンツ**: ハイブリッド方式 - ローカルAstro Content Collections + MicroCMS
+- **コンテンツ**: ローカルAstro Content Collections + MicroCMS（ハイブリッド）
 - **スタイリング**: Emotion CSS-in-JS
-- **コード品質**: Biome (ESLint/Prettierの代替)
-- **テスト**: Vitest (ユニットテスト) + Storybook (コンポーネントテスト) + Playwright (E2Eテスト)
-- **デプロイ**: Vercel (静的アダプター)
+- **コード品質**: Biome（ESLint/Prettierの代替、`src/`のみ対象）
+- **テスト**: Vitest + Storybook + Playwright
 
 ### 国際化 (i18n)
 - **対応言語**: 日本語（デフォルト）、英語、ラオス語
-- **ルーティング**: 
-  - 日本語: `/`, `/career`, `/blog` (デフォルトルート)
-  - 英語: `/en/`, `/en/career`, `/en/blog` (プレフィックス付き)
-  - ラオス語: `/lo/`, `/lo/career`, `/lo/blog` (プレフィックス付き)
-- **翻訳ファイル**: `/src/i18n/ui.ts` に共通翻訳
-- **ユーティリティ**: `/src/i18n/utils.tsx` でReact統合
+- **ルーティング**: 日本語はプレフィックスなし（`/blog`）、英語・ラオス語はプレフィックス付き（`/en/blog`, `/lo/blog`）
+- **翻訳**: `/src/i18n/ui.ts`（翻訳定義）、`/src/i18n/utils.tsx`（React統合）
 
 ### コンテンツ管理
-- **ブログコンテンツ**: デュアルシステム
-  - `/src/content/blog/` のローカルMarkdownファイル（Astro Content Collections）
-  - MicroCMS統合によるリモートコンテンツ（`/src/utils/microcms.ts`）
-- **環境対応**: データ取得方法の環境別分岐
-  - 通常のビルド: テストデータ（`.github/workflows/sample-data/blogs.json`）を使用
-  - Vercel本番環境: 自動的にMicroCMSから実データを取得
-  - 開発時にMicroCMSデータが必要な場合: `PRODUCTION=true`環境変数を使用
-- **型安全**: コンテンツ検証用Zodスキーマ
+- **ローカル**: `/src/content/blog/` のMarkdownファイル（Astro Content Collections、Zodスキーマで型安全）
+- **リモート**: MicroCMS統合（`/src/utils/microcms.ts`）
+- **環境別分岐**:
+  - 通常ビルド: テストデータ（`.github/workflows/sample-data/blogs.json`）
+  - Vercel本番: MicroCMSから実データ取得
+  - 開発時に実データ: `PRODUCTION=true`環境変数
 
 ### コンポーネントアーキテクチャ
-- **デザインシステム**: `/src/components/` にStorybook統合
 - **ページコンポーネント**: `/src/components/Page/` にレイアウトコンポーネント
 - **ハイドレーション**: `client:visible`による選択的クライアントサイドハイドレーション
-- **レスポンシブ**: MUI Joyブレークポイントでモバイルファースト設計
-
-### フォント最適化
-- **全ウェイトプリロード**: Layout.astroでNoto Serif JPの全ウェイト（400、500、700）をpreload
-- **font-display最適化**: `font-display: swap`を使用してフォント読み込み時の視覚的な伸び縮みを軽減
-- **環境別フォント**: 開発時はシステムセリフフォント、本番時はNoto Serif JP
-- **カスタムCSS**: `/src/styles/fonts-optimized.css`で最適化されたフォント定義
-- **FOUC防止**: フォントプリロードとfont-displayによりFlash of Unstyled Contentを軽減
-- **パフォーマンス最適化**: 開発時はフォント読み込みを無効化して高速化
-
-### フォント問題の解決アプローチ
-
-#### 問題: ページ表示時のフォント遅延ロード
-サイトでWebフォント（Noto Serif JP）使用時に、フォント読み込みによる視覚的な伸び縮みが発生
-
-#### 解決方法1: システムフォントのみ使用
-- **ブランチ**: `claude/issue-52-20250709_152817`
-- **アプローチ**: Webフォントを完全に削除し、システムフォント（Times New Roman等）のみを使用
-- **利点**: フォント読み込み遅延の完全解決、パフォーマンス向上
-- **欠点**: デザイン面でのフォント統一性が失われる
-
-#### 解決方法2: Noto Serif JP最適化使用
-- **ブランチ**: `claude/issue-52-noto-serif-jp-optimized`
-- **アプローチ**: 全ウェイトプリロード + `font-display: swap` + カスタムフォント定義
-- **利点**: デザイン統一性を保ちながらフォント読み込み最適化
-- **欠点**: 初期読み込みサイズが若干増加
+- **フォント**: 本番=Noto Serif JP（全ウェイトpreload + `font-display: swap`）、開発=システムセリフフォント
 
 ### 重要ファイル
-- **`astro.config.mts`**: メインAstro設定（i18nと統合）
-- **`biome.json`**: コード品質設定
+- **`astro.config.mts`**: Astro設定（i18n、Vite最適化、MUI事前バンドル）
+- **`biome.json`**: Biome設定（`src/`スコープ、`noUnusedImports: error`）
 - **`src/content/config.ts`**: コンテンツコレクションスキーマ
 - **`src/utils/staticRoute.ts`**: ページルート定義
-- **`src/layouts/Layout.astro`**: フォントpreload設定
+- **`src/layouts/Layout.astro`**: メインレイアウト（フォントpreload）
 - **`src/components/ThemeProvider/index.tsx`**: 環境別フォント設定
-- **`src/styles/fonts-optimized.css`**: 最適化されたフォント定義（font-display: swap使用）
-- **`vercel.json`**: デプロイ設定
+- **`src/styles/fonts-optimized.css`**: フォント定義（`font-display: swap`）
 
 ### ソフトウェア仕様
 
-詳細な外部仕様については @SPEC.md を参照してください。
+詳細な外部仕様については docs/SPEC.md を参照。
 
-#### 実装関連
-- **実装ファイル**: 
-  - `/src/pages/[...lang]/blog/[...slug].astro`: 多言語ブログページ
-  - `/src/pages/blog/[...slug].astro`: デフォルト言語ブログページ  
-  - `/src/components/Page/Header/LangSelector/index.tsx`: 言語切り替え機能
-  - `/src/layouts/Blog.astro`: ブログレイアウト（langパラメータ受け取り）
-  - `/src/components/Blog/LanguageFallbackNotice/`: 言語フォールバック通知
+## 開発時の注意点
 
-#### パス生成ルール
-- **全ブログ×全言語**: getStaticPaths()で全ブログに対して全言語のパスを生成
-- **URLパラメータ優先**: `Blog.astro`では`blog.language[0]`ではなく`Astro.params.lang`を使用
-- **言語アイコン表示**: LangSelectorはURLの言語パラメータに基づいてアイコン表示
-
-#### テスト
-- **E2Eテスト**: `/e2e/multilingual-blog.spec.ts` でブログフォールバック機能をテスト
-- **ブログ一覧テスト**: `/e2e/blog-list.spec.ts` でブログ一覧の言語絵文字機能をテスト
-- **テストデータ**: `.github/workflows/sample-data/blogs.json` を使用（MicroCMS非依存）
-- **実行**: `pnpm run test:e2e` で多言語切り替えとURL正規化をテスト
-
-### 開発時の注意点
-
-#### 基本ルール
-- 日本語で回答する
-- `.npmrc` で `save-exact=true` を設定済みのため、`pnpm add パッケージ名` で自動的にバージョン固定される
-- コードフォーマットには**ESLint/Prettierではなく、Biome**を使用
-- **コードを編集したら必ず `pnpm run biome:apply` を実行**してフォーマットとリンティング修正を適用
+### 基本ルール
+- `.npmrc`で`save-exact=true`設定済み — `pnpm add`で自動バージョン固定
+- コードフォーマットは**Biome**（ESLint/Prettierではない）
+- **コード編集後は必ず`pnpm run biome:apply`を実行**
 - 全コンポーネントには対応する**Storybookストーリー**が必要
-- ブログ投稿は**多言語コンテンツ**対応 - content configのスキーマを確認
-- MicroCMS統合は**環境別データ取得**を処理
-- サイトに変更を加えた場合、playwright mcp を利用して動作確認
-- ルートは**ビルド時に静的生成**されパフォーマンス最適化
-- チャットを通じてCLAUDE.mdに書くべきがあれば随時更新
-- コミット前に必ず `pnpm run preCommit` を実行してコード品質チェック＆フォーマット
+- サイト変更後はplaywright mcpで動作確認
+- コミット前に必ず`pnpm run preCommit`を実行
 
-#### 開発パフォーマンス
-- **開発サーバー高速化**: フォント読み込みは本番環境でのみ実行
-- **Vite最適化**: MUIコンポーネントとアイコンを事前バンドル
-- **設定ファイル**: `astro.config.mts`でESモジュール対応とTypeScript統合
-- **フォントフォールバック**: 開発時はシステムセリフフォントで代替表示
-
-#### コミット・プルリクエストルール
+### コミット・プルリクエストルール
 - **言語**: コミット、プルリクエスト作成時は英語を使用
-- **コミット粒度**: 機能別・論理的まとまり別にコミットを分ける（wipコミットは避ける）
-- **コミットメッセージプレフィックス**:
-  - `feat:` 新機能追加
-  - `fix:` バグ修正
-  - `ci:` テスト環境整備、CI/CD関連
-  - `test:` テストファイルの追加・修正
-  - `chore:` 設定ファイル更新、依存関係更新
-  - `docs:` ドキュメント更新
-- **プルリクエスト**: issueを元に作成する際は、descriptionに `closed #<issue番号>`を含める
+- **コミット粒度**: 機能別・論理的まとまり別に分ける（wipコミットは避ける）
+- **プレフィックス**: `feat:` / `fix:` / `ci:` / `test:` / `chore:` / `docs:`
+- **PR**: issueベースの場合、descriptionに`closed #<issue番号>`を含める
 
-#### Gitワークフロー
-- **mainブランチ保護**: mainブランチへの直接コミットは禁止 - 必ず機能ブランチを作成してから作業
-- **ブランチ命名**: `<type>/<brief-description>` 形式（例：`feat/add-new-component`, `fix/resolve-routing-issue`）
-- **コミット**: 目的が複数個あると判断した場合、目的ごとにコミットする
+### Gitワークフロー
+- **mainブランチ保護**: 直接コミット禁止 — 必ず機能ブランチを作成
+- **ブランチ命名**: `<type>/<brief-description>`（例: `feat/add-new-component`）
+- **コミット**: 目的が複数あれば目的ごとに分割
 
-#### テスト関連
-- **テストケースタイトル**: 日本語で記述し、「〜するべき」という形式で書く
-- **テスト実行**: 機能追加後は必ず関連するテストを実行して動作確認
+### テスト関連
+- **テストケースタイトル**: 日本語、「〜するべき」形式
+- **テスト実行**: 機能追加後は必ず関連テストを実行
+- **テストデータ**: `.github/workflows/sample-data/blogs.json`（MicroCMS非依存）
