@@ -39,7 +39,7 @@
     "@vercel/speed-insights": "1.0.12",
     "astro": "5.18.0",
     "html-react-parser": "5.2.6",
-    "isomorphic-dompurify": "2.26.0",
+    "isomorphic-dompurify": "3.0.0",
     "microcms-js-sdk": "3.2.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
@@ -60,14 +60,15 @@
     "@vitest/coverage-v8": "^3.2.3",
     "@vitest/ui": "^3.2.3",
     "jsdom": "^26.1.0",
-    "playwright": "1.53.0",
+    "playwright": "1.58.2",
     "storybook": "9.1.19",
     "vitest": "^3.2.3"
   },
   "packageManager": "pnpm@10.29.1",
   "pnpm": {
     "overrides": {
-      "storybook": "$storybook"
+      "storybook": "$storybook",
+      "lodash": ">=4.17.23"
     },
     "onlyBuiltDependencies": [
       "@biomejs/biome",
