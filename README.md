@@ -21,19 +21,19 @@
 
 ```bash
 # 開発サーバー起動（高速化されたフォント設定）
-npm run dev
+pnpm run dev
 
 # 本番ビルド
-npm run build
+pnpm run build
 
 # MicroCMSデータでの開発
-npm run production-dev
+pnpm run production-dev
 
 # テスト実行
-npm run test
+pnpm run test
 
 # コード品質チェック
-npm run biome
+pnpm run biome
 ```
 
 ## パフォーマンス最適化

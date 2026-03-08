@@ -27,27 +27,27 @@
 
 ```bash
 # 開発
-npm run dev                 # 開発サーバー起動（高速フォント）
-npm run production-dev      # MicroCMSデータでの開発
+pnpm run dev                 # 開発サーバー起動（高速フォント）
+pnpm run production-dev      # MicroCMSデータでの開発
 
 # ビルド
-npm run build              # チェック付き本番ビルド
-npm run preview            # 本番ビルドのプレビュー
+pnpm run build              # チェック付き本番ビルド
+pnpm run preview            # 本番ビルドのプレビュー
 
 # テスト
-npm run test               # 全テスト実行
-npm run test:unit          # ユニットテストのみ
-npm run test:e2e           # E2Eテストのみ
-npm run test:storybook     # Storybookテスト
+pnpm run test               # 全テスト実行
+pnpm run test:unit          # ユニットテストのみ
+pnpm run test:e2e           # E2Eテストのみ
+pnpm run test:storybook     # Storybookテスト
 
 # コード品質
-npm run biome              # コード品質チェック
-npm run biome:apply        # コード問題の修正
-npm run preCommit          # プリコミットフック
+pnpm run biome              # コード品質チェック
+pnpm run biome:apply        # コード問題の修正
+pnpm run preCommit          # プリコミットフック
 
 # Storybook
-npm run storybook          # Storybook開発サーバー起動
-npm run build-storybook    # Storybookビルド
+pnpm run storybook          # Storybook開発サーバー起動
+pnpm run build-storybook    # Storybookビルド
 ```
 
 ## パフォーマンス最適化
