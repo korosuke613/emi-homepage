@@ -15,7 +15,7 @@
 
 ### 1. GitHubでファイルを開く
 
-1. [GitHub](https://github.com/korosuke613/emi-homepage)のリポジトリに移動
+1. [GitHub](https://github.com/Amybystara/emi-homepage)のリポジトリに移動
 2. 編集したいファイルを選択（例：`src/i18n/content/about.ts`）
 3. ファイルの右上にある **鉛筆マーク（Edit）** をクリック
 
