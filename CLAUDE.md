@@ -9,54 +9,54 @@
 
 **開発サーバー起動:**
 ```bash
-npm run dev
+pnpm run dev
 # または
-npm start
+pnpm start
 ```
 
 **ビルド:**
 ```bash
-npm run build              # テストデータでビルド
-npm run production-build   # microCMSの実データでビルド
+pnpm run build              # テストデータでビルド
+pnpm run production-build   # microCMSの実データでビルド
 ```
 
 **プレビュー:**
 ```bash
-npm run preview            # テストデータでプレビュー
-npm run production-preview # microCMSの実データでプレビュー
+pnpm run preview            # テストデータでプレビュー
+pnpm run production-preview # microCMSの実データでプレビュー
 ```
 
 **開発サーバー（microCMSデータ使用）:**
 ```bash
-npm run production-dev     # microCMSの実データで開発サーバー起動
+pnpm run production-dev     # microCMSの実データで開発サーバー起動
 ```
 
 **コード品質とフォーマット:**
 ```bash
-npm run biome        # Biomeリンター/フォーマッター実行
-npm run biome:apply  # リンティング問題の自動修正
-npm run biome:ci     # CI環境用のBiomeチェック
-npm run preCommit    # コミット前品質チェック（biome:apply実行）
+pnpm run biome        # Biomeリンター/フォーマッター実行
+pnpm run biome:apply  # リンティング問題の自動修正
+pnpm run biome:ci     # CI環境用のBiomeチェック
+pnpm run preCommit    # コミット前品質チェック（biome:apply実行）
 ```
 
 **コンポーネント開発:**
 ```bash
-npm run storybook    # コンポーネント開発用Storybook起動
+pnpm run storybook    # コンポーネント開発用Storybook起動
 ```
 
 **テスト:**
 ```bash
-npm run test           # 全テスト実行（unit + storybook + e2e）
-npm run test:unit      # Vitestユニットテスト実行
-npm run test:unit:ui   # Vitestユニットテスト（UI付き）実行
-npm run test:storybook # Storybookテスト実行
-npm run test:e2e       # Playwrightテスト実行
-npm run test:e2e:ui    # Playwrightテスト（UI付き）実行
+pnpm run test           # 全テスト実行（unit + storybook + e2e）
+pnpm run test:unit      # Vitestユニットテスト実行
+pnpm run test:unit:ui   # Vitestユニットテスト（UI付き）実行
+pnpm run test:storybook # Storybookテスト実行
+pnpm run test:e2e       # Playwrightテスト実行
+pnpm run test:e2e:ui    # Playwrightテスト（UI付き）実行
 ```
 
 **プロジェクトチェック:**
 ```bash
-npm run check          # Astroプロジェクトチェック
+pnpm run check          # Astroプロジェクトチェック
 astro check            # TypeScriptとAstroファイルの型チェック
 ```
 
@@ -154,22 +154,22 @@ astro check            # TypeScriptとAstroファイルの型チェック
 - **E2Eテスト**: `/e2e/multilingual-blog.spec.ts` でブログフォールバック機能をテスト
 - **ブログ一覧テスト**: `/e2e/blog-list.spec.ts` でブログ一覧の言語絵文字機能をテスト
 - **テストデータ**: `.github/workflows/sample-data/blogs.json` を使用（MicroCMS非依存）
-- **実行**: `npm run test:e2e` で多言語切り替えとURL正規化をテスト
+- **実行**: `pnpm run test:e2e` で多言語切り替えとURL正規化をテスト
 
 ### 開発時の注意点
 
 #### 基本ルール
 - 日本語で回答する
-- npm install時は -E を付けてバージョン固定する
+- `.npmrc` で `save-exact=true` を設定済みのため、`pnpm add パッケージ名` で自動的にバージョン固定される
 - コードフォーマットには**ESLint/Prettierではなく、Biome**を使用
-- **コードを編集したら必ず `npm run biome:apply` を実行**してフォーマットとリンティング修正を適用
+- **コードを編集したら必ず `pnpm run biome:apply` を実行**してフォーマットとリンティング修正を適用
 - 全コンポーネントには対応する**Storybookストーリー**が必要
 - ブログ投稿は**多言語コンテンツ**対応 - content configのスキーマを確認
 - MicroCMS統合は**環境別データ取得**を処理
 - サイトに変更を加えた場合、playwright mcp を利用して動作確認
 - ルートは**ビルド時に静的生成**されパフォーマンス最適化
 - チャットを通じてCLAUDE.mdに書くべきがあれば随時更新
-- コミット前に必ず `npm run preCommit` を実行してコード品質チェック＆フォーマット
+- コミット前に必ず `pnpm run preCommit` を実行してコード品質チェック＆フォーマット
 
 #### 開発パフォーマンス
 - **開発サーバー高速化**: フォント読み込みは本番環境でのみ実行
