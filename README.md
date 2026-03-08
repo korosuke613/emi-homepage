@@ -6,7 +6,7 @@
 
 ## 技術スタック
 
-- **フレームワーク**: Astro 4.16+ (静的サイト生成)
+- **フレームワーク**: Astro (静的サイト生成) + Vercelアダプター
 - **言語**: TypeScript
 - **UI**: React + MUI Joy
 - **スタイリング**: Emotion CSS-in-JS
@@ -20,34 +20,24 @@
 ## 開発
 
 ```bash
-# 開発サーバー起動（高速化されたフォント設定）
+# 開発サーバー起動（テストデータ使用、フォント読み込み無効で高速）
 pnpm run dev
 
-# 本番ビルド
-pnpm run build
-
-# MicroCMSデータでの開発
+# MicroCMSの実データで開発
 pnpm run production-dev
 
-# テスト実行
+# ビルド（astro check含む）
+pnpm run build
+
+# テスト実行（unit + storybook + e2e）
 pnpm run test
 
-# コード品質チェック
-pnpm run biome
+# コード品質チェック・自動修正
+pnpm run biome:apply
 ```
 
-## パフォーマンス最適化
+## ドキュメント
 
-### 開発サーバー高速化
-- フォント読み込みを本番環境でのみ実行
-- 開発時はシステムセリフフォントで代替
-- Vite依存関係の事前最適化
-
-### 本番最適化
-- Noto Serif JPフォントのpreload
-- FOUC (Flash of Unstyled Content) 防止
-- チャンク分割による効率的な読み込み
-
-## アーキテクチャ
-
-詳細な設計情報は [CLAUDE.md](./CLAUDE.md) と [SPEC.md](./SPEC.md) を参照。
+- [CLAUDE.md](./CLAUDE.md) - 開発ガイダンス・アーキテクチャ概要
+- [docs/SPEC.md](./docs/SPEC.md) - 外部仕様（多言語ブログ・i18n等）
+- [docs/CONTENT_EDITING_GUIDE.md](./docs/CONTENT_EDITING_GUIDE.md) - 文言編集ガイド（非エンジニア向け）
