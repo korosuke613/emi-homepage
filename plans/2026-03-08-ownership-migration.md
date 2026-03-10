@@ -29,32 +29,24 @@ Git（GitHub）・Vercel・microCMS の3サービスのオーナーを移行す�
 ※ `src/components/SocialNetworks/SocialNetworksTemplate/SocialNetworksTemplate.stories.tsx:58` の `korosuke613.dev` はStorybook用のダミーデータなので変更不要。
 ※ `.claude/settings.local.json` はローカル設定（gitignore済み）なので対象外。
 
-## Phase 2: GitHub リポジトリ Transfer（手動・GitHub側作業）
+## Phase 2: Vercel プロジェクト移行（手動・Vercel側作業）
 
-1. `Amybystara` のGitHubアカウントが存在することを確認
-2. **GitHub** → `korosuke613/emi-homepage` → Settings → General → Danger Zone → "Transfer repository"
-3. 新オーナーとして `Amybystara` を指定
-4. Transfer 完了後、旧URL（`korosuke613/emi-homepage`）から自動リダイレクトされる
-5. ローカルのリモートURLを更新:
-   ```bash
-   git remote set-url origin https://github.com/Amybystara/emi-homepage.git
-   ```
-
-## Phase 3: Vercel プロジェクト移行（手動・Vercel側作業）
-
-GitHub Transfer 完了後に実施。**Transfer 方式**を使用し、ドメイン（`emi-homepage.vercel.app`）・環境変数・デプロイ履歴を維持する。
+GitHub リポジトリが `korosuke613/emi-homepage` のまま安定した状態で先に実施する。
+**Transfer 方式**を使用し、ドメイン（`emi-homepage.vercel.app`）・環境変数・デプロイ履歴・Git連携を維持する。
 amybystera 側を一時的にProプランにアップグレードし、Transfer 完了後にHobbyに戻す。
 
 1. **`amybystera` の Vercel アカウントを作成**
    - GitHub `Amybystara` アカウントで Vercel にサインアップ（Git連携が楽）
 2. **amybystera を一時的にProプランにアップグレード**
    - メンバー招待にはProプランが必要（Hobbyプランでは不可）
+   - 支払い方法の登録が必要
 3. **amybystera が korosuke613 をチームメンバーとして招待**
    - Transfer を実行するには、korosuke613 が移行先チームのメンバーである必要がある
 4. **korosuke613 が Transfer を実行**:
    - `emi-homepage` プロジェクト → Settings → General → Transfer Project
    - Transfer 先として amybystera のチームを選択
-   - ドメイン・環境変数・デプロイ履歴がすべて引き継がれる（ゼロダウンタイム）
+   - ドメイン・環境変数・デプロイ履歴・Git連携がすべて引き継がれる（ゼロダウンタイム）
+   - ※ Integrations は引き継がれないため、Transfer後に再設定が必要
 5. **Transfer 後の確認**: amybystera 側でサイトが正常表示されることを確認
 6. **korosuke613 が amybystera のチームから退出**
 7. **amybystera が Hobbyプランにダウングレード**
@@ -69,6 +61,20 @@ amybystera 側を一時的にProプランにアップグレードし、Transfer 
 4. korosuke613 が旧プロジェクトを削除
 
 ※ フォールバック方式ではドメインが `emi-homepage-<hash>.vercel.app` 等に変更される可能性がある。`README.md` のバッジURLを再確認すること。
+
+## Phase 3: GitHub リポジトリ Transfer（手動・GitHub側作業）
+
+Vercel Transfer 完了後に実施。
+
+1. `Amybystara` のGitHubアカウントが存在することを確認
+2. **GitHub** → `korosuke613/emi-homepage` → Settings → General → Danger Zone → "Transfer repository"
+3. 新オーナーとして `Amybystara` を指定
+4. Transfer 完了後、旧URL（`korosuke613/emi-homepage`）から自動リダイレクトされる
+5. ローカルのリモートURLを更新:
+   ```bash
+   git remote set-url origin https://github.com/Amybystara/emi-homepage.git
+   ```
+6. Vercel 側で Git 連携先を確認（必要に応じて `Amybystara/emi-homepage` に再接続）
 
 ## Phase 4: microCMS オーナー移行（手動・サービス側作業）
 
@@ -90,8 +96,8 @@ microCMSはサービスそのまま、権限だけ移行。
 
 ```
 1. コードベース修正           （Phase 1）← Claude Code で実施（README.md, CONTENT_EDITING_GUIDE.md）
-2. GitHub Transfer           （Phase 2）← 手動
-3. Vercel Transfer            （Phase 3）← GitHub Transfer 完了後・手動
+2. Vercel Transfer            （Phase 2）← Git連携が安定した状態で先に実施・手動
+3. GitHub Transfer           （Phase 3）← Vercel Transfer 完了後・手動
 4. microCMS 権限移行        （Phase 4）← 手動
 5. 動作確認                  （Phase 5）
 ```
