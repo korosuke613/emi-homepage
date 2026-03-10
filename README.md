@@ -1,6 +1,6 @@
 # emi-homepage
 
-[![Vercel](https://vercelbadges.com/api/korosuke613/emi-homepage)](https://emi-homepage.vercel.app)
+[![Vercel](https://vercelbadges.com/api/Amybystara/emi-homepage)](https://emi-homepage.vercel.app)
 
 牧浦えみの個人ホームページ（多言語対応）
 
