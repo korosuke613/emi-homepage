@@ -43,25 +43,28 @@ Git（GitHub）・Vercel・microCMS の3サービスのオーナーを移行す�
 ## Phase 3: Vercel プロジェクト移行（手動・Vercel側作業）
 
 GitHub Transfer 完了後に実施。**Transfer 方式**を使用し、ドメイン（`emi-homepage.vercel.app`）・環境変数・デプロイ履歴を維持する。
+amybystera 側を一時的にProプランにアップグレードし、Transfer 完了後にHobbyに戻す。
 
 1. **`amybystera` の Vercel アカウントを作成**
    - GitHub `Amybystara` アカウントで Vercel にサインアップ（Git連携が楽）
-   - 個人アカウントは自動的に「チーム」として作成される（2024年1月以降の仕様）
-2. **Amybystera が korosuke613 をチームメンバーとして招待**
+2. **amybystera を一時的にProプランにアップグレード**
+   - メンバー招待にはProプランが必要（Hobbyプランでは不可）
+3. **amybystera が korosuke613 をチームメンバーとして招待**
    - Transfer を実行するには、korosuke613 が移行先チームのメンバーである必要がある
-3. **korosuke613 が Transfer を実行**:
+4. **korosuke613 が Transfer を実行**:
    - `emi-homepage` プロジェクト → Settings → General → Transfer Project
-   - Transfer 先として Amybystera のチームを選択
+   - Transfer 先として amybystera のチームを選択
    - ドメイン・環境変数・デプロイ履歴がすべて引き継がれる（ゼロダウンタイム）
-4. **Transfer 後の確認**: Amybystera 側でサイトが正常表示されることを確認
-5. **korosuke613 が Amybystera のチームから退出**
+5. **Transfer 後の確認**: amybystera 側でサイトが正常表示されることを確認
+6. **korosuke613 が amybystera のチームから退出**
+7. **amybystera が Hobbyプランにダウングレード**
 
 ### Transfer がうまくいかない場合（フォールバック）
 
-Transfer 時に Pro プランへのアップグレードや支払い方法を求められた場合は、新規プロジェクト作成方式に切り替える:
+新規プロジェクト作成方式に切り替える:
 
 1. korosuke613 が旧プロジェクトの環境変数（`MICROCMS_SERVICE_DOMAIN`、`MICROCMS_API_KEY`）を控えて共有
-2. Amybystera が Vercel で `Amybystara/emi-homepage` をインポートして新規プロジェクト作成
+2. amybystera が Vercel で `Amybystara/emi-homepage` をインポートして新規プロジェクト作成
 3. 環境変数を手動設定してデプロイ
 4. korosuke613 が旧プロジェクトを削除
 
